@@ -1,249 +1,14 @@
-/* Alpha 2.1 — Escena 4 + elección del primer club */
-.invitation-scene,
+/* Alpha 2.1 — Elección del primer club */
 .club-selection-scene {
   place-items: center;
   overflow: hidden;
   background: #08110d;
 }
 
-.invitation-sequence,
 .club-selection-shell {
   position: relative;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
-}
-
-.invitation-sequence {
-  background: linear-gradient(180deg, #ef8f55 0%, #6e5073 34%, #172b2c 68%, #08110d 100%);
-}
-
-.community-sun {
-  position: absolute;
-  width: 18vw;
-  height: 18vw;
-  min-width: 150px;
-  min-height: 150px;
-  right: 8vw;
-  top: 10vh;
-  border-radius: 50%;
-  background: rgba(255, 218, 142, .72);
-  box-shadow: 0 0 80px rgba(255, 180, 98, .45);
-}
-
-.community-hills {
-  position: absolute;
-  left: -5vw;
-  right: -5vw;
-  bottom: 38vh;
-  height: 30vh;
-  background: #182e28;
-  clip-path: polygon(0 62%, 11% 40%, 22% 57%, 36% 28%, 50% 55%, 63% 34%, 77% 61%, 88% 39%, 100% 57%, 100% 100%, 0 100%);
-}
-
-.community-field {
-  position: absolute;
-  left: -8vw;
-  right: -8vw;
-  bottom: -10vh;
-  height: 58vh;
-  transform: perspective(900px) rotateX(58deg);
-  transform-origin: bottom;
-  background: repeating-linear-gradient(90deg, #214f31 0 12vw, #1d472c 12vw 24vw);
-  box-shadow: inset 0 20px 60px rgba(0,0,0,.35);
-}
-
-.community-field::before {
-  content: '';
-  position: absolute;
-  inset: 7% 10%;
-  border: 4px solid rgba(255,255,255,.58);
-}
-
-.community-field::after {
-  content: '';
-  position: absolute;
-  width: 18%;
-  aspect-ratio: 1;
-  left: 41%;
-  top: 28%;
-  border: 4px solid rgba(255,255,255,.58);
-  border-radius: 50%;
-}
-
-.community-goal {
-  position: absolute;
-  left: 8vw;
-  bottom: 19vh;
-  width: 150px;
-  height: 90px;
-  border: 5px solid rgba(238,245,238,.82);
-  border-bottom: 0;
-  transform: skewY(-5deg);
-  opacity: .72;
-}
-
-.community-ball {
-  position: absolute;
-  left: 38vw;
-  bottom: 18vh;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #fff 0 30%, #bfc6c3 72%);
-  box-shadow: 0 8px 12px rgba(0,0,0,.32);
-  opacity: 0;
-}
-
-.community-player {
-  position: absolute;
-  bottom: 19vh;
-  width: 28px;
-  height: 68px;
-  border-radius: 48% 48% 18% 18%;
-  background: #101b18;
-  opacity: 0;
-}
-
-.community-player::before {
-  content: '';
-  position: absolute;
-  width: 25px;
-  height: 25px;
-  left: 2px;
-  top: -22px;
-  border-radius: 50%;
-  background: #17231f;
-}
-
-.player-a { left: 29vw; }
-.player-b { left: 47vw; transform: scale(.92); }
-.player-c { left: 62vw; transform: scale(1.06); }
-.player-d { left: 74vw; transform: scale(.86); }
-
-.invitation-board {
-  position: absolute;
-  left: 50%;
-  bottom: 11vh;
-  z-index: 8;
-  width: min(420px, 76vw);
-  padding: 26px 28px;
-  transform: translate(-50%, 130%) rotate(-2deg);
-  background: #e8dec4;
-  color: #20231e;
-  border: 8px solid #543b27;
-  box-shadow: 0 18px 45px rgba(0,0,0,.48);
-  text-align: center;
-  opacity: 0;
-}
-
-.invitation-board small {
-  display: block;
-  font-weight: 900;
-  letter-spacing: .17em;
-  color: #4a6c54;
-}
-
-.invitation-board strong {
-  display: block;
-  margin: 8px 0;
-  font-size: clamp(1.45rem, 4vw, 2.5rem);
-}
-
-.invitation-board span { font-weight: 750; }
-
-.invitation-flyer {
-  position: absolute;
-  z-index: 7;
-  width: 125px;
-  height: 165px;
-  padding: 16px 12px;
-  background: #efe7d2;
-  color: #263128;
-  font-size: .72rem;
-  font-weight: 900;
-  text-align: center;
-  box-shadow: 0 12px 25px rgba(0,0,0,.3);
-  opacity: 0;
-}
-
-.flyer-a { left: 12vw; top: 16vh; transform: rotate(-10deg); }
-.flyer-b { right: 16vw; top: 20vh; transform: rotate(8deg); }
-.flyer-c { left: 20vw; top: 46vh; transform: rotate(5deg); }
-
-.invitation-story {
-  position: absolute;
-  inset: 0;
-  z-index: 20;
-  display: grid;
-  place-items: center;
-  pointer-events: none;
-}
-
-.invitation-line {
-  position: absolute;
-  width: min(820px, 88vw);
-  padding: 0 20px;
-  color: #fff;
-  font-size: clamp(1.35rem, 3vw, 2.45rem);
-  font-weight: 800;
-  line-height: 1.35;
-  text-align: center;
-  text-shadow: 0 4px 22px rgba(0,0,0,.9);
-  opacity: 0;
-  transform: translateY(18px);
-}
-
-.invitation-continue-button,
-.club-confirm-button,
-.club-cancel-button,
-.club-next-button {
-  border: 1px solid rgba(255,255,255,.2);
-  border-radius: 999px;
-  font: inherit;
-  font-weight: 850;
-  cursor: pointer;
-}
-
-.invitation-continue-button {
-  position: absolute;
-  right: clamp(20px, 4vw, 56px);
-  bottom: clamp(20px, 4vh, 42px);
-  z-index: 30;
-  padding: 13px 22px;
-  background: rgba(7, 23, 15, .8);
-  color: #eaffe9;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(12px);
-}
-
-.invitation-scene.active .community-player { animation: communityPeople 1s forwards; }
-.invitation-scene.active .player-a { animation-delay: 2.2s; }
-.invitation-scene.active .player-b { animation-delay: 2.7s; }
-.invitation-scene.active .player-c { animation-delay: 3.1s; }
-.invitation-scene.active .player-d { animation-delay: 3.5s; }
-.invitation-scene.active .community-ball { animation: ballPass 6s 3.2s ease-in-out forwards; }
-.invitation-scene.active .flyer-a { animation: flyerFall 1.2s 7.2s forwards; }
-.invitation-scene.active .flyer-b { animation: flyerFall 1.2s 7.8s forwards; }
-.invitation-scene.active .flyer-c { animation: flyerFall 1.2s 8.4s forwards; }
-.invitation-scene.active .invitation-board { animation: boardRise 1.4s 11.6s forwards; }
-.invitation-scene.active .invitation-line-1 { animation: invitationText 3s .8s both; }
-.invitation-scene.active .invitation-line-2 { animation: invitationText 3.2s 4s both; }
-.invitation-scene.active .invitation-line-3 { animation: invitationText 3.2s 7.4s both; }
-.invitation-scene.active .invitation-line-4 { animation: invitationText 3.4s 10.9s both; }
-.invitation-scene.active .invitation-line-5 { animation: invitationText 3.6s 14.6s both; }
-.invitation-scene.active .invitation-continue-button { animation: revealContinue .55s 18.3s forwards; }
-
-@keyframes communityPeople { from { opacity: 0; transform: translateY(25px); } to { opacity: .92; } }
-@keyframes ballPass { 0% { opacity: 0; transform: translateX(-90px); } 12% { opacity: 1; } 45% { transform: translateX(150px) translateY(-16px); } 74% { transform: translateX(310px); } 100% { opacity: 1; transform: translateX(430px) translateY(-8px); } }
-@keyframes flyerFall { from { opacity: 0; translate: 0 -80px; rotate: -12deg; } to { opacity: .9; translate: 0 0; } }
-@keyframes boardRise { to { opacity: 1; transform: translate(-50%, 0) rotate(-2deg); } }
-@keyframes invitationText { 0%,100% { opacity: 0; transform: translateY(18px); } 15%,78% { opacity: 1; transform: translateY(0); } }
-@keyframes revealContinue { to { opacity: 1; pointer-events: auto; transform: translateY(0); } }
-
-/* Elección de club */
-.club-selection-shell {
   overflow-y: auto;
   padding: 5vh clamp(18px, 4vw, 58px) 8vh;
   background:
@@ -315,7 +80,10 @@
   outline: none;
 }
 
-@keyframes clubCardIn { from { opacity: 0; transform: translateY(22px) scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes clubCardIn {
+  from { opacity: 0; transform: translateY(22px) scale(.96); }
+  to { opacity: 1; transform: none; }
+}
 
 .club-placeholder {
   width: 104px;
@@ -379,9 +147,29 @@
 .club-modal-card h3 { margin: 0; font-size: clamp(1.8rem, 5vw, 2.7rem); }
 .club-modal-card p { color: rgba(255,255,255,.7); }
 .club-modal-actions { display: flex; justify-content: center; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+
 .club-confirm-button,
-.club-next-button { padding: 13px 23px; background: var(--club-primary, #64ffc0); color: #07120d; }
-.club-cancel-button { padding: 13px 23px; background: rgba(255,255,255,.08); color: white; }
+.club-cancel-button,
+.club-next-button {
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.club-confirm-button,
+.club-next-button {
+  padding: 13px 23px;
+  background: var(--club-primary, #64ffc0);
+  color: #07120d;
+}
+
+.club-cancel-button {
+  padding: 13px 23px;
+  background: rgba(255,255,255,.08);
+  color: white;
+}
 
 .club-confirmed {
   position: fixed;
@@ -397,10 +185,20 @@
 
 .club-confirmed.is-visible { opacity: 1; pointer-events: auto; }
 .club-confirmed-content { text-align: center; padding: 30px; z-index: 3; }
-.club-confirmed-content .club-placeholder { width: 160px; height: 160px; font-size: 2.2rem; animation: crestCelebrate .85s cubic-bezier(.16,.84,.35,1.18); }
+.club-confirmed-content .club-placeholder {
+  width: 160px;
+  height: 160px;
+  font-size: 2.2rem;
+  animation: crestCelebrate .85s cubic-bezier(.16,.84,.35,1.18);
+}
 .club-confirmed-content h3 { margin: 18px 0 5px; font-size: clamp(2.2rem, 7vw, 4.6rem); }
 .club-confirmed-content p { margin: 0 0 24px; color: rgba(255,255,255,.75); font-size: 1.05rem; }
-@keyframes crestCelebrate { 0% { transform: scale(.35) rotate(-18deg); opacity: 0; } 70% { transform: scale(1.12) rotate(4deg); } 100% { transform: none; opacity: 1; } }
+
+@keyframes crestCelebrate {
+  0% { transform: scale(.35) rotate(-18deg); opacity: 0; }
+  70% { transform: scale(1.12) rotate(4deg); }
+  100% { transform: none; opacity: 1; }
+}
 
 .confetti-piece {
   position: fixed;
@@ -412,18 +210,18 @@
   background: var(--confetti-color);
   animation: confettiFall var(--fall-duration) linear forwards;
 }
-@keyframes confettiFall { to { transform: translate3d(var(--drift), 115vh, 0) rotate(900deg); } }
+
+@keyframes confettiFall {
+  to { transform: translate3d(var(--drift), 115vh, 0) rotate(900deg); }
+}
 
 @media (max-width: 700px) {
   .club-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .club-card { min-height: 205px; padding-inline: 10px; }
   .club-placeholder { width: 82px; height: 82px; font-size: 1.2rem; }
-  .community-player { bottom: 17vh; }
-  .invitation-board { bottom: 8vh; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .invitation-scene.active * { animation-duration: .01ms !important; animation-delay: 0s !important; }
   .club-card { animation: none; opacity: 1; }
   .confetti-piece { display: none; }
 }
