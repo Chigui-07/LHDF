@@ -5,6 +5,9 @@ const newHistoryForm = document.getElementById('newHistoryForm');
 const historyMessage = document.getElementById('historyMessage');
 
 const TRANSITION_TIME = 480;
+const SAVE_KEY = 'lhdf.histories';
+const CURRENT_HISTORY_KEY = 'lhdf.currentHistoryId';
+const GAME_VERSION = 'Alpha 1.1';
 
 window.addEventListener('load', () => {
   requestAnimationFrame(() => {
@@ -31,6 +34,24 @@ function showScreen(screenId) {
   }, TRANSITION_TIME);
 }
 
+function loadHistories() {
+  try {
+    const saved = localStorage.getItem(SAVE_KEY);
+    return saved ? JSON.parse(saved) : [];
+  } catch (error) {
+    console.error('No se pudieron leer las partidas guardadas:', error);
+    return [];
+  }
+}
+
+function saveHistory(history) {
+  const histories = loadHistories();
+  histories.push(history);
+
+  localStorage.setItem(SAVE_KEY, JSON.stringify(histories));
+  localStorage.setItem(CURRENT_HISTORY_KEY, history.id);
+}
+
 navigationButtons.forEach((button) => {
   button.addEventListener('click', () => {
     showScreen(button.dataset.screen);
@@ -49,13 +70,25 @@ if (newHistoryForm) {
       return;
     }
 
+    const createdAt = new Date().toISOString();
     const newHistory = {
+      id: `lhdf-${Date.now()}`,
       foundationName,
       founderName,
-      country: 'Guatemala'
+      country: 'Guatemala',
+      createdAt,
+      updatedAt: createdAt,
+      version: GAME_VERSION,
+      introCompleted: false
     };
 
-    console.log('Nueva historia preparada:', newHistory);
-    historyMessage.textContent = `Fundación “${foundationName}” preparada. El siguiente paso será crear el sistema de guardado.`;
+    try {
+      saveHistory(newHistory);
+      historyMessage.textContent = `Fundación “${foundationName}” guardada correctamente.`;
+      newHistoryForm.reset();
+    } catch (error) {
+      console.error('No se pudo guardar la historia:', error);
+      historyMessage.textContent = 'No se pudo guardar la historia en este navegador.';
+    }
   });
 }
