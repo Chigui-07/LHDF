@@ -70,18 +70,27 @@ Este README funciona como registro de los cambios importantes del proyecto.
 - Se retiraron los atajos temporales utilizados durante las pruebas de las animaciones.
 - Alpha 2.1 queda cerrada como la versión de **introducción, elección del club y origen de la primera rivalidad**.
 
+### 29 de agosto de 2026 — Inicio de Alpha 3.1
+
+- Se creó la rama `alpha-3.1` desde el cierre de Alpha 2.1.
+- Se inició la construcción de la pantalla real de **Configuraciones**.
+- Las preferencias se guardan en `lhdf.settings` dentro de `localStorage`.
+- Se añadió un control funcional para entrar y salir de pantalla completa.
+- Se añadió la opción de reducir las animaciones del juego.
+- Se añadió selección entre transiciones normales y rápidas.
+- Se añadió ajuste de tamaño de interfaz entre 90%, 100% y 110%.
+- Se añadió restablecimiento de configuraciones.
+- La interfaz visible identifica el desarrollo como **Alpha 3.1**.
+
 ## 🚧 Alpha 3.1 — En desarrollo
 
-La siguiente versión comienza el juego después de la introducción.
-
-Objetivos iniciales:
+Objetivos principales:
 
 - Crear el **Hub principal** de cada historia.
 - Hacer que las historias con `introCompleted: true` entren directamente al Hub.
-- Desarrollar una pantalla real de **Configuraciones**.
-- Añadir modo de pantalla completa y opciones básicas de experiencia.
+- Completar y ampliar **Configuraciones** conforme aparezcan nuevos sistemas como audio.
 - Preparar la arquitectura sobre la que se añadirán clubes, partidos, torneos y herramientas de gestión.
 
 ## 🌿 Ramas de desarrollo
 
-Las versiones Alpha se conservan en ramas separadas para mantener el historial del proyecto. El desarrollo activo pasa a `alpha-3.1` una vez cerrada Alpha 2.1.
+Las versiones Alpha se conservan en ramas separadas para mantener el historial del proyecto. El desarrollo activo se encuentra en `alpha-3.1`.
