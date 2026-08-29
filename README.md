@@ -123,6 +123,21 @@ Este README funciona como registro de los cambios importantes del proyecto.
 - Se añadió **Historia del jugador**, preparada para registrar debut, fichajes, goles importantes, títulos y otros momentos generados durante la partida.
 - Las fichas no utilizan el club real de referencia como club jugable; todos continúan inicialmente como **Sin club en esta historia**.
 
+### 29 de agosto de 2026 — Alpha 3.1: Primera plantilla y economía del club
+
+- La primera entrada al club activa una secuencia de presentación y tutorial.
+- El club elegido recibe tres jugadores aleatorios del pool de Guatemala y el rival inaugural recibe otros tres jugadores distintos.
+- El sorteo se guarda permanentemente por historia y no cambia al recargar la partida.
+- La primera plantilla intenta mantener una composición útil con portero, jugador defensivo/medio y jugador ofensivo.
+- Las fichas y el registro general de Jugadores reflejan el club adquirido dentro de esa historia.
+- La ficha individual muestra el escudo del club cuando un jugador ya pertenece a uno.
+- **Plantilla** muestra los tres jugadores iniciales y permite abrir sus fichas.
+- **Estadísticas** registra partidos, victorias, empates, derrotas, goles a favor, goles en contra y títulos.
+- **Historia** comienza con la entrega de la primera plantilla y el anuncio del partido inaugural.
+- **Gestión** incorpora economía separada para Fundación y club, junto con historial de movimientos.
+- Como cifras provisionales de Alpha 3.1, la Fundación comienza con Q250,000 y entrega Q50,000 al primer club.
+- Las cantidades económicas quedan pendientes de balance definitivo cuando existan salarios, fichajes e ingresos jugables.
+
 ## 🚧 Alpha 3.1 — En desarrollo
 
 Objetivos principales:
