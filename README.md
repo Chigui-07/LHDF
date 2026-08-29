@@ -138,6 +138,21 @@ Este README funciona como registro de los cambios importantes del proyecto.
 - Como cifras provisionales de Alpha 3.1, la Fundación comienza con Q250,000 y entrega Q50,000 al primer club.
 - Las cantidades económicas quedan pendientes de balance definitivo cuando existan salarios, fichajes e ingresos jugables.
 
+### 29 de agosto de 2026 — Alpha 3.1: Gameplay de partido — segunda prueba
+
+- El prototipo pasó de un duelo con un solo jugador visible por equipo a un **3 contra 3 simultáneo**.
+- El usuario controla un futbolista a la vez y cambia entre sus tres jugadores con `1`, `2` y `3`.
+- Los compañeros no controlados mantienen posiciones y reaccionan al balón mediante IA básica según su función.
+- Portero, defensa, mediocampista y delantero utilizan posiciones de referencia distintas cuando la IA los controla.
+- El rival utiliza tres futbolistas simultáneamente y una IA más agresiva para perseguir, conducir, robar y disparar.
+- El disparo solo funciona cuando el futbolista controlado posee realmente la pelota.
+- Se añadió la acción **Robar** mediante la tecla `E` y un botón visible en la interfaz.
+- Los robos requieren cercanía, tienen posibilidad de fallar y un pequeño tiempo de espera antes del siguiente intento.
+- La posesión pertenece a un jugador concreto, por lo que cambiar de futbolista forma parte de la estrategia.
+- Se añadió una animación de gol con escudo del club, nombre del goleador y nombre del equipo.
+- Las tarjetas inferiores muestran cuál jugador está controlado y cuál posee el balón.
+- El gameplay continúa siendo un prototipo sujeto a balance de velocidad, IA, física, disparos y futuras habilidades individuales.
+
 ## 🚧 Alpha 3.1 — En desarrollo
 
 Objetivos principales:
