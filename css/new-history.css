@@ -1,0 +1,223 @@
+#newGame.new-history-screen {
+  place-items: center;
+  padding: clamp(24px, 4vw, 56px);
+}
+
+.new-history-screen .history-layout {
+  width: min(920px, 92vw);
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(28px, 5vw, 56px);
+  align-items: center;
+  padding: clamp(30px, 4.5vw, 52px);
+  border: 1px solid rgba(70, 246, 223, 0.25);
+  border-radius: 30px;
+  background:
+    linear-gradient(145deg, rgba(4, 34, 23, 0.94), rgba(2, 18, 12, 0.91));
+  box-shadow:
+    0 28px 80px rgba(0, 0, 0, 0.56),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(18px);
+}
+
+.new-history-screen .history-heading {
+  text-align: center;
+  padding: 10px 8px;
+}
+
+.new-history-screen .history-heading .eyebrow {
+  margin-bottom: 16px;
+}
+
+.new-history-screen .history-heading h2 {
+  margin: 0;
+  font-size: clamp(2.5rem, 4.8vw, 4.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  text-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+.new-history-screen .history-heading h2::after {
+  content: "";
+  display: block;
+  width: 110px;
+  height: 3px;
+  margin: 22px auto 18px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--aqua), transparent);
+  box-shadow: 0 0 18px rgba(70, 246, 223, 0.32);
+}
+
+.new-history-screen .history-heading > p:not(.eyebrow) {
+  max-width: 390px;
+  margin: 0 auto;
+  color: rgba(220, 242, 233, 0.68);
+  font-size: 0.98rem;
+  line-height: 1.75;
+}
+
+.new-history-screen .history-form {
+  display: grid;
+  gap: 18px;
+  padding: clamp(22px, 3vw, 30px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 22px;
+  background: rgba(0, 11, 8, 0.42);
+}
+
+.new-history-screen .history-field {
+  display: grid;
+  gap: 8px;
+}
+
+.new-history-screen .history-field > span {
+  color: #eafff8;
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.new-history-screen .history-field input,
+.new-history-screen .history-field select {
+  appearance: none;
+  width: 100%;
+  min-height: 54px;
+  padding: 0 16px;
+  border: 1px solid rgba(70, 246, 223, 0.2);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(4, 31, 21, 0.96), rgba(2, 20, 14, 0.96));
+  color: #f4fffb;
+  font: inherit;
+  font-size: 0.96rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.new-history-screen .history-field select {
+  cursor: pointer;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--aqua) 50%),
+    linear-gradient(135deg, var(--aqua) 50%, transparent 50%),
+    linear-gradient(180deg, rgba(4, 31, 21, 0.96), rgba(2, 20, 14, 0.96));
+  background-position:
+    calc(100% - 20px) 23px,
+    calc(100% - 14px) 23px,
+    0 0;
+  background-size: 6px 6px, 6px 6px, 100% 100%;
+  background-repeat: no-repeat;
+  padding-right: 44px;
+}
+
+.new-history-screen .history-field input::placeholder {
+  color: rgba(224, 245, 237, 0.35);
+}
+
+.new-history-screen .history-field input:hover,
+.new-history-screen .history-field select:hover {
+  border-color: rgba(70, 246, 223, 0.48);
+}
+
+.new-history-screen .history-field input:focus,
+.new-history-screen .history-field select:focus {
+  transform: translateY(-1px);
+  border-color: var(--aqua);
+  background-color: rgba(5, 40, 28, 0.98);
+  box-shadow:
+    0 0 0 3px rgba(70, 246, 223, 0.11),
+    0 8px 24px rgba(0, 0, 0, 0.18),
+    0 0 22px rgba(70, 246, 223, 0.08);
+}
+
+.new-history-screen .history-field small {
+  color: rgba(221, 243, 234, 0.44);
+  font-size: 0.72rem;
+  line-height: 1.45;
+  padding-left: 3px;
+}
+
+.new-history-screen .history-message {
+  min-height: 20px;
+  text-align: center;
+  color: var(--aqua);
+  font-size: 0.84rem;
+  font-weight: 750;
+}
+
+.new-history-screen .history-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 2px;
+}
+
+.new-history-screen .history-actions button {
+  min-height: 52px;
+  margin: 0;
+  border-radius: 14px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.new-history-screen .back-button {
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  background: rgba(10, 76, 48, 0.68);
+}
+
+.new-history-screen .back-button:hover,
+.new-history-screen .back-button:focus-visible {
+  border-color: rgba(70, 246, 223, 0.75);
+  background: rgba(13, 113, 87, 0.9);
+  color: #ffffff;
+}
+
+.new-history-screen .create-history-button {
+  border: 1px solid rgba(70, 246, 223, 0.5);
+  background: linear-gradient(135deg, #118b4d, #087764);
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.new-history-screen .create-history-button:hover,
+.new-history-screen .create-history-button:focus-visible {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #37e1c0, #19b79f);
+  color: #03251f;
+  box-shadow: 0 12px 28px rgba(16, 215, 182, 0.22);
+  outline: none;
+}
+
+@media (max-width: 850px) {
+  #newGame.new-history-screen {
+    padding: 24px 18px;
+    overflow-y: auto;
+  }
+
+  .new-history-screen .history-layout {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin: auto;
+  }
+
+  .new-history-screen .history-heading h2 {
+    font-size: clamp(2.6rem, 10vw, 4rem);
+  }
+}
+
+@media (max-width: 560px) {
+  .new-history-screen .history-layout {
+    width: 96vw;
+    padding: 22px 16px;
+    border-radius: 22px;
+  }
+
+  .new-history-screen .history-form {
+    padding: 18px 14px;
+  }
+
+  .new-history-screen .history-actions {
+    grid-template-columns: 1fr;
+  }
+}
