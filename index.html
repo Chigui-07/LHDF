@@ -7,7 +7,7 @@
   <title>La Historia del Fútbol</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/alpha-fixes.css">
-  <link rel="stylesheet" href="css/new-history.css?v=1.1.1">
+  <link rel="stylesheet" href="css/new-history.css?v=1.1.2">
 </head>
 <body>
   <div class="stadium" aria-hidden="true">
@@ -85,33 +85,19 @@
       <div class="history-layout">
         <div class="history-heading">
           <p class="eyebrow">NUEVA HISTORIA</p>
-          <h2 id="newGameTitle">Comienza tu historia</h2>
-          <p>Define los datos básicos de tu nueva partida. Esta configuración será la base de tu mundo dentro de LHDF.</p>
+          <h2 id="newGameTitle">Crea tu fundación</h2>
+          <p>Tu historia comenzará en Guatemala. Define el nombre de tu fundación y quién estará al frente de ella.</p>
         </div>
 
         <form id="newHistoryForm" class="history-form" autocomplete="off">
           <label class="history-field">
-            <span>Nombre de la historia</span>
-            <input id="historyName" name="historyName" type="text" maxlength="32" placeholder="Ej. El sueño chapín" required>
+            <span>Fundación</span>
+            <input id="foundationName" name="foundationName" type="text" maxlength="32" placeholder="Escribe tu fundación" required>
           </label>
 
           <label class="history-field">
-            <span>Nombre del entrenador</span>
-            <input id="managerName" name="managerName" type="text" maxlength="32" placeholder="Tu nombre dentro del juego" required>
-          </label>
-
-          <label class="history-field">
-            <span>País inicial</span>
-            <select id="startingCountry" name="startingCountry" required>
-              <option value="Guatemala">Guatemala</option>
-            </select>
-            <small>Guatemala es el primer país disponible en esta etapa del desarrollo.</small>
-          </label>
-
-          <label class="history-field">
-            <span>Equipo inicial</span>
-            <input id="startingTeam" name="startingTeam" type="text" maxlength="40" placeholder="Escribe el equipo por ahora" required>
-            <small>Más adelante este campo mostrará los equipos oficiales disponibles en el juego.</small>
+            <span>Nombre del fundador</span>
+            <input id="founderName" name="founderName" type="text" maxlength="32" placeholder="Tu nombre de fundador" required>
           </label>
 
           <div id="historyMessage" class="history-message" aria-live="polite"></div>
