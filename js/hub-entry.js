@@ -11,7 +11,9 @@
     loadScript('js/players-guatemala.js?v=3.1.0', () => {
       loadScript('js/hub.js?v=3.1.1', () => {
         loadScript('js/clubs.js?v=3.1.0', () => {
-          loadScript('js/club-system.js?v=3.1.0');
+          loadScript('js/club-system.js?v=3.1.0', () => {
+            loadScript('js/match-game.js?v=3.1.0');
+          });
         });
         loadScript('js/countries.js?v=3.1.2');
         loadScript('js/players.js?v=3.1.3', () => {
