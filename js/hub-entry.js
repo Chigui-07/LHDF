@@ -1,7 +1,7 @@
 // Enrutador del Hub para Alpha 3.1.
 (() => {
   const hubScript = document.createElement('script');
-  hubScript.src = 'js/hub.js?v=3.1.0';
+  hubScript.src = 'js/hub.js?v=3.1.1';
 
   hubScript.addEventListener('load', () => {
     // En Alpha 3.1, una historia que ya terminó la introducción entra al Hub.
