@@ -4,7 +4,7 @@
 
   const style = document.createElement('link');
   style.rel = 'stylesheet';
-  style.href = 'css/countries.css?v=3.1.0';
+  style.href = 'css/countries.css?v=3.1.1';
   document.head.appendChild(style);
 
   const stage = document.createElement('section');
@@ -32,9 +32,12 @@
     const players = window.LHDF_DATA?.players || [];
     grid.innerHTML = countries.map((country) => {
       const totalPlayers = players.filter((player) => player.countryId === country.id).length;
+      const mark = country.flag
+        ? `<div class="country-flag-wrap"><img class="country-flag" src="${country.flag}" alt="Bandera de ${country.name}"></div>`
+        : `<div class="country-code">${country.code}</div>`;
       return `
         <button class="country-card is-discovered" type="button" data-country-id="${country.id}">
-          <div class="country-code">${country.code}</div>
+          ${mark}
           <div>
             <small>País descubierto</small>
             <strong>${country.name}</strong>
