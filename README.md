@@ -66,6 +66,17 @@ Este README funcionará como **bitácora oficial del proyecto**. Cada actualizac
 - Se añadió al README el enlace oficial desplegado en Cloudflare Workers.
 - URL: https://lhdf.denischigui16.workers.dev/
 
+### 28 de agosto de 2026 — Alpha 1.1: Nueva Historia
+
+- Se creó la rama `alpha-1.1` a partir de la versión estable anterior.
+- La pantalla **Nueva Historia** dejó de ser provisional y pasó a tener un formulario real.
+- Se añadieron los campos **Nombre de la historia**, **Nombre del entrenador**, **País inicial** y **Equipo inicial**.
+- Guatemala quedó como primer país disponible durante esta etapa del desarrollo.
+- El campo de equipo se mantiene como texto temporal hasta incorporar la base oficial de equipos del juego.
+- Se añadió validación básica del formulario.
+- Se mantuvo la identidad visual verde/aqua y las transiciones suaves del menú principal.
+- La versión visible del menú se actualizó a **Alpha 1.1**.
+
 ## 🚧 Estado actual
 
-LHDF ya cuenta con un menú principal funcional y una primera identidad visual definida. Las pantallas internas son todavía provisionales y se irán reemplazando conforme se construyan los sistemas reales del juego.
+LHDF cuenta con un menú principal funcional y la primera pantalla real de creación de partida. El siguiente sistema pendiente es el guardado de historias para poder conectar **Nueva Historia** con **Continuar Partida**.
