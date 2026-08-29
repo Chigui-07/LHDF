@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/alpha-fixes.css">
   <link rel="stylesheet" href="css/new-history.css?v=1.1.2">
+  <link rel="stylesheet" href="css/continue-game.css?v=1.1.0">
 </head>
 <body>
   <div class="stadium" aria-hidden="true">
@@ -110,12 +111,20 @@
       </div>
     </section>
 
-    <section id="continueGame" class="screen secondary-screen" aria-labelledby="continueTitle">
-      <div class="screen-card">
-        <p class="eyebrow">CONTINUAR PARTIDA</p>
-        <h2 id="continueTitle">Todavía no hay partidas guardadas</h2>
-        <p>Cuando implementemos el sistema de guardado, aquí aparecerán tus historias disponibles.</p>
-        <button class="back-button" data-screen="mainMenu">← Volver al menú</button>
+    <section id="continueGame" class="screen secondary-screen continue-screen" aria-labelledby="continueTitle">
+      <div class="continue-layout">
+        <header class="continue-heading">
+          <p class="eyebrow">CONTINUAR PARTIDA</p>
+          <h2 id="continueTitle">Tus historias</h2>
+          <p>Selecciona una fundación guardada para continuar su historia.</p>
+        </header>
+
+        <div id="savedHistories" class="saved-histories" aria-live="polite"></div>
+        <div id="continueMessage" class="continue-message" aria-live="polite"></div>
+
+        <div class="continue-footer">
+          <button class="back-button" data-screen="mainMenu">← Volver al menú</button>
+        </div>
       </div>
     </section>
 
