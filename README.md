@@ -136,16 +136,27 @@ Este README funciona como registro de los cambios importantes del proyecto.
 - Mediocampistas registran pases completados, pases clave, asistencias y recuperaciones.
 - Delanteros registran goles, tiros, tiros al arco y asistencias.
 - Se descartó como sistema definitivo el prototipo de movimiento libre en Canvas.
-- El partido inaugural ahora funciona mediante **turnos** y un tablero táctico con cuatro fichas por equipo.
+- El partido inaugural pasó a funcionar mediante **turnos** y cuatro posiciones por equipo.
 - Cada turno permite una única acción antes de la respuesta del rival.
-- El balón avanza por zonas: Portero → Defensa → Mediocampista → Delantero.
-- El Portero distribuye y ataja; el Defensa recupera e intercepta; el Mediocampista construye jugadas; el Delantero es el único que puede disparar.
-- Se añadieron pases seguros, pases largos, pases filtrados, presión, recuperación, tiros colocados y tiros potentes.
-- Los pases pueden ser interceptados, los tiros pueden salir fuera y los porteros pueden realizar atajadas.
 - El reloj avanza mediante las acciones hasta 90 minutos, incluyendo el descanso en el minuto 45.
 - Se añadió un botón de **Pausa** con continuar, reglas y abandonar partido.
 - Se mantiene la animación de gol con escudo del club, nombre del goleador y marcador.
 - El primer partido completado se registra una sola vez en estadísticas e Historia; las repeticiones posteriores funcionan como pruebas sin duplicar el partido inaugural.
+
+### 29 de agosto de 2026 — Alpha 3.1: Prueba 4 del partido táctico
+
+- Se reemplazó el menú de acciones del prototipo por una **cancha interactiva con fichas móviles**.
+- Cada jugador aparece como una ficha física sobre el campo con nombre y posición.
+- El usuario apunta arrastrando desde una ficha hacia una dirección del campo.
+- Soltar en una zona vacía mueve la ficha y consume el turno.
+- Si la ficha posee el balón, soltar sobre un compañero ejecuta un pase.
+- El delantero puede apuntar directamente hacia la portería para intentar un disparo.
+- Los pases pueden ser interceptados por fichas rivales colocadas cerca de la trayectoria.
+- Una ficha que se mueve junto al poseedor rival puede disputar y recuperar el balón.
+- Las posiciones tienen zonas amplias y superpuestas para mantener su función sin bloquear la libertad táctica.
+- El portero queda limitado a una zona cercana a su portería y su colocación influye en las atajadas.
+- La IA rival utiliza las mismas ideas básicas de movimiento, pase, presión y tiro.
+- La regla principal continúa siendo **una acción por turno**.
 
 ## 🚧 Alpha 3.1 — En desarrollo
 
