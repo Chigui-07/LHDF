@@ -4,7 +4,7 @@
 
   const style = document.createElement('link');
   style.rel = 'stylesheet';
-  style.href = 'css/players.css?v=3.1.0';
+  style.href = 'css/players.css?v=3.1.1';
   document.head.appendChild(style);
 
   const stage = document.createElement('section');
@@ -16,7 +16,7 @@
         <div>
           <p class="eyebrow">REGISTRO DE JUGADORES</p>
           <h2>Jugadores</h2>
-          <p>Cada jugador estará relacionado con un país y un club.</p>
+          <p>Los jugadores pertenecen a un país, pero todavía no tienen club dentro de esta historia.</p>
         </div>
         <button id="playersBackButton" class="players-back" type="button">← Volver al Hub</button>
       </header>
@@ -25,73 +25,73 @@
         <label>País
           <select id="playersCountryFilter"></select>
         </label>
-        <label>Club
-          <select id="playersClubFilter"></select>
+        <label>Posición
+          <select id="playersPositionFilter">
+            <option value="">Todas las posiciones</option>
+            <option value="Portero">Porteros</option>
+            <option value="Defensa">Defensas</option>
+            <option value="Mediocampista">Mediocampistas</option>
+            <option value="Delantero">Delanteros</option>
+          </select>
         </label>
       </section>
 
+      <div class="players-summary"><strong id="playersCount">0</strong> jugadores disponibles para esta nación.</div>
       <div id="playersGrid" class="players-grid"></div>
     </div>`;
   shell.appendChild(stage);
 
   const countryFilter = document.getElementById('playersCountryFilter');
-  const clubFilter = document.getElementById('playersClubFilter');
+  const positionFilter = document.getElementById('playersPositionFilter');
+  const count = document.getElementById('playersCount');
   const grid = document.getElementById('playersGrid');
 
-  function getHistory() {
-    try {
-      const histories = JSON.parse(localStorage.getItem('lhdf.histories') || '[]');
-      const id = localStorage.getItem('lhdf.currentHistoryId');
-      return histories.find((item) => item.id === id) || null;
-    } catch (error) {
-      return null;
-    }
-  }
-
-  function renderFilters() {
-    const data = window.LHDF_DATA || { countries: [], clubs: [] };
-    const history = getHistory();
+  function renderFilters(preferredCountry) {
+    const data = window.LHDF_DATA || { countries: [] };
     const countries = data.countries.filter((country) => country.discovered !== false);
     countryFilter.innerHTML = countries.map((country) => `<option value="${country.id}">${country.name}</option>`).join('');
-
-    const selectedCountry = countryFilter.value || countries[0]?.id || 'guatemala';
-    const clubs = data.clubs.filter((club) => club.countryId === selectedCountry && (!history || club.id === history.selectedClub));
-    clubFilter.innerHTML = `<option value="">Todos los clubes disponibles</option>` + clubs.map((club) => `<option value="${club.id}">${club.name}</option>`).join('');
+    if (preferredCountry && countries.some((country) => country.id === preferredCountry)) countryFilter.value = preferredCountry;
   }
 
   function renderPlayers() {
     const players = window.LHDF_DATA?.players || [];
     const countryId = countryFilter.value;
-    const clubId = clubFilter.value;
-    const visible = players.filter((player) => (!countryId || player.countryId === countryId) && (!clubId || player.clubId === clubId));
+    const position = positionFilter.value;
+    const visible = players.filter((player) => (!countryId || player.countryId === countryId) && (!position || player.position === position));
+
+    count.textContent = String(visible.length);
 
     if (!visible.length) {
       grid.innerHTML = `
         <div class="players-empty">
           <div class="players-empty-icon">?</div>
-          <h3>Aún no hay jugadores registrados</h3>
-          <p>La estructura ya está preparada. Aquí aparecerán los jugadores reales cuando carguemos las plantillas de Guatemala.</p>
+          <h3>No hay jugadores disponibles</h3>
+          <p>No encontramos jugadores de primer equipo que cumplan los filtros actuales.</p>
         </div>`;
       return;
     }
 
     grid.innerHTML = visible.map((player) => `
       <article class="player-card">
-        <strong>${player.name}</strong>
+        <div class="player-card-top">
+          <strong>${player.name}</strong>
+          <small>${player.countryId === 'guatemala' ? 'GT' : player.countryId.toUpperCase()}</small>
+        </div>
         <span>${player.position || 'Posición por definir'}</span>
+        <em>Sin club en esta historia</em>
       </article>`).join('');
   }
 
-  function refresh() {
-    renderFilters();
+  function refresh(preferredCountry) {
+    renderFilters(preferredCountry);
     renderPlayers();
   }
 
-  countryFilter.addEventListener('change', () => { renderFilters(); renderPlayers(); });
-  clubFilter.addEventListener('change', renderPlayers);
+  countryFilter.addEventListener('change', renderPlayers);
+  positionFilter.addEventListener('change', renderPlayers);
 
-  window.showPlayers = function () {
-    refresh();
+  window.showPlayers = function (countryId = 'guatemala') {
+    refresh(countryId);
     fade.classList.add('is-visible');
     window.setTimeout(() => {
       document.querySelectorAll('.screen.active').forEach((screen) => screen.classList.remove('active'));
