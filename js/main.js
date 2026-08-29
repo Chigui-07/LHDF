@@ -5,15 +5,17 @@ const newHistoryForm = document.getElementById('newHistoryForm');
 const historyMessage = document.getElementById('historyMessage');
 const savedHistoriesContainer = document.getElementById('savedHistories');
 const continueMessage = document.getElementById('continueMessage');
-const introFoundationName = document.getElementById('introFoundationName');
-const introFounderName = document.getElementById('introFounderName');
+const dreamSequence = document.getElementById('dreamSequence');
+const dreamContinueButton = document.getElementById('dreamContinueButton');
 
 const TRANSITION_TIME = 480;
+const DREAM_SCENE_DURATION = 22600;
 const SAVE_KEY = 'lhdf.histories';
 const CURRENT_HISTORY_KEY = 'lhdf.currentHistoryId';
-const GAME_VERSION = 'Alpha 1.1';
+const GAME_VERSION = 'Alpha 2.1';
 
 let pendingDeleteHistoryId = null;
+let dreamSceneTimer = null;
 
 window.addEventListener('load', () => {
   renderSavedHistories();
@@ -27,6 +29,9 @@ function showScreen(screenId) {
   const target = document.getElementById(screenId);
 
   if (!target || target.classList.contains('active')) {
+    if (screenId === 'introStage') {
+      playDreamScene();
+    }
     return;
   }
 
@@ -41,10 +46,42 @@ function showScreen(screenId) {
       renderSavedHistories();
     }
 
+    if (screenId === 'introStage') {
+      playDreamScene();
+    } else {
+      stopDreamScene();
+    }
+
     requestAnimationFrame(() => {
       fade.classList.remove('is-visible');
     });
   }, TRANSITION_TIME);
+}
+
+function playDreamScene() {
+  if (!dreamSequence) {
+    return;
+  }
+
+  stopDreamScene();
+  dreamSequence.classList.remove('is-playing', 'is-complete');
+
+  void dreamSequence.offsetWidth;
+
+  requestAnimationFrame(() => {
+    dreamSequence.classList.add('is-playing');
+  });
+
+  dreamSceneTimer = window.setTimeout(() => {
+    dreamSequence.classList.add('is-complete');
+  }, DREAM_SCENE_DURATION);
+}
+
+function stopDreamScene() {
+  if (dreamSceneTimer) {
+    window.clearTimeout(dreamSceneTimer);
+    dreamSceneTimer = null;
+  }
 }
 
 function loadHistories() {
@@ -105,20 +142,6 @@ function escapeHtml(value) {
     .replaceAll("'", '&#039;');
 }
 
-function prepareIntroStage(history) {
-  if (!history) {
-    return;
-  }
-
-  if (introFoundationName) {
-    introFoundationName.textContent = history.foundationName || 'Tu fundación';
-  }
-
-  if (introFounderName) {
-    introFounderName.textContent = history.founderName || 'tu fundador';
-  }
-}
-
 function openHistory(history) {
   const histories = loadHistories();
   const storedHistory = histories.find((item) => item.id === history.id);
@@ -130,7 +153,6 @@ function openHistory(history) {
   storedHistory.updatedAt = new Date().toISOString();
   writeHistories(histories);
   localStorage.setItem(CURRENT_HISTORY_KEY, storedHistory.id);
-  prepareIntroStage(storedHistory);
   renderSavedHistories();
   showScreen('introStage');
 }
@@ -301,6 +323,12 @@ navigationButtons.forEach((button) => {
   });
 });
 
+if (dreamContinueButton) {
+  dreamContinueButton.addEventListener('click', () => {
+    showScreen('mainMenu');
+  });
+}
+
 if (newHistoryForm) {
   newHistoryForm.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -327,7 +355,8 @@ if (newHistoryForm) {
       createdAt,
       updatedAt: createdAt,
       version: GAME_VERSION,
-      introCompleted: false
+      introCompleted: false,
+      introScene: 1
     };
 
     try {
@@ -335,7 +364,6 @@ if (newHistoryForm) {
       historyMessage.textContent = `Fundación “${foundationName}” guardada correctamente.`;
       newHistoryForm.reset();
       renderSavedHistories();
-      prepareIntroStage(newHistory);
 
       window.setTimeout(() => {
         showScreen('introStage');
