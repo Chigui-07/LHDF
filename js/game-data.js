@@ -1,7 +1,7 @@
 // Alpha 3.1 — Datos base compartidos del mundo de LHDF.
 window.LHDF_DATA = window.LHDF_DATA || {
   countries: [
-    { id: 'guatemala', name: 'Guatemala', code: 'GT', flag: 'assets/flags/guatemala.png', discovered: true }
+    { id: 'guatemala', name: 'Guatemala', code: 'GT', flag: 'assets/flags/Guatemala.png', discovered: true }
   ],
   clubs: [
     { id: 'municipal', countryId: 'guatemala', name: 'Municipal', logo: 'CSD Municipal.png' },
