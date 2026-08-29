@@ -12,10 +12,14 @@ const foundationContinueButton = document.getElementById('foundationContinueButt
 const foundationDocumentName = document.getElementById('foundationDocumentName');
 const foundationDocumentFounder = document.getElementById('foundationDocumentFounder');
 const foundationStoryName = document.getElementById('foundationStoryName');
+const unknownSequence = document.getElementById('unknownSequence');
+const unknownContinueButton = document.getElementById('unknownContinueButton');
+const unknownFoundationSign = document.getElementById('unknownFoundationSign');
 
 const TRANSITION_TIME = 480;
 const DREAM_SCENE_DURATION = 22600;
 const FOUNDATION_SCENE_DURATION = 19400;
+const UNKNOWN_SCENE_DURATION = 20100;
 const SAVE_KEY = 'lhdf.histories';
 const CURRENT_HISTORY_KEY = 'lhdf.currentHistoryId';
 const GAME_VERSION = 'Alpha 2.1';
@@ -23,6 +27,7 @@ const GAME_VERSION = 'Alpha 2.1';
 let pendingDeleteHistoryId = null;
 let dreamSceneTimer = null;
 let foundationSceneTimer = null;
+let unknownSceneTimer = null;
 
 window.addEventListener('load', () => {
   renderSavedHistories();
@@ -35,6 +40,7 @@ function showScreen(screenId) {
   if (!target || target.classList.contains('active')) {
     if (screenId === 'introStage') playDreamScene();
     if (screenId === 'foundationStage') playFoundationScene();
+    if (screenId === 'unknownStage') playUnknownScene();
     return;
   }
 
@@ -49,17 +55,21 @@ function showScreen(screenId) {
       renderSavedHistories();
     }
 
-    if (screenId === 'introStage') {
-      playDreamScene();
-    } else {
-      stopDreamScene();
-    }
+    if (screenId === 'introStage') playDreamScene();
+    else stopDreamScene();
 
     if (screenId === 'foundationStage') {
       prepareFoundationScene(getCurrentHistory());
       playFoundationScene();
     } else {
       stopFoundationScene();
+    }
+
+    if (screenId === 'unknownStage') {
+      prepareUnknownScene(getCurrentHistory());
+      playUnknownScene();
+    } else {
+      stopUnknownScene();
     }
 
     requestAnimationFrame(() => fade.classList.remove('is-visible'));
@@ -98,6 +108,22 @@ function stopFoundationScene() {
   }
 }
 
+function playUnknownScene() {
+  if (!unknownSequence) return;
+  stopUnknownScene();
+  unknownSequence.classList.remove('is-playing', 'is-complete');
+  void unknownSequence.offsetWidth;
+  requestAnimationFrame(() => unknownSequence.classList.add('is-playing'));
+  unknownSceneTimer = window.setTimeout(() => unknownSequence.classList.add('is-complete'), UNKNOWN_SCENE_DURATION);
+}
+
+function stopUnknownScene() {
+  if (unknownSceneTimer) {
+    window.clearTimeout(unknownSceneTimer);
+    unknownSceneTimer = null;
+  }
+}
+
 function loadHistories() {
   try {
     const saved = localStorage.getItem(SAVE_KEY);
@@ -122,7 +148,6 @@ function updateCurrentIntroScene(sceneNumber) {
   const currentHistoryId = localStorage.getItem(CURRENT_HISTORY_KEY);
   const histories = loadHistories();
   const currentHistory = histories.find((history) => history.id === currentHistoryId);
-
   if (!currentHistory) return;
 
   currentHistory.introScene = sceneNumber;
@@ -138,6 +163,11 @@ function prepareFoundationScene(history) {
   if (foundationDocumentName) foundationDocumentName.textContent = foundationName;
   if (foundationDocumentFounder) foundationDocumentFounder.textContent = founderName;
   if (foundationStoryName) foundationStoryName.textContent = foundationName;
+}
+
+function prepareUnknownScene(history) {
+  if (!history || !unknownFoundationSign) return;
+  unknownFoundationSign.textContent = history.foundationName || 'Tu Fundación';
 }
 
 function normalizeFoundationName(value) {
@@ -159,19 +189,11 @@ function saveHistory(history) {
 function formatSaveDate(dateValue) {
   const date = new Date(dateValue);
   if (Number.isNaN(date.getTime())) return 'Sin fecha';
-
-  return new Intl.DateTimeFormat('es-GT', {
-    day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
-  }).format(date);
+  return new Intl.DateTimeFormat('es-GT', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }).format(date);
 }
 
 function escapeHtml(value) {
-  return String(value)
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;');
+  return String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;');
 }
 
 function openHistory(history) {
@@ -184,7 +206,12 @@ function openHistory(history) {
   localStorage.setItem(CURRENT_HISTORY_KEY, storedHistory.id);
   renderSavedHistories();
 
-  if ((storedHistory.introScene || 1) >= 2) {
+  const introScene = storedHistory.introScene || 1;
+
+  if (introScene >= 3) {
+    prepareUnknownScene(storedHistory);
+    showScreen('unknownStage');
+  } else if (introScene >= 2) {
     prepareFoundationScene(storedHistory);
     showScreen('foundationStage');
   } else {
@@ -194,12 +221,10 @@ function openHistory(history) {
 
 function selectHistory(historyId) {
   const selectedHistory = loadHistories().find((history) => history.id === historyId);
-
   if (!selectedHistory) {
     if (continueMessage) continueMessage.textContent = 'No se pudo encontrar esa historia guardada.';
     return;
   }
-
   pendingDeleteHistoryId = null;
   openHistory(selectedHistory);
 }
@@ -266,21 +291,7 @@ function renderSavedHistories() {
     const historyId = escapeHtml(history.id);
     const date = formatSaveDate(history.updatedAt || history.createdAt);
 
-    return `
-      <article class="saved-history-card${isCurrent ? ' is-current' : ''}${isPendingDelete ? ' is-deleting' : ''}">
-        <div class="save-card-top"><h3>${foundationName}</h3>${isCurrent ? '<span class="current-badge">Activa</span>' : ''}</div>
-        <div class="save-details">
-          <div class="save-detail"><span>Fundador</span><strong>${founderName}</strong></div>
-          <div class="save-detail"><span>País</span><strong>${country}</strong></div>
-          <div class="save-detail"><span>Último guardado</span><strong>${date}</strong></div>
-          <div class="save-detail"><span>Versión</span><strong>${version}</strong></div>
-        </div>
-        ${isPendingDelete ? `
-          <div class="delete-confirmation"><p>¿Eliminar definitivamente <strong>${foundationName}</strong>?</p><div class="delete-confirmation-actions"><button class="confirm-delete-button" type="button" data-confirm-delete-id="${historyId}">Confirmar eliminación</button><button class="cancel-delete-button" type="button" data-cancel-delete>Cancelar</button></div></div>
-        ` : `
-          <div class="save-card-actions"><button class="continue-save-button" type="button" data-history-id="${historyId}">${isCurrent ? 'Continuar partida' : 'Seleccionar y continuar'}</button><button class="delete-save-button" type="button" data-delete-history-id="${historyId}">Eliminar</button></div>
-        `}
-      </article>`;
+    return `<article class="saved-history-card${isCurrent ? ' is-current' : ''}${isPendingDelete ? ' is-deleting' : ''}"><div class="save-card-top"><h3>${foundationName}</h3>${isCurrent ? '<span class="current-badge">Activa</span>' : ''}</div><div class="save-details"><div class="save-detail"><span>Fundador</span><strong>${founderName}</strong></div><div class="save-detail"><span>País</span><strong>${country}</strong></div><div class="save-detail"><span>Último guardado</span><strong>${date}</strong></div><div class="save-detail"><span>Versión</span><strong>${version}</strong></div></div>${isPendingDelete ? `<div class="delete-confirmation"><p>¿Eliminar definitivamente <strong>${foundationName}</strong>?</p><div class="delete-confirmation-actions"><button class="confirm-delete-button" type="button" data-confirm-delete-id="${historyId}">Confirmar eliminación</button><button class="cancel-delete-button" type="button" data-cancel-delete>Cancelar</button></div></div>` : `<div class="save-card-actions"><button class="continue-save-button" type="button" data-history-id="${historyId}">${isCurrent ? 'Continuar partida' : 'Seleccionar y continuar'}</button><button class="delete-save-button" type="button" data-delete-history-id="${historyId}">Eliminar</button></div>`}</article>`;
   }).join('');
 
   savedHistoriesContainer.querySelectorAll('[data-history-id]').forEach((button) => button.addEventListener('click', () => selectHistory(button.dataset.historyId)));
@@ -300,6 +311,13 @@ if (dreamContinueButton) {
 
 if (foundationContinueButton) {
   foundationContinueButton.addEventListener('click', () => {
+    updateCurrentIntroScene(3);
+    showScreen('unknownStage');
+  });
+}
+
+if (unknownContinueButton) {
+  unknownContinueButton.addEventListener('click', () => {
     showScreen('mainMenu');
   });
 }
@@ -322,17 +340,7 @@ if (newHistoryForm) {
     }
 
     const createdAt = new Date().toISOString();
-    const newHistory = {
-      id: `lhdf-${Date.now()}`,
-      foundationName,
-      founderName,
-      country: 'Guatemala',
-      createdAt,
-      updatedAt: createdAt,
-      version: GAME_VERSION,
-      introCompleted: false,
-      introScene: 1
-    };
+    const newHistory = { id: `lhdf-${Date.now()}`, foundationName, founderName, country: 'Guatemala', createdAt, updatedAt: createdAt, version: GAME_VERSION, introCompleted: false, introScene: 1 };
 
     try {
       saveHistory(newHistory);
