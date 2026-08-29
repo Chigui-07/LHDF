@@ -1,6 +1,6 @@
-// Entrada oficial a la introducción de Alpha 2.1.
-// Las historias sin completar comienzan desde El Sueño; una introducción terminada
-// queda lista para que la siguiente versión la envíe al hub real.
+// Entrada oficial de historias para Alpha 3.1.
+// Las historias sin completar comienzan desde El Sueño; las completadas quedarán
+// listas para entrar al hub cuando se conecte en esta versión.
 
 openHistory = function (history) {
   const histories = loadHistories();
@@ -14,7 +14,7 @@ openHistory = function (history) {
   renderSavedHistories();
 
   if (storedHistory.introCompleted === true) {
-    // Alpha 2.1 todavía no contiene el hub; Alpha 3.1 reemplazará este destino.
+    // Destino temporal mientras se construye el Hub de Alpha 3.1.
     showScreen('mainMenu');
     return;
   }
@@ -160,8 +160,6 @@ if (invitationContinueButton) {
 const clubSelectionScript = document.createElement('script');
 clubSelectionScript.src = 'js/club-selection.js?v=2.1.4';
 clubSelectionScript.addEventListener('load', () => {
-  // El clásico y la escena final se cargan después de la selección para
-  // asegurar que el flujo completo esté disponible antes de elegir un club.
   if (!document.querySelector('script[data-lhdf-classic]')) {
     const classicScript = document.createElement('script');
     classicScript.src = 'js/intro-classic.js?v=2.1.2';
@@ -170,3 +168,8 @@ clubSelectionScript.addEventListener('load', () => {
   }
 });
 document.body.appendChild(clubSelectionScript);
+
+// Sistemas propios de Alpha 3.1.
+const settingsScript = document.createElement('script');
+settingsScript.src = 'js/settings.js?v=3.1.0';
+document.body.appendChild(settingsScript);
