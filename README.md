@@ -99,68 +99,62 @@ Este README funciona como registro de los cambios importantes del proyecto.
 
 - El módulo **Clubes** quedó disponible desde el Hub.
 - Solo el club elegido por el jugador aparece descubierto; los otros clubes se muestran en negro con `?`.
-- Se creó un menú base propio para el club seleccionado con accesos futuros a Plantilla, Estadísticas, Historia y Gestión.
+- Se creó un menú base propio para el club seleccionado con accesos a Plantilla, Estadísticas, Historia y Gestión.
 - Se añadió el módulo **Países** al Hub y Guatemala quedó como primer país disponible.
 - Se creó una base común de datos en `js/game-data.js` para relacionar países, clubes y jugadores.
 - Se activó la pantalla de **Jugadores** y Guatemala abre directamente su registro de futbolistas.
 - Se creó `js/players-guatemala.js` como archivo separado para mantener actualizado el pool nacional sin modificar el resto del mundo.
-- El pool inicial de Guatemala contiene jugadores guatemaltecos identificados en plantillas de **primer equipo** de clubes de la Liga Nacional 2026/27.
-- No se importan plantillas Sub-20, Sub-22, academias o juveniles como fuentes independientes.
-- Un jugador joven sí puede formar parte del pool si ya aparece en la plantilla del primer equipo de su club.
-- Los futbolistas extranjeros o nacionalizados guatemaltecos cuyo origen futbolístico corresponde a otro país no se incorporan al pool de Guatemala.
-- Todos los jugadores comienzan con `clubId: null`: ningún club real queda fijado dentro de una historia nueva.
-- `referenceClubId` conserva únicamente el club real usado para verificar que el jugador estaba activo en Guatemala al crear la base.
-- La pantalla de jugadores permite filtrar por país y posición y muestra a todos inicialmente como **Sin club en esta historia**.
+- El pool inicial de Guatemala contiene jugadores guatemaltecos identificados en plantillas de primer equipo de clubes de Guatemala.
+- No se importan plantillas juveniles como fuentes independientes.
+- Todos los jugadores comienzan sin club jugable; `referenceClubId` conserva únicamente el club real usado como referencia.
 
 ### 29 de agosto de 2026 — Alpha 3.1: Fichas de jugador y banderas
 
 - Se añadió `assets/flags/` como carpeta oficial para las banderas de los países.
-- Guatemala utiliza `assets/flags/Guatemala.png` y su bandera aparece en Países, Jugadores y la ficha individual.
-- Las tarjetas de Jugadores ahora son interactivas y permiten abrir la ficha de cada futbolista.
-- Se creó una ficha individual con país, posición, club dentro de la historia y estado del jugador.
-- Cada ficha incluye estadísticas propias de la partida: partidos, goles, asistencias, amarillas, rojas y títulos.
-- Las estadísticas comienzan en cero y están preparadas para guardarse por historia mediante `playerStates`.
-- Se añadió **Historia del jugador**, preparada para registrar debut, fichajes, goles importantes, títulos y otros momentos generados durante la partida.
-- Las fichas no utilizan el club real de referencia como club jugable; todos continúan inicialmente como **Sin club en esta historia**.
+- Guatemala utiliza `assets/flags/Guatemala.png`.
+- Las tarjetas de Jugadores permiten abrir una ficha individual.
+- La ficha muestra país, posición, club dentro de la historia, estado, estadísticas y una cronología propia.
+- Las estadísticas se guardan por historia mediante `playerStates`.
 
 ### 29 de agosto de 2026 — Alpha 3.1: Primera plantilla y economía del club
 
 - La primera entrada al club activa una secuencia de presentación y tutorial.
-- El club elegido recibe tres jugadores aleatorios del pool de Guatemala y el rival inaugural recibe otros tres jugadores distintos.
-- El sorteo se guarda permanentemente por historia y no cambia al recargar la partida.
-- La primera plantilla intenta mantener una composición útil con portero, jugador defensivo/medio y jugador ofensivo.
-- Las fichas y el registro general de Jugadores reflejan el club adquirido dentro de esa historia.
-- La ficha individual muestra el escudo del club cuando un jugador ya pertenece a uno.
-- **Plantilla** muestra los tres jugadores iniciales y permite abrir sus fichas.
-- **Estadísticas** registra partidos, victorias, empates, derrotas, goles a favor, goles en contra y títulos.
-- **Historia** comienza con la entrega de la primera plantilla y el anuncio del partido inaugural.
-- **Gestión** incorpora economía separada para Fundación y club, junto con historial de movimientos.
+- Se añadió economía separada para Fundación y club.
 - Como cifras provisionales de Alpha 3.1, la Fundación comienza con Q250,000 y entrega Q50,000 al primer club.
-- Las cantidades económicas quedan pendientes de balance definitivo cuando existan salarios, fichajes e ingresos jugables.
+- Plantilla, Estadísticas, Historia y Gestión quedaron como módulos funcionales de base.
 
-### 29 de agosto de 2026 — Alpha 3.1: Gameplay de partido — segunda prueba
+### 29 de agosto de 2026 — Alpha 3.1: Nueva estructura de plantilla y partido por turnos
 
-- El prototipo pasó de un duelo con un solo jugador visible por equipo a un **3 contra 3 simultáneo**.
-- El usuario controla un futbolista a la vez y cambia entre sus tres jugadores con `1`, `2` y `3`.
-- Los compañeros no controlados mantienen posiciones y reaccionan al balón mediante IA básica según su función.
-- Portero, defensa, mediocampista y delantero utilizan posiciones de referencia distintas cuando la IA los controla.
-- El rival utiliza tres futbolistas simultáneamente y una IA más agresiva para perseguir, conducir, robar y disparar.
-- El disparo solo funciona cuando el futbolista controlado posee realmente la pelota.
-- Se añadió la acción **Robar** mediante la tecla `E` y un botón visible en la interfaz.
-- Los robos requieren cercanía, tienen posibilidad de fallar y un pequeño tiempo de espera antes del siguiente intento.
-- La posesión pertenece a un jugador concreto, por lo que cambiar de futbolista forma parte de la estrategia.
-- Se añadió una animación de gol con escudo del club, nombre del goleador y nombre del equipo.
-- Las tarjetas inferiores muestran cuál jugador está controlado y cuál posee el balón.
-- El gameplay continúa siendo un prototipo sujeto a balance de velocidad, IA, física, disparos y futuras habilidades individuales.
+- Se sustituyó la entrega inicial de tres jugadores por una plantilla inicial de **cuatro futbolistas**.
+- Cada club recibe exactamente **1 Portero, 1 Defensa, 1 Mediocampista y 1 Delantero**.
+- Las partidas creadas durante las pruebas anteriores migran automáticamente al nuevo sistema y vuelven a mostrar el tutorial de entrega.
+- La **Plantilla** y la **Alineación** quedan separadas conceptualmente. La alineación guarda qué jugador ocupa cada uno de los cuatro roles del partido.
+- La estructura queda preparada para plantillas más grandes, suplentes y cambios de alineación en futuras versiones.
+- Las fichas individuales muestran estadísticas distintas según la posición del jugador.
+- Porteros registran atajadas, goles recibidos y porterías a cero.
+- Defensas registran recuperaciones, intercepciones y pases completados.
+- Mediocampistas registran pases completados, pases clave, asistencias y recuperaciones.
+- Delanteros registran goles, tiros, tiros al arco y asistencias.
+- Se descartó como sistema definitivo el prototipo de movimiento libre en Canvas.
+- El partido inaugural ahora funciona mediante **turnos** y un tablero táctico con cuatro fichas por equipo.
+- Cada turno permite una única acción antes de la respuesta del rival.
+- El balón avanza por zonas: Portero → Defensa → Mediocampista → Delantero.
+- El Portero distribuye y ataja; el Defensa recupera e intercepta; el Mediocampista construye jugadas; el Delantero es el único que puede disparar.
+- Se añadieron pases seguros, pases largos, pases filtrados, presión, recuperación, tiros colocados y tiros potentes.
+- Los pases pueden ser interceptados, los tiros pueden salir fuera y los porteros pueden realizar atajadas.
+- El reloj avanza mediante las acciones hasta 90 minutos, incluyendo el descanso en el minuto 45.
+- Se añadió un botón de **Pausa** con continuar, reglas y abandonar partido.
+- Se mantiene la animación de gol con escudo del club, nombre del goleador y marcador.
+- El primer partido completado se registra una sola vez en estadísticas e Historia; las repeticiones posteriores funcionan como pruebas sin duplicar el partido inaugural.
 
 ## 🚧 Alpha 3.1 — En desarrollo
 
 Objetivos principales:
 
-- Expandir el **Hub principal** y definir la navegación real del juego.
-- Completar y ampliar **Configuraciones** conforme aparezcan nuevos sistemas como audio.
-- Preparar la arquitectura sobre la que se añadirán clubes, partidos, torneos y herramientas de gestión.
-- Convertir progresivamente los módulos provisionales del Hub en sistemas jugables.
+- Seguir refinando el gameplay del partido por turnos.
+- Expandir el Hub principal y definir la navegación real del juego.
+- Mantener separadas las reglas del partido de los futuros sistemas de habilidades, características y evolución de Jugadores.
+- Preparar plantillas más amplias, alineaciones editables, suplentes, fichajes y salarios.
 - Revisar y mantener actualizado el pool de jugadores de Guatemala conforme cambien las plantillas reales.
 
 ## 🌿 Ramas de desarrollo
