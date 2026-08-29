@@ -74,6 +74,16 @@ Este README funcionará como **bitácora oficial del proyecto**. Cada actualizac
 - Se añadió el estado `introCompleted: false` para preparar la futura introducción animada.
 - Las historias guardadas permanecen disponibles aunque se cierre o recargue el navegador.
 
+### 28 de agosto de 2026 — Alpha 1.1: Continuar Partida
+
+- Se conectó la pantalla **Continuar Partida** con las historias almacenadas en el navegador.
+- Las partidas guardadas aparecen como tarjetas individuales.
+- Cada tarjeta muestra fundación, fundador, país, último guardado y versión.
+- La partida activa queda identificada visualmente.
+- El jugador puede seleccionar una historia y convertirla en la partida activa.
+- Al seleccionar una historia se actualiza su fecha de último acceso.
+- Si no existen guardados, la pantalla muestra un estado vacío en lugar de información provisional.
+
 ## 🧭 Próxima etapa — Alpha 2.1
 
 - La **Alpha 2.1** estará dedicada a la introducción animada de la historia.
@@ -85,4 +95,4 @@ Este README funcionará como **bitácora oficial del proyecto**. Cada actualizac
 
 ## 🚧 Estado actual
 
-LHDF cuenta con un menú principal funcional, una pantalla real de creación de historia y un sistema de guardado local. La siguiente tarea dentro de la Alpha 1.1 será conectar las partidas guardadas con **Continuar Partida**. La introducción animada quedará reservada para **Alpha 2.1**.
+LHDF cuenta con menú principal, creación de historia, guardado local y selección de partidas existentes mediante **Continuar Partida**. La Alpha 1.1 continúa centrada en dejar sólido el sistema de guardado antes de comenzar la introducción animada de la **Alpha 2.1**.
