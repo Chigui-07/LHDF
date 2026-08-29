@@ -68,6 +68,7 @@ Este README funciona como registro de los cambios importantes del proyecto.
 - Se creó la escena final con los dos clubes descubiertos y los restantes ocultos mediante tarjetas negras con `?`.
 - La última escena establece `introCompleted: true`, por lo que la introducción completa solo debe reproducirse una vez por historia.
 - Se retiraron los atajos temporales utilizados durante las pruebas de las animaciones.
+- Se añadieron ajustes responsive para que las escenas se mantengan centradas y dentro del viewport en ventana y pantalla completa.
 - Alpha 2.1 queda cerrada como la versión de **introducción, elección del club y origen de la primera rivalidad**.
 
 ### 29 de agosto de 2026 — Inicio de Alpha 3.1
@@ -82,14 +83,26 @@ Este README funciona como registro de los cambios importantes del proyecto.
 - Se añadió restablecimiento de configuraciones.
 - La interfaz visible identifica el desarrollo como **Alpha 3.1**.
 
+### 29 de agosto de 2026 — Alpha 3.1: Base del Hub principal
+
+- Se creó la primera versión funcional del **Hub principal**.
+- El Hub muestra el nombre de la fundación, fundador y país de la partida activa.
+- Se muestran el club elegido y el rival que originó el primer clásico, con sus escudos.
+- Se añadieron accesos provisionales para **Clubes**, **Jugadores**, **Partidos**, **Torneos** y **Fundación**.
+- Las historias con `introCompleted: true` entran directamente al Hub desde **Continuar Partida**.
+- La última escena de la introducción entra al Hub al terminar por primera vez.
+- Se añadió un botón manual **Guardar partida**.
+- Se añadió **Guardar y salir**, que actualiza el guardado antes de volver al menú principal.
+- Al guardar desde el Hub, la historia actualiza su fecha de guardado y queda identificada como **Alpha 3.1**.
+
 ## 🚧 Alpha 3.1 — En desarrollo
 
 Objetivos principales:
 
-- Crear el **Hub principal** de cada historia.
-- Hacer que las historias con `introCompleted: true` entren directamente al Hub.
+- Expandir el **Hub principal** y definir la navegación real del juego.
 - Completar y ampliar **Configuraciones** conforme aparezcan nuevos sistemas como audio.
 - Preparar la arquitectura sobre la que se añadirán clubes, partidos, torneos y herramientas de gestión.
+- Convertir progresivamente los módulos provisionales del Hub en sistemas jugables.
 
 ## 🌿 Ramas de desarrollo
 
