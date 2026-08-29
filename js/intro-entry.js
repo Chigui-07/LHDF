@@ -161,5 +161,5 @@ if (invitationContinueButton) {
 
 // Pantalla interactiva de elección del primer club.
 const clubSelectionScript = document.createElement('script');
-clubSelectionScript.src = 'js/club-selection.js?v=2.1.2';
+clubSelectionScript.src = 'js/club-selection.js?v=2.1.3';
 document.body.appendChild(clubSelectionScript);
