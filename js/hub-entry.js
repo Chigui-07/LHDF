@@ -4,6 +4,10 @@
   hubScript.src = 'js/hub.js?v=3.1.1';
 
   hubScript.addEventListener('load', () => {
+    const clubsScript = document.createElement('script');
+    clubsScript.src = 'js/clubs.js?v=3.1.0';
+    document.body.appendChild(clubsScript);
+
     // En Alpha 3.1, una historia que ya terminó la introducción entra al Hub.
     openHistory = function (history) {
       const histories = loadHistories();
