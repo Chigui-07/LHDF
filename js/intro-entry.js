@@ -180,7 +180,7 @@ document.body.appendChild(settingsScript);
 
 if (!document.querySelector('script[data-lhdf-hub-entry]')) {
   const hubEntryScript = document.createElement('script');
-  hubEntryScript.src = 'js/hub-entry.js?v=3.1.8';
+  hubEntryScript.src = 'js/hub-entry.js?v=3.1.9';
   hubEntryScript.dataset.lhdfHubEntry = 'true';
   document.body.appendChild(hubEntryScript);
 }
