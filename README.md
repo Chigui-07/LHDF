@@ -82,7 +82,19 @@ Este README funcionará como **bitácora oficial del proyecto**. Cada actualizac
 - La partida activa queda identificada visualmente.
 - El jugador puede seleccionar una historia y convertirla en la partida activa.
 - Al seleccionar una historia se actualiza su fecha de último acceso.
-- Si no existen guardados, la pantalla muestra un estado vacío en lugar de información provisional.
+- Se añadió eliminación de partidas con confirmación integrada en la interfaz.
+- Si se elimina la partida activa, otra historia pasa a ser la actual automáticamente cuando existe una disponible.
+- Si no existen guardados, la pantalla muestra un estado vacío.
+
+### 28 de agosto de 2026 — Cierre funcional de Alpha 1.1
+
+- Se impide crear dos partidas con el mismo nombre de fundación, ignorando diferencias entre mayúsculas y minúsculas.
+- La partida creada queda seleccionada inmediatamente como partida activa.
+- Al pulsar **Crear Historia**, el juego guarda los datos y entra automáticamente al punto de inicio de la introducción.
+- **Continuar Partida** también carga la historia elegida y la dirige al mismo punto de entrada.
+- Se añadió una pantalla provisional de introducción para verificar el flujo completo antes de desarrollar las animaciones reales.
+- La pantalla provisional muestra la fundación y el fundador cargados.
+- Las animaciones reales no forman parte de Alpha 1.1 y serán implementadas en Alpha 2.1.
 
 ## 🧭 Próxima etapa — Alpha 2.1
 
@@ -95,4 +107,4 @@ Este README funcionará como **bitácora oficial del proyecto**. Cada actualizac
 
 ## 🚧 Estado actual
 
-LHDF cuenta con menú principal, creación de historia, guardado local y selección de partidas existentes mediante **Continuar Partida**. La Alpha 1.1 continúa centrada en dejar sólido el sistema de guardado antes de comenzar la introducción animada de la **Alpha 2.1**.
+La **Alpha 1.1** cuenta con menú principal, creación de historias, validación de nombres duplicados, guardado local, selección de partidas, eliminación de guardados y flujo automático hacia el inicio de la futura introducción. Con esto, la base del sistema de partidas queda preparada para comenzar la **Alpha 2.1**.
