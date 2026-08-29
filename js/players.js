@@ -4,7 +4,7 @@
 
   const style = document.createElement('link');
   style.rel = 'stylesheet';
-  style.href = 'css/players.css?v=3.1.1';
+  style.href = 'css/players.css?v=3.1.2';
   document.head.appendChild(style);
 
   const stage = document.createElement('section');
@@ -54,10 +54,10 @@
   }
 
   function renderPlayers() {
-    const players = window.LHDF_DATA?.players || [];
+    const data = window.LHDF_DATA || { players: [], countries: [] };
     const countryId = countryFilter.value;
     const position = positionFilter.value;
-    const visible = players.filter((player) => (!countryId || player.countryId === countryId) && (!position || player.position === position));
+    const visible = data.players.filter((player) => (!countryId || player.countryId === countryId) && (!position || player.position === position));
 
     count.textContent = String(visible.length);
 
@@ -71,15 +71,23 @@
       return;
     }
 
-    grid.innerHTML = visible.map((player) => `
-      <article class="player-card">
-        <div class="player-card-top">
-          <strong>${player.name}</strong>
-          <small>${player.countryId === 'guatemala' ? 'GT' : player.countryId.toUpperCase()}</small>
-        </div>
-        <span>${player.position || 'Posición por definir'}</span>
-        <em>Sin club en esta historia</em>
-      </article>`).join('');
+    grid.innerHTML = visible.map((player) => {
+      const country = data.countries.find((item) => item.id === player.countryId);
+      const countryMark = country?.flag
+        ? `<img class="player-card-flag" src="${country.flag}" alt="Bandera de ${country.name}">`
+        : `<small>${country?.code || player.countryId.toUpperCase()}</small>`;
+
+      return `
+        <button class="player-card" type="button" data-player-id="${player.id}" aria-label="Abrir ficha de ${player.name}">
+          <div class="player-card-top">
+            <strong>${player.name}</strong>
+            ${countryMark}
+          </div>
+          <span>${player.position || 'Posición por definir'}</span>
+          <em>Sin club en esta historia</em>
+          <div class="player-card-open">Ver ficha ›</div>
+        </button>`;
+    }).join('');
   }
 
   function refresh(preferredCountry) {
@@ -89,6 +97,12 @@
 
   countryFilter.addEventListener('change', renderPlayers);
   positionFilter.addEventListener('change', renderPlayers);
+
+  grid.addEventListener('click', (event) => {
+    const card = event.target.closest('[data-player-id]');
+    if (!card || typeof window.showPlayerDetail !== 'function') return;
+    window.showPlayerDetail(card.dataset.playerId);
+  });
 
   window.showPlayers = function (countryId = 'guatemala') {
     refresh(countryId);
