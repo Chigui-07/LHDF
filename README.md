@@ -112,6 +112,17 @@ Este README funciona como registro de los cambios importantes del proyecto.
 - `referenceClubId` conserva únicamente el club real usado para verificar que el jugador estaba activo en Guatemala al crear la base.
 - La pantalla de jugadores permite filtrar por país y posición y muestra a todos inicialmente como **Sin club en esta historia**.
 
+### 29 de agosto de 2026 — Alpha 3.1: Fichas de jugador y banderas
+
+- Se añadió `assets/flags/` como carpeta oficial para las banderas de los países.
+- Guatemala utiliza `assets/flags/Guatemala.png` y su bandera aparece en Países, Jugadores y la ficha individual.
+- Las tarjetas de Jugadores ahora son interactivas y permiten abrir la ficha de cada futbolista.
+- Se creó una ficha individual con país, posición, club dentro de la historia y estado del jugador.
+- Cada ficha incluye estadísticas propias de la partida: partidos, goles, asistencias, amarillas, rojas y títulos.
+- Las estadísticas comienzan en cero y están preparadas para guardarse por historia mediante `playerStates`.
+- Se añadió **Historia del jugador**, preparada para registrar debut, fichajes, goles importantes, títulos y otros momentos generados durante la partida.
+- Las fichas no utilizan el club real de referencia como club jugable; todos continúan inicialmente como **Sin club en esta historia**.
+
 ## 🚧 Alpha 3.1 — En desarrollo
 
 Objetivos principales:
