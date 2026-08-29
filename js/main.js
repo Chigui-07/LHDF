@@ -41,24 +41,21 @@ if (newHistoryForm) {
   newHistoryForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const historyName = document.getElementById('historyName').value.trim();
-    const managerName = document.getElementById('managerName').value.trim();
-    const startingCountry = document.getElementById('startingCountry').value;
-    const startingTeam = document.getElementById('startingTeam').value.trim();
+    const foundationName = document.getElementById('foundationName').value.trim();
+    const founderName = document.getElementById('founderName').value.trim();
 
-    if (!historyName || !managerName || !startingCountry || !startingTeam) {
-      historyMessage.textContent = 'Completa todos los campos para crear la historia.';
+    if (!foundationName || !founderName) {
+      historyMessage.textContent = 'Completa los dos campos para crear tu historia.';
       return;
     }
 
     const newHistory = {
-      historyName,
-      managerName,
-      startingCountry,
-      startingTeam
+      foundationName,
+      founderName,
+      country: 'Guatemala'
     };
 
     console.log('Nueva historia preparada:', newHistory);
-    historyMessage.textContent = `Historia “${historyName}” preparada. El guardado se añadirá en el siguiente sistema.`;
+    historyMessage.textContent = `Fundación “${foundationName}” preparada. El siguiente paso será crear el sistema de guardado.`;
   });
 }
