@@ -14,14 +14,13 @@
           loadScript('js/club-system.js?v=3.1.0');
         });
         loadScript('js/countries.js?v=3.1.2');
-        loadScript('js/players.js?v=3.1.2', () => {
+        loadScript('js/players.js?v=3.1.3', () => {
           loadScript('js/player-detail.js?v=3.1.0', () => {
             loadScript('js/player-club-logo.js?v=3.1.0');
             loadScript('js/hub-modules.js?v=3.1.0');
           });
         });
 
-        // En Alpha 3.1, una historia que ya terminó la introducción entra al Hub.
         openHistory = function (history) {
           const histories = loadHistories();
           const storedHistory = histories.find((item) => item.id === history.id);
@@ -40,7 +39,6 @@
           showScreen('introStage');
         };
 
-        // La última escena de la introducción ahora termina directamente en el Hub.
         document.addEventListener('click', (event) => {
           const button = event.target.closest('#futureContinueButton');
           if (!button) return;
