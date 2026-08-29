@@ -158,6 +158,19 @@ Este README funciona como registro de los cambios importantes del proyecto.
 - La IA rival utiliza las mismas ideas básicas de movimiento, pase, presión y tiro.
 - La regla principal continúa siendo **una acción por turno**.
 
+### 29 de agosto de 2026 — Alpha 3.1: Prueba 5 con pelota física
+
+- Se recuperó el Canvas del primer prototipo para que jugadores y pelota vuelvan a ser objetos físicos.
+- Los cuatro jugadores de cada equipo aparecen como fichas circulares sobre la cancha.
+- Durante su turno, el usuario mueve una sola ficha directamente con el mouse.
+- Cada ficha dispone de una distancia máxima de movimiento por turno.
+- La pelota ya no pertenece a una ficha ni funciona como etiqueta de posesión: mantiene posición, velocidad, fricción y rebotes propios.
+- Cuando una ficha golpea la pelota, el choque transmite fuerza de acuerdo con la dirección y velocidad de la ficha.
+- La pelota puede rebotar en los límites del campo y entrar físicamente en las porterías.
+- Se conserva la regla de que solo un delantero puede convertir un gol válido.
+- La IA también desplaza una ficha por turno e interactúa con la misma pelota física.
+- Se mantienen el reloj por turnos, el botón de Pausa y la animación de gol con escudo y goleador.
+
 ## 🚧 Alpha 3.1 — En desarrollo
 
 Objetivos principales:
