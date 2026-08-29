@@ -5,6 +5,8 @@ const newHistoryForm = document.getElementById('newHistoryForm');
 const historyMessage = document.getElementById('historyMessage');
 const savedHistoriesContainer = document.getElementById('savedHistories');
 const continueMessage = document.getElementById('continueMessage');
+const introFoundationName = document.getElementById('introFoundationName');
+const introFounderName = document.getElementById('introFounderName');
 
 const TRANSITION_TIME = 480;
 const SAVE_KEY = 'lhdf.histories';
@@ -60,6 +62,17 @@ function writeHistories(histories) {
   localStorage.setItem(SAVE_KEY, JSON.stringify(histories));
 }
 
+function normalizeFoundationName(value) {
+  return value.trim().toLocaleLowerCase('es-GT');
+}
+
+function foundationNameExists(foundationName) {
+  const normalizedName = normalizeFoundationName(foundationName);
+  return loadHistories().some((history) => {
+    return normalizeFoundationName(history.foundationName || '') === normalizedName;
+  });
+}
+
 function saveHistory(history) {
   const histories = loadHistories();
   histories.push(history);
@@ -92,6 +105,36 @@ function escapeHtml(value) {
     .replaceAll("'", '&#039;');
 }
 
+function prepareIntroStage(history) {
+  if (!history) {
+    return;
+  }
+
+  if (introFoundationName) {
+    introFoundationName.textContent = history.foundationName || 'Tu fundación';
+  }
+
+  if (introFounderName) {
+    introFounderName.textContent = history.founderName || 'tu fundador';
+  }
+}
+
+function openHistory(history) {
+  const histories = loadHistories();
+  const storedHistory = histories.find((item) => item.id === history.id);
+
+  if (!storedHistory) {
+    return;
+  }
+
+  storedHistory.updatedAt = new Date().toISOString();
+  writeHistories(histories);
+  localStorage.setItem(CURRENT_HISTORY_KEY, storedHistory.id);
+  prepareIntroStage(storedHistory);
+  renderSavedHistories();
+  showScreen('introStage');
+}
+
 function selectHistory(historyId) {
   const histories = loadHistories();
   const selectedHistory = histories.find((history) => history.id === historyId);
@@ -103,16 +146,8 @@ function selectHistory(historyId) {
     return;
   }
 
-  selectedHistory.updatedAt = new Date().toISOString();
-  writeHistories(histories);
-  localStorage.setItem(CURRENT_HISTORY_KEY, selectedHistory.id);
   pendingDeleteHistoryId = null;
-
-  if (continueMessage) {
-    continueMessage.textContent = `“${selectedHistory.foundationName}” quedó seleccionada como partida activa.`;
-  }
-
-  renderSavedHistories();
+  openHistory(selectedHistory);
 }
 
 function requestDeleteHistory(historyId) {
@@ -278,6 +313,11 @@ if (newHistoryForm) {
       return;
     }
 
+    if (foundationNameExists(foundationName)) {
+      historyMessage.textContent = 'Ya existe una partida con ese nombre de fundación. Elige otro nombre.';
+      return;
+    }
+
     const createdAt = new Date().toISOString();
     const newHistory = {
       id: `lhdf-${Date.now()}`,
@@ -295,6 +335,11 @@ if (newHistoryForm) {
       historyMessage.textContent = `Fundación “${foundationName}” guardada correctamente.`;
       newHistoryForm.reset();
       renderSavedHistories();
+      prepareIntroStage(newHistory);
+
+      window.setTimeout(() => {
+        showScreen('introStage');
+      }, 260);
     } catch (error) {
       console.error('No se pudo guardar la historia:', error);
       historyMessage.textContent = 'No se pudo guardar la historia en este navegador.';
