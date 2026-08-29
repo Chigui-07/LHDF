@@ -128,6 +128,7 @@
       const history = histories.find((item) => item.id === id);
       if (history) {
         history.introScene = 7;
+        history.introCompleted = true;
         history.updatedAt = new Date().toISOString();
         localStorage.setItem('lhdf.histories', JSON.stringify(histories));
       }
@@ -135,7 +136,7 @@
       console.error('No se pudo guardar el cierre de la introducción:', error);
     }
 
-    // Destino provisional hasta construir el hub real del juego.
+    // Alpha 2.1 termina aquí. Alpha 3.1 reemplazará este destino por el hub real.
     showScreen('mainMenu');
   });
 })();
