@@ -1,110 +1,87 @@
 # ⚽ La Historia del Fútbol — LHDF
 
-Repositorio oficial del juego web **La Historia del Fútbol (LHDF)**.
+Repositorio oficial del juego web **La Historia del Fútbol (LHDF)**, desarrollado por **Chigui Studios**.
 
-## 📌 Descripción
+## 📌 Idea del juego
 
-LHDF será un juego web relacionado con la historia y evolución del fútbol. El proyecto se desarrollará progresivamente desde cero, agregando sistemas, equipos, jugadores, torneos, partidos y demás funciones conforme avance el desarrollo.
+LHDF parte desde un mundo en el que la historia del fútbol todavía está por escribirse. El jugador crea una fundación, impulsa los primeros clubes y construye con sus decisiones una historia propia de partidos, rivalidades, torneos y crecimiento internacional.
+
+Los clubes, países, jugadores, nombres e identidades pueden tomar datos del mundo real, pero la historia deportiva de cada partida nace desde cero dentro del juego.
 
 ## 🌐 Plataforma
 
-- Tipo de proyecto: Juego web
-- Repositorio: GitHub
-- Publicación de pruebas: GitHub Pages
-- Estado: En desarrollo
-- Estudio: **Chigui Studios**
+- Tipo: juego web.
+- Tecnologías actuales: HTML, CSS y JavaScript.
+- Repositorio: GitHub.
+- Pruebas públicas: GitHub Pages.
+- Guardado actual: `localStorage` del navegador.
+- Estado: en desarrollo.
 
-## 🛠️ Desarrollo
+## 🛠️ Bitácora oficial
 
-Este README funcionará como **bitácora oficial del proyecto**. Cada actualización importante realizada al juego será registrada aquí para mantener un historial claro de los cambios.
+Este README funciona como registro de los cambios importantes del proyecto.
 
-## 🎨 Identidad visual base
+## 🎨 Identidad visual
 
-- Ambientación principal basada en un estadio nocturno.
-- Colores principales: verde, aqua/cian, blanco y negro translúcido.
-- Botones verdes con iluminación aqua al pasar el cursor.
-- Pelota de fútbol animada y giratoria en el menú principal.
-- Paneles oscuros y translúcidos para mantener la estética del estadio.
-- Transiciones entre pantallas mediante un fundido suave a negro.
+- Ambientación nocturna y deportiva.
+- Verde, aqua/cian, blanco y fondos oscuros.
+- Transiciones mediante fundidos a negro.
+- Paneles y tarjetas oscuras.
+- Animaciones realizadas principalmente con CSS y JavaScript.
 
-## 📜 Historial de actualizaciones
+## 📜 Historial
 
-### 28 de agosto de 2026 — Inicio del nuevo proyecto
+### 28 de agosto de 2026 — Alpha 0.1
 
 - Se creó el repositorio oficial `LHDF`.
-- Se decidió desarrollar **La Historia del Fútbol** como un juego web.
-- Se comenzó a utilizar este README como registro oficial de actualizaciones.
+- Se construyó el primer menú principal.
+- Se añadieron **Nueva Historia**, **Continuar Partida**, **Configuraciones** y **Créditos**.
+- Se definió **Chigui Studios** como estudio del proyecto.
+- Se creó la ambientación inicial de estadio nocturno y la pelota animada.
+- Se implementó el sistema base de navegación y fundidos entre pantallas.
 
-### 28 de agosto de 2026 — Primer prototipo web
+### 28 de agosto de 2026 — Alpha 1.1
 
-- Se creó `index.html` como página inicial del juego.
-- Se agregó `css/style.css` para los primeros estilos visuales.
-- Se agregó `js/main.js` para la primera interacción básica.
-- Se comprobó correctamente la publicación web del proyecto.
-
-### 28 de agosto de 2026 — Menú principal Alpha 0.1
-
-- Se reemplazó la portada de prueba por el primer menú principal real de LHDF.
-- Se añadieron los botones **Nueva Historia**, **Continuar Partida**, **Configuraciones** y **Créditos**.
-- Se definió a **Chigui Studios** como estudio del proyecto.
-- Se creó una ambientación de estadio nocturno completamente mediante CSS.
-- Se añadió una pelota de fútbol animada que gira y flota en el menú.
-- Los botones utilizan verde como color principal y cambian a aqua/cian al pasar el cursor.
-- Se añadieron efectos de iluminación, movimiento y respuesta al hacer clic.
-- Se implementó un sistema reutilizable de transición `fade out → cambio de pantalla → fade in`.
-- Se añadieron pantallas provisionales para probar la navegación de las cuatro opciones principales.
-- Se añadió diseño adaptable para escritorio y teléfono.
-
-### 28 de agosto de 2026 — Alpha 1.1: Nueva Historia
-
-- Se creó la rama `alpha-1.1` a partir de la versión estable anterior.
-- Se rediseñó por completo la pantalla **Nueva Historia** para mantener el estilo visual del menú.
-- La creación de una historia ahora solicita únicamente **Fundación** y **Nombre del fundador**.
-- Guatemala queda establecido internamente como país inicial de todas las nuevas historias.
-- La elección del club se realizará posteriormente dentro de la partida.
-- Se añadió validación básica de los datos introducidos.
-- La versión visible del menú se actualizó a **Alpha 1.1**.
-
-### 28 de agosto de 2026 — Alpha 1.1: Sistema de guardado
-
+- Se creó el sistema **Nueva Historia**.
+- Cada partida solicita el nombre de la fundación y del fundador.
+- Guatemala quedó establecido como país inicial.
 - Se implementó guardado local mediante `localStorage`.
-- Cada nueva historia guarda el nombre de la fundación, fundador, país inicial, fecha de creación, última actualización y versión del juego.
-- Se genera un identificador único para cada historia.
-- La historia recién creada queda marcada como la partida actual.
-- Se añadió el estado `introCompleted: false` para preparar la futura introducción animada.
-- Las historias guardadas permanecen disponibles aunque se cierre o recargue el navegador.
+- Cada historia posee identificador, fechas, versión y estado de introducción.
+- Se impidieron nombres de fundación duplicados.
+- Se construyó **Continuar Partida** con tarjetas de guardado.
+- Se añadieron selección, partida activa y eliminación con confirmación.
+- Alpha 1.1 quedó cerrada como la base funcional de historias y guardados.
 
-### 28 de agosto de 2026 — Alpha 1.1: Continuar Partida
+### 28–29 de agosto de 2026 — Alpha 2.1: Introducción animada
 
-- Se conectó la pantalla **Continuar Partida** con las historias almacenadas en el navegador.
-- Las partidas guardadas aparecen como tarjetas individuales.
-- Cada tarjeta muestra fundación, fundador, país, último guardado y versión.
-- La partida activa queda identificada visualmente.
-- El jugador puede seleccionar una historia y convertirla en la partida activa.
-- Al seleccionar una historia se actualiza su fecha de último acceso.
-- Se añadió eliminación de partidas con confirmación integrada en la interfaz.
-- Si se elimina la partida activa, otra historia pasa a ser la actual automáticamente cuando existe una disponible.
-- Si no existen guardados, la pantalla muestra un estado vacío.
+- Se creó la secuencia narrativa completa que presenta el nacimiento del fútbol dentro de una nueva historia.
+- **El Sueño:** estadio nocturno, iluminación progresiva, pelota y primeras ideas del fundador.
+- **Nacimiento de la fundación:** escritorio, documentos, nombre dinámico de la fundación y sello de fundación.
+- **Fundación desconocida:** escena urbana en la que todavía nadie conoce el proyecto.
+- **Primera convocatoria:** cancha comunitaria, jóvenes, carteles e invitación pública.
+- Se creó una pantalla interactiva para escoger el primer club entre 12 clubes de Guatemala.
+- Se añadieron los escudos cargados desde `assets/clubs/guatemala/`.
+- La selección guarda `selectedClub`, `clubSelected` y el `rivalClub` resuelto para esa historia.
+- Se añadió una celebración con confeti independiente de los colores del club.
+- Se creó la animación del **primer clásico**, mostrando el club elegido contra su rival automático.
+- En el universo de LHDF este encuentro establece el primer clásico de esa historia, sin depender de rivalidades reales previas.
+- Se creó la escena final con los dos clubes descubiertos y los restantes ocultos mediante tarjetas negras con `?`.
+- La última escena establece `introCompleted: true`, por lo que la introducción completa solo debe reproducirse una vez por historia.
+- Se retiraron los atajos temporales utilizados durante las pruebas de las animaciones.
+- Alpha 2.1 queda cerrada como la versión de **introducción, elección del club y origen de la primera rivalidad**.
 
-### 28 de agosto de 2026 — Cierre funcional de Alpha 1.1
+## 🚧 Alpha 3.1 — En desarrollo
 
-- Se impide crear dos partidas con el mismo nombre de fundación, ignorando diferencias entre mayúsculas y minúsculas.
-- La partida creada queda seleccionada inmediatamente como partida activa.
-- Al pulsar **Crear Historia**, el juego guarda los datos y entra automáticamente al punto de inicio de la introducción.
-- **Continuar Partida** también carga la historia elegida y la dirige al mismo punto de entrada.
-- Se añadió una pantalla provisional de introducción para verificar el flujo completo antes de desarrollar las animaciones reales.
-- La pantalla provisional muestra la fundación y el fundador cargados.
-- Las animaciones reales no forman parte de Alpha 1.1 y serán implementadas en Alpha 2.1.
+La siguiente versión comienza el juego después de la introducción.
 
-## 🧭 Próxima etapa — Alpha 2.1
+Objetivos iniciales:
 
-- La **Alpha 2.1** estará dedicada a la introducción animada de la historia.
-- La secuencia explicará el sueño del fundador de crear un deporte capaz de crecer hasta volverse mundial.
-- Se mostrará el nacimiento de la fundación, que al principio será desconocida.
-- La inauguración comenzará invitando a jóvenes para formar pequeños clubes.
-- Estos clubes podrán desarrollarse y crecer conforme avance el tiempo dentro de la partida.
-- La introducción se dividirá en varias escenas y animaciones para que la historia se entienda de forma progresiva.
+- Crear el **Hub principal** de cada historia.
+- Hacer que las historias con `introCompleted: true` entren directamente al Hub.
+- Desarrollar una pantalla real de **Configuraciones**.
+- Añadir modo de pantalla completa y opciones básicas de experiencia.
+- Preparar la arquitectura sobre la que se añadirán clubes, partidos, torneos y herramientas de gestión.
 
-## 🚧 Estado actual
+## 🌿 Ramas de desarrollo
 
-La **Alpha 1.1** cuenta con menú principal, creación de historias, validación de nombres duplicados, guardado local, selección de partidas, eliminación de guardados y flujo automático hacia el inicio de la futura introducción. Con esto, la base del sistema de partidas queda preparada para comenzar la **Alpha 2.1**.
+Las versiones Alpha se conservan en ramas separadas para mantener el historial del proyecto. El desarrollo activo pasa a `alpha-3.1` una vez cerrada Alpha 2.1.
