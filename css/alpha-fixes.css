@@ -1,0 +1,17 @@
+.menu-button {
+  grid-template-columns: 1fr 28px;
+  text-align: center;
+}
+
+.button-copy {
+  text-align: center;
+  padding-left: 28px;
+}
+
+.menu-footer {
+  justify-content: flex-end;
+}
+
+.footer-version {
+  margin-left: 0;
+}
