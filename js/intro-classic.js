@@ -1,7 +1,7 @@
 (() => {
   const style = document.createElement('link');
   style.rel = 'stylesheet';
-  style.href = 'css/intro-classic.css?v=2.1.0';
+  style.href = 'css/intro-classic.css?v=2.1.1';
   document.head.appendChild(style);
 
   const LOGO_BASE = 'assets/clubs/guatemala/';
@@ -150,8 +150,6 @@
     }, TRANSITION_TIME);
   };
 
-  // Intercepta el botón final de la celebración del club antes de que
-  // club-selection.js lo envíe provisionalmente al menú principal.
   document.addEventListener('click', (event) => {
     const button = event.target.closest('#clubNextButton');
     if (!button || typeof window.showFirstClassicScene !== 'function') return;
@@ -170,7 +168,7 @@
 
   continueButton.addEventListener('click', () => {
     stop();
-    stage.classList.remove('active');
+
     try {
       const histories = JSON.parse(localStorage.getItem('lhdf.histories') || '[]');
       const id = localStorage.getItem('lhdf.currentHistoryId');
@@ -184,7 +182,15 @@
       console.error('No se pudo guardar el avance del primer clásico:', error);
     }
 
-    // Destino provisional hasta implementar la animación final de clubes por descubrir.
-    showScreen('mainMenu');
+    if (typeof window.showFutureScene === 'function') {
+      window.showFutureScene();
+    } else {
+      stage.classList.remove('active');
+      showScreen('mainMenu');
+    }
   });
+
+  const futureScript = document.createElement('script');
+  futureScript.src = 'js/intro-future.js?v=2.1.0';
+  document.body.appendChild(futureScript);
 })();
