@@ -1,0 +1,239 @@
+/* Alpha 2.1 — Cierre de introducción: el fútbol comienza a crecer */
+.future-scene {
+  place-items: center;
+  overflow: hidden;
+  background: #020706;
+}
+
+.future-sequence {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(55, 255, 171, .09), transparent 34%),
+    linear-gradient(180deg, #020706 0%, #07140f 55%, #020706 100%);
+}
+
+.future-sequence::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: .35;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, transparent, black 24%, black 80%, transparent);
+}
+
+.future-heading {
+  position: absolute;
+  left: 50%;
+  top: clamp(24px, 5vh, 52px);
+  z-index: 5;
+  width: min(900px, 90vw);
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.future-heading .eyebrow {
+  margin: 0 0 8px;
+  color: #7fffc0;
+  letter-spacing: .18em;
+}
+
+.future-heading h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4.7vw, 4rem);
+}
+
+.future-club-grid {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(110px, 1fr));
+  gap: clamp(10px, 1.4vw, 18px);
+  width: min(1180px, 92vw);
+  transform: translate(-50%, -50%);
+}
+
+.future-club-card {
+  position: relative;
+  min-height: 150px;
+  padding: 15px 10px 12px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 20px;
+  background: rgba(255,255,255,.045);
+  box-shadow: 0 16px 36px rgba(0,0,0,.26);
+  opacity: 0;
+  transform: translateY(18px) scale(.94);
+}
+
+.future-sequence.is-playing .future-club-card {
+  animation: futureCardIn .55s forwards;
+  animation-delay: calc(1.2s + var(--card-index) * 90ms);
+}
+
+@keyframes futureCardIn {
+  to { opacity: 1; transform: none; }
+}
+
+.future-club-card.is-revealed {
+  border-color: color-mix(in srgb, var(--club-color) 55%, rgba(255,255,255,.16));
+  background:
+    radial-gradient(circle at 50% 20%, color-mix(in srgb, var(--club-color) 22%, transparent), transparent 55%),
+    rgba(255,255,255,.06);
+}
+
+.future-club-card.is-revealed::after {
+  content: '';
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  bottom: 0;
+  height: 3px;
+  background: var(--club-color);
+  box-shadow: 0 0 15px var(--club-color);
+}
+
+.future-logo-wrap {
+  width: 78px;
+  height: 78px;
+  display: grid;
+  place-items: center;
+}
+
+.future-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 9px 14px rgba(0,0,0,.42));
+}
+
+.future-club-name {
+  max-width: 100%;
+  color: rgba(255,255,255,.88);
+  font-size: .82rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.future-club-card.is-hidden {
+  background: linear-gradient(145deg, #080b0a, #010202);
+  border-color: rgba(255,255,255,.07);
+}
+
+.future-hidden-badge {
+  width: 74px;
+  height: 82px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px 18px 24px 24px;
+  background: #000;
+  border: 1px solid rgba(255,255,255,.08);
+  color: rgba(255,255,255,.62);
+  font-size: 2.5rem;
+  font-weight: 950;
+  box-shadow: inset 0 0 20px rgba(255,255,255,.025);
+}
+
+.future-club-card.is-hidden .future-club-name {
+  color: rgba(255,255,255,.25);
+  letter-spacing: .12em;
+}
+
+.future-story {
+  position: absolute;
+  left: 50%;
+  bottom: 8vh;
+  z-index: 6;
+  width: min(900px, 88vw);
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.future-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  font-size: clamp(1rem, 2.15vw, 1.45rem);
+  font-weight: 750;
+  text-shadow: 0 3px 14px #000;
+}
+
+.future-sequence.is-playing .future-line-1 { animation: futureText 3s .25s both; }
+.future-sequence.is-playing .future-line-2 { animation: futureText 3.2s 3.35s both; }
+.future-sequence.is-playing .future-line-3 { animation: futureText 3.2s 6.65s both; }
+.future-sequence.is-playing .future-line-4 { animation: futureTextLast 1s 10s forwards; }
+
+@keyframes futureText {
+  0%, 100% { opacity: 0; transform: translateY(8px); }
+  15%, 78% { opacity: 1; transform: none; }
+}
+
+@keyframes futureTextLast {
+  to { opacity: 1; transform: none; }
+}
+
+.future-continue-button {
+  position: absolute;
+  right: clamp(18px, 4vw, 54px);
+  bottom: clamp(18px, 4vh, 40px);
+  z-index: 8;
+  padding: 13px 24px;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 999px;
+  background: rgba(13, 39, 28, .92);
+  color: white;
+  font: inherit;
+  font-weight: 850;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+}
+
+.future-sequence.is-complete .future-continue-button {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+  transition: opacity .4s ease, transform .4s ease, background .2s ease;
+}
+
+.future-continue-button:hover { background: rgba(38,154,111,.96); }
+
+@media (max-width: 900px) {
+  .future-club-grid { grid-template-columns: repeat(4, minmax(95px, 1fr)); top: 51%; }
+  .future-club-card { min-height: 125px; }
+  .future-logo-wrap { width: 62px; height: 62px; }
+  .future-hidden-badge { width: 60px; height: 65px; font-size: 2rem; }
+  .future-story { bottom: 12vh; }
+}
+
+@media (max-width: 620px) {
+  .future-heading h2 { font-size: clamp(1.65rem, 8vw, 2.5rem); }
+  .future-club-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; top: 52%; }
+  .future-club-card { min-height: 102px; padding: 9px 5px; border-radius: 14px; }
+  .future-logo-wrap { width: 46px; height: 46px; }
+  .future-hidden-badge { width: 44px; height: 49px; border-radius: 12px; font-size: 1.55rem; }
+  .future-club-name { font-size: .66rem; }
+  .future-story { bottom: 14vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .future-club-card,
+  .future-line { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .future-continue-button { opacity: 1; pointer-events: auto; transform: none; }
+}
