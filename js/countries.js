@@ -16,12 +16,12 @@
         <div>
           <p class="eyebrow">MUNDO DEL FÚTBOL</p>
           <h2>Países</h2>
-          <p>Los clubes y jugadores pertenecen a un país dentro de tu historia.</p>
+          <p>Los jugadores se registran por su país y después construyen su historia de clubes dentro de LHDF.</p>
         </div>
         <button id="countriesBackButton" class="countries-back" type="button">← Volver al Hub</button>
       </header>
       <div id="countriesGrid" class="countries-grid"></div>
-      <div class="countries-note">Nuevos países se añadirán y descubrirán conforme crezca el mundo de LHDF.</div>
+      <div class="countries-note">Selecciona Guatemala para abrir sus jugadores disponibles.</div>
     </div>`;
   shell.appendChild(stage);
 
@@ -29,15 +29,19 @@
 
   function renderCountries() {
     const countries = window.LHDF_DATA?.countries || [];
-    grid.innerHTML = countries.map((country) => `
-      <button class="country-card is-discovered" type="button" data-country-id="${country.id}">
-        <div class="country-code">${country.code}</div>
-        <div>
-          <small>País descubierto</small>
-          <strong>${country.name}</strong>
-          <span>Clubes y jugadores disponibles en esta nación.</span>
-        </div>
-      </button>`).join('');
+    const players = window.LHDF_DATA?.players || [];
+    grid.innerHTML = countries.map((country) => {
+      const totalPlayers = players.filter((player) => player.countryId === country.id).length;
+      return `
+        <button class="country-card is-discovered" type="button" data-country-id="${country.id}">
+          <div class="country-code">${country.code}</div>
+          <div>
+            <small>País descubierto</small>
+            <strong>${country.name}</strong>
+            <span>${totalPlayers} jugadores disponibles · abrir registro</span>
+          </div>
+        </button>`;
+    }).join('');
   }
 
   window.showCountries = function () {
@@ -49,6 +53,12 @@
       requestAnimationFrame(() => fade.classList.remove('is-visible'));
     }, typeof TRANSITION_TIME === 'number' ? TRANSITION_TIME : 480);
   };
+
+  grid.addEventListener('click', (event) => {
+    const country = event.target.closest('[data-country-id]');
+    if (!country || typeof window.showPlayers !== 'function') return;
+    window.showPlayers(country.dataset.countryId);
+  });
 
   document.getElementById('countriesBackButton').addEventListener('click', () => window.showHub?.());
 })();
