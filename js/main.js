@@ -11,6 +11,8 @@ const SAVE_KEY = 'lhdf.histories';
 const CURRENT_HISTORY_KEY = 'lhdf.currentHistoryId';
 const GAME_VERSION = 'Alpha 1.1';
 
+let pendingDeleteHistoryId = null;
+
 window.addEventListener('load', () => {
   renderSavedHistories();
 
@@ -33,6 +35,7 @@ function showScreen(screenId) {
     target.classList.add('active');
 
     if (screenId === 'continueGame') {
+      pendingDeleteHistoryId = null;
       renderSavedHistories();
     }
 
@@ -103,9 +106,68 @@ function selectHistory(historyId) {
   selectedHistory.updatedAt = new Date().toISOString();
   writeHistories(histories);
   localStorage.setItem(CURRENT_HISTORY_KEY, selectedHistory.id);
+  pendingDeleteHistoryId = null;
 
   if (continueMessage) {
     continueMessage.textContent = `“${selectedHistory.foundationName}” quedó seleccionada como partida activa.`;
+  }
+
+  renderSavedHistories();
+}
+
+function requestDeleteHistory(historyId) {
+  pendingDeleteHistoryId = historyId;
+
+  if (continueMessage) {
+    continueMessage.textContent = 'Confirma la eliminación de la partida seleccionada.';
+  }
+
+  renderSavedHistories();
+}
+
+function cancelDeleteHistory() {
+  pendingDeleteHistoryId = null;
+
+  if (continueMessage) {
+    continueMessage.textContent = '';
+  }
+
+  renderSavedHistories();
+}
+
+function deleteHistory(historyId) {
+  const histories = loadHistories();
+  const historyToDelete = histories.find((history) => history.id === historyId);
+
+  if (!historyToDelete) {
+    if (continueMessage) {
+      continueMessage.textContent = 'No se pudo encontrar esa partida.';
+    }
+    pendingDeleteHistoryId = null;
+    renderSavedHistories();
+    return;
+  }
+
+  const remainingHistories = histories.filter((history) => history.id !== historyId);
+  writeHistories(remainingHistories);
+
+  const currentHistoryId = localStorage.getItem(CURRENT_HISTORY_KEY);
+
+  if (currentHistoryId === historyId) {
+    if (remainingHistories.length > 0) {
+      const nextCurrent = [...remainingHistories].sort((a, b) => {
+        return new Date(b.updatedAt || b.createdAt) - new Date(a.updatedAt || a.createdAt);
+      })[0];
+      localStorage.setItem(CURRENT_HISTORY_KEY, nextCurrent.id);
+    } else {
+      localStorage.removeItem(CURRENT_HISTORY_KEY);
+    }
+  }
+
+  pendingDeleteHistoryId = null;
+
+  if (continueMessage) {
+    continueMessage.textContent = `La partida “${historyToDelete.foundationName}” fue eliminada.`;
   }
 
   renderSavedHistories();
@@ -128,23 +190,21 @@ function renderSavedHistories() {
         <span>Crea una nueva fundación desde el menú principal para comenzar.</span>
       </div>
     `;
-
-    if (continueMessage) {
-      continueMessage.textContent = '';
-    }
     return;
   }
 
   savedHistoriesContainer.innerHTML = histories.map((history) => {
     const isCurrent = history.id === currentHistoryId;
+    const isPendingDelete = history.id === pendingDeleteHistoryId;
     const foundationName = escapeHtml(history.foundationName || 'Fundación sin nombre');
     const founderName = escapeHtml(history.founderName || 'Sin fundador');
     const country = escapeHtml(history.country || 'Guatemala');
     const version = escapeHtml(history.version || 'Desconocida');
+    const historyId = escapeHtml(history.id);
     const date = formatSaveDate(history.updatedAt || history.createdAt);
 
     return `
-      <article class="saved-history-card${isCurrent ? ' is-current' : ''}">
+      <article class="saved-history-card${isCurrent ? ' is-current' : ''}${isPendingDelete ? ' is-deleting' : ''}">
         <div class="save-card-top">
           <h3>${foundationName}</h3>
           ${isCurrent ? '<span class="current-badge">Activa</span>' : ''}
@@ -157,9 +217,22 @@ function renderSavedHistories() {
           <div class="save-detail"><span>Versión</span><strong>${version}</strong></div>
         </div>
 
-        <button class="continue-save-button" type="button" data-history-id="${escapeHtml(history.id)}">
-          ${isCurrent ? 'Continuar partida' : 'Seleccionar y continuar'}
-        </button>
+        ${isPendingDelete ? `
+          <div class="delete-confirmation">
+            <p>¿Eliminar definitivamente <strong>${foundationName}</strong>?</p>
+            <div class="delete-confirmation-actions">
+              <button class="confirm-delete-button" type="button" data-confirm-delete-id="${historyId}">Confirmar eliminación</button>
+              <button class="cancel-delete-button" type="button" data-cancel-delete>Cancelar</button>
+            </div>
+          </div>
+        ` : `
+          <div class="save-card-actions">
+            <button class="continue-save-button" type="button" data-history-id="${historyId}">
+              ${isCurrent ? 'Continuar partida' : 'Seleccionar y continuar'}
+            </button>
+            <button class="delete-save-button" type="button" data-delete-history-id="${historyId}">Eliminar</button>
+          </div>
+        `}
       </article>
     `;
   }).join('');
@@ -168,6 +241,22 @@ function renderSavedHistories() {
     button.addEventListener('click', () => {
       selectHistory(button.dataset.historyId);
     });
+  });
+
+  savedHistoriesContainer.querySelectorAll('[data-delete-history-id]').forEach((button) => {
+    button.addEventListener('click', () => {
+      requestDeleteHistory(button.dataset.deleteHistoryId);
+    });
+  });
+
+  savedHistoriesContainer.querySelectorAll('[data-confirm-delete-id]').forEach((button) => {
+    button.addEventListener('click', () => {
+      deleteHistory(button.dataset.confirmDeleteId);
+    });
+  });
+
+  savedHistoriesContainer.querySelectorAll('[data-cancel-delete]').forEach((button) => {
+    button.addEventListener('click', cancelDeleteHistory);
   });
 }
 
