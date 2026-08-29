@@ -2,6 +2,11 @@
 // Las historias sin completar comienzan desde El Sueño; las completadas quedarán
 // listas para entrar al hub cuando se conecte en esta versión.
 
+const introResponsiveStyle = document.createElement('link');
+introResponsiveStyle.rel = 'stylesheet';
+introResponsiveStyle.href = 'css/intro-responsive.css?v=2.1.0';
+document.head.appendChild(introResponsiveStyle);
+
 openHistory = function (history) {
   const histories = loadHistories();
   const storedHistory = histories.find((item) => item.id === history.id);
