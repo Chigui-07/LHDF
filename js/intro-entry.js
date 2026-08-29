@@ -144,8 +144,6 @@ function showInvitationScene() {
   }, TRANSITION_TIME);
 }
 
-// Capturamos el botón de la tercera escena antes de que el manejador provisional
-// de main.js lo envíe al menú principal.
 document.addEventListener('click', (event) => {
   const button = event.target.closest('#unknownContinueButton');
   if (!button) return;
@@ -158,14 +156,12 @@ document.addEventListener('click', (event) => {
 
 if (invitationContinueButton) {
   invitationContinueButton.addEventListener('click', () => {
-    // Destino temporal; club-selection.js sustituye este listener cuando carga.
     invitationStage.classList.remove('active');
     stopInvitationScene();
     showScreen('mainMenu');
   });
 }
 
-// Pantalla interactiva de elección del primer club.
 const clubSelectionScript = document.createElement('script');
 clubSelectionScript.src = 'js/club-selection.js?v=2.1.4';
 clubSelectionScript.addEventListener('load', () => {
@@ -178,15 +174,13 @@ clubSelectionScript.addEventListener('load', () => {
 });
 document.body.appendChild(clubSelectionScript);
 
-// Sistemas propios de Alpha 3.1.
 const settingsScript = document.createElement('script');
 settingsScript.src = 'js/settings.js?v=3.1.0';
 document.body.appendChild(settingsScript);
 
-// Cargador oficial del Hub de Alpha 3.1.
 if (!document.querySelector('script[data-lhdf-hub-entry]')) {
   const hubEntryScript = document.createElement('script');
-  hubEntryScript.src = 'js/hub-entry.js?v=3.1.5';
+  hubEntryScript.src = 'js/hub-entry.js?v=3.1.8';
   hubEntryScript.dataset.lhdfHubEntry = 'true';
   document.body.appendChild(hubEntryScript);
 }
