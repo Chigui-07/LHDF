@@ -1,4 +1,6 @@
 // Alpha 3.1 — Pool inicial de jugadores de Guatemala.
+// Regla: jugadores guatemaltecos presentes en plantillas de primer equipo de clubes de Guatemala.
+// No se importan plantillas Sub-20/juveniles por separado. El club real solo se conserva como referencia.
 (() => {
   const data = window.LHDF_DATA;
   if (!data) return;
@@ -12,15 +14,15 @@
   add('municipal', 'Mediocampista', ["Pedro Altán", "Rudy Barrientos", "Jonathan Franco", "John Méndez", "Rudy Muñoz", "Rodrigo Saravia"]);
   add('municipal', 'Delantero', ["César Archila", "Jefry Bantes", "José Carlos Martínez"]);
 
-  add('comunicaciones', 'Portero', ["Arnold Barrios", "Fredy Pérez"]);
-  add('comunicaciones', 'Defensa', ["Rafael Morales", "Wilson Pineda", "José Carlos Pinto", "Diego Santis"]);
-  add('comunicaciones', 'Mediocampista', ["José Manuel Contreras", "Marco Domínguez", "Lynner García", "Stheven Robles"]);
-  add('comunicaciones', 'Delantero', ["Nelson García", "Erick Lemus", "Dewinder Bradley"]);
+  add('comunicaciones', 'Portero', ["Fredy Pérez", "Arnold Barrios"]);
+  add('comunicaciones', 'Defensa', ["José Carlos Pinto", "Kevin Grijalva", "Elsar Cruz Martín", "Emerson Raymundo", "David Prada", "Diego Santis"]);
+  add('comunicaciones', 'Mediocampista', ["Marco Domínguez", "Samuel Camacho", "Stheven Robles", "Joseph Folgar", "Brayam Castañeda", "Axel de la Cruz"]);
+  add('comunicaciones', 'Delantero', ["Nelson García", "Andersson Ortiz", "Erick Lemus", "Dewinder Bradley"]);
 
-  add('antigua-gfc', 'Portero', ["Allan Fernández", "Luis Morán", "Jorge Moreno", "Jhonatan Andree Teret Alvarenga"]);
-  add('antigua-gfc', 'Defensa', ["José Ardón", "Santiago Garzaro", "Allan García"]);
-  add('antigua-gfc', 'Mediocampista', ["Óscar Castellanos", "Brandon de León", "José Rosales"]);
-  add('antigua-gfc', 'Delantero', ["José Franco", "Ángel Gustavo Illescas", "William Fajardo", "Alejandro Daniel González Mendizabal", "Diego Fernández"]);
+  add('antigua-gfc', 'Portero', ["Luis Morán", "Jorge Moreno"]);
+  add('antigua-gfc', 'Defensa', ["José Ardón", "Wálter Paz", "Alejandro González", "Héctor Prillwitz", "Dilan Palencia", "José Gálvez"]);
+  add('antigua-gfc', 'Mediocampista', ["Óscar Castellanos", "Allan García", "Guillermo Carbonell", "José Rosales", "Selvin Sagastume", "Jimmy Ruiz", "Santiago Garzaro", "José Espinoza"]);
+  add('antigua-gfc', 'Delantero', ["Diego Fernández", "William Fajardo", "Jhostin Colindres", "José Franco"]);
 
   add('xelaju-mc', 'Portero', ["Estuardo Chang", "Álvaro Marcelo García Zaroba", "Estuardo Sican"]);
   add('xelaju-mc', 'Defensa', ["Javier González", "José Castañeda", "Kevin Ruiz", "Widvin Tebalán", "Erick González", "Jesús López"]);
@@ -38,8 +40,9 @@
   add('guastatoya', 'Delantero', ["Gilder Otoniel Cruz Ortíz", "Denilson Sánchez", "Bryan Lemus", "Christopher Ramírez", "Edy Palencia"]);
 
   add('san-pedro', 'Portero', ["Vander Estuardo Cruz Véliz"]);
-  add('san-pedro', 'Defensa', ["Alexis Jesús Eduardo Barrientos Mejía", "Steveth Óscar Javier Chacón Maldonado", "Romario Gómez Palacios", "Emerson Gonzalo García Matías", "Edgar Alejandro Macal Razulfo"]);
+  add('san-pedro', 'Defensa', ["Mathius Gaitán", "Steveth Óscar Javier Chacón Maldonado", "Romario Gómez Palacios", "Emerson Gonzalo García Matías", "Edgar Alejandro Macal Razulfo"]);
   add('san-pedro', 'Mediocampista', ["Yonathan Morán", "Edwin Fuentes"]);
+  add('san-pedro', 'Delantero', ["Alexis Jesús Eduardo Barrientos Mejía", "Jorge Vargas"]);
 
   add('suchitepequez', 'Portero', ["Eder Alexander García Castillo", "Julio Steven Secaida Gómez"]);
   add('suchitepequez', 'Defensa', ["Jorge Matul", "Denilson Luis Antonio Hernández Coronado", "César Augusto Madrid Franco", "Dany Klisman Rodas Cifuentes", "Nery Gerardo Cifuentes Pinto"]);
@@ -47,7 +50,7 @@
   add('suchitepequez', 'Delantero', ["Erick Rivera", "Mateo Alvarado Vicente", "Adrián Enrique Cifuentes Pinto"]);
 
   add('marquense', 'Portero', ["Esteban Benjamin Pérez Bravo", "Jordy Cifuentes", "Carlos Josué Rodríguez Almeda"]);
-  add('marquense', 'Defensa', ["Randall Corado", "Ryan Eduardo Díaz López", "Fernando Fuentes"]);
+  add('marquense', 'Defensa', ["Randall Corado", "Ryan Eduardo Díaz López", "Fernando Fuentes", "Gerardo Gordillo"]);
   add('marquense', 'Delantero', ["Erick Sanchez"]);
 
   add('aurora', 'Portero', ["Diego Navas", "Ian Cabrera"]);
