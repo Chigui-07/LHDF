@@ -1,5 +1,6 @@
 (() => {
   const SETTINGS_KEY = 'lhdf.settings';
+  const SETTINGS_RETURN_KEY = 'lhdf.settingsReturn';
   const DEFAULTS = {
     animations: true,
     transitionSpeed: 'normal',
@@ -37,50 +38,15 @@
       </header>
 
       <div class="settings-grid">
-        <article class="setting-card">
-          <div class="setting-copy">
-            <strong>Pantalla completa</strong>
-            <small>Activa o abandona el modo de pantalla completa del navegador.</small>
-          </div>
-          <button id="fullscreenSetting" class="setting-toggle" type="button" role="switch" aria-checked="false" aria-label="Pantalla completa"></button>
-        </article>
-
-        <article class="setting-card">
-          <div class="setting-copy">
-            <strong>Animaciones</strong>
-            <small>Permite las animaciones visuales del menú, transiciones e introducción.</small>
-          </div>
-          <button id="animationsSetting" class="setting-toggle" type="button" role="switch" aria-checked="true" aria-label="Animaciones"></button>
-        </article>
-
-        <article class="setting-card">
-          <div class="setting-copy">
-            <strong>Velocidad de transición</strong>
-            <small>Controla qué tan rápido cambia el juego entre una pantalla y otra.</small>
-          </div>
-          <select id="transitionSetting" class="setting-select" aria-label="Velocidad de transición">
-            <option value="normal">Normal</option>
-            <option value="fast">Rápida</option>
-          </select>
-        </article>
-
-        <article class="setting-card">
-          <div class="setting-copy">
-            <strong>Tamaño de interfaz</strong>
-            <small>Ajusta textos y controles sin cambiar el zoom completo del navegador.</small>
-          </div>
-          <select id="scaleSetting" class="setting-select" aria-label="Tamaño de interfaz">
-            <option value="90">90%</option>
-            <option value="100">100%</option>
-            <option value="110">110%</option>
-          </select>
-        </article>
+        <article class="setting-card"><div class="setting-copy"><strong>Pantalla completa</strong><small>Activa o abandona el modo de pantalla completa del navegador.</small></div><button id="fullscreenSetting" class="setting-toggle" type="button" role="switch" aria-checked="false" aria-label="Pantalla completa"></button></article>
+        <article class="setting-card"><div class="setting-copy"><strong>Animaciones</strong><small>Permite las animaciones visuales del menú, transiciones e introducción.</small></div><button id="animationsSetting" class="setting-toggle" type="button" role="switch" aria-checked="true" aria-label="Animaciones"></button></article>
+        <article class="setting-card"><div class="setting-copy"><strong>Velocidad de transición</strong><small>Controla qué tan rápido cambia el juego entre una pantalla y otra.</small></div><select id="transitionSetting" class="setting-select" aria-label="Velocidad de transición"><option value="normal">Normal</option><option value="fast">Rápida</option></select></article>
+        <article class="setting-card"><div class="setting-copy"><strong>Tamaño de interfaz</strong><small>Ajusta textos y controles sin cambiar el zoom completo del navegador.</small></div><select id="scaleSetting" class="setting-select" aria-label="Tamaño de interfaz"><option value="90">90%</option><option value="100">100%</option><option value="110">110%</option></select></article>
       </div>
 
       <div id="settingsStatus" class="settings-status" aria-live="polite"></div>
-
       <div class="settings-actions">
-        <button class="back-button" type="button" data-screen="mainMenu">← Volver al menú</button>
+        <button id="settingsBackButton" class="back-button" type="button">← Volver</button>
         <button id="settingsReset" class="settings-reset-button" type="button">Restablecer configuraciones</button>
       </div>
     </div>`;
@@ -90,32 +56,35 @@
   const transitionSelect = document.getElementById('transitionSetting');
   const scaleSelect = document.getElementById('scaleSetting');
   const resetButton = document.getElementById('settingsReset');
+  const backButton = document.getElementById('settingsBackButton');
   const status = document.getElementById('settingsStatus');
 
   function loadSettings() {
-    try {
-      return { ...DEFAULTS, ...JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}') };
-    } catch (error) {
-      return { ...DEFAULTS };
-    }
+    try { return { ...DEFAULTS, ...JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}') }; }
+    catch (error) { return { ...DEFAULTS }; }
   }
 
   let settings = loadSettings();
+
+  function getReturnTarget() {
+    return sessionStorage.getItem(SETTINGS_RETURN_KEY) === 'hub' ? 'hub' : 'menu';
+  }
+
+  function syncBackLabel() {
+    backButton.textContent = getReturnTarget() === 'hub' ? '← Volver al Hub' : '← Volver al menú';
+  }
 
   function saveSettings(message = 'Configuración guardada.') {
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
     applySettings();
     status.textContent = message;
-    window.setTimeout(() => {
-      if (status.textContent === message) status.textContent = '';
-    }, 1800);
+    window.setTimeout(() => { if (status.textContent === message) status.textContent = ''; }, 1800);
   }
 
   function applySettings() {
     animationsButton.setAttribute('aria-checked', String(settings.animations));
     transitionSelect.value = settings.transitionSpeed;
     scaleSelect.value = settings.interfaceScale;
-
     document.body.classList.toggle('lhdf-no-animations', !settings.animations);
     document.body.classList.toggle('lhdf-fast-transitions', settings.transitionSpeed === 'fast');
     document.documentElement.style.fontSize = `${Number(settings.interfaceScale) / 100 * 16}px`;
@@ -161,13 +130,26 @@
     saveSettings('Configuraciones restablecidas.');
   });
 
-  settingsScreen.querySelector('[data-screen="mainMenu"]').addEventListener('click', () => showScreen('mainMenu'));
-
-  document.querySelectorAll('.footer-version').forEach((element) => {
-    element.textContent = 'Alpha 3.1';
+  backButton.addEventListener('click', () => {
+    if (getReturnTarget() === 'hub' && typeof window.showHub === 'function') {
+      sessionStorage.removeItem(SETTINGS_RETURN_KEY);
+      window.showHub();
+      return;
+    }
+    sessionStorage.removeItem(SETTINGS_RETURN_KEY);
+    showScreen('mainMenu');
   });
 
-  // Las historias creadas durante Alpha 3.1 quedan identificadas con esta versión.
+  // Abrir Configuraciones desde el menú principal debe conservar el menú como regreso.
+  document.addEventListener('click', (event) => {
+    const menuSettingsButton = event.target.closest('[data-screen="settings"]');
+    if (!menuSettingsButton) return;
+    sessionStorage.setItem(SETTINGS_RETURN_KEY, 'menu');
+    window.setTimeout(syncBackLabel, 0);
+  }, true);
+
+  document.querySelectorAll('.footer-version').forEach((element) => { element.textContent = 'Alpha 3.1'; });
+
   const newHistoryForm = document.getElementById('newHistoryForm');
   if (newHistoryForm) {
     newHistoryForm.addEventListener('submit', () => {
@@ -189,8 +171,9 @@
 
   applySettings();
   syncFullscreen();
+  syncBackLabel();
 })();
 
 const hubEntryScript = document.createElement('script');
-hubEntryScript.src = 'js/hub-entry.js?v=3.1.0';
+hubEntryScript.src = 'js/hub-entry.js?v=3.1.1';
 document.body.appendChild(hubEntryScript);
