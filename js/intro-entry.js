@@ -152,9 +152,14 @@ document.addEventListener('click', (event) => {
 
 if (invitationContinueButton) {
   invitationContinueButton.addEventListener('click', () => {
-    // Destino temporal hasta construir la quinta animación.
+    // Destino temporal; club-selection.js sustituye este listener cuando carga.
     invitationStage.classList.remove('active');
     stopInvitationScene();
     showScreen('mainMenu');
   });
 }
+
+// Pantalla interactiva de elección del primer club.
+const clubSelectionScript = document.createElement('script');
+clubSelectionScript.src = 'js/club-selection.js?v=2.1.1';
+document.body.appendChild(clubSelectionScript);
