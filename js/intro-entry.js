@@ -162,4 +162,14 @@ if (invitationContinueButton) {
 // Pantalla interactiva de elección del primer club.
 const clubSelectionScript = document.createElement('script');
 clubSelectionScript.src = 'js/club-selection.js?v=2.1.3';
+clubSelectionScript.addEventListener('load', () => {
+  // El clásico y la escena final se cargan después de la selección para
+  // asegurar que el flujo completo esté disponible antes de elegir un club.
+  if (!document.querySelector('script[data-lhdf-classic]')) {
+    const classicScript = document.createElement('script');
+    classicScript.src = 'js/intro-classic.js?v=2.1.1';
+    classicScript.dataset.lhdfClassic = 'true';
+    document.body.appendChild(classicScript);
+  }
+});
 document.body.appendChild(clubSelectionScript);
