@@ -43,6 +43,17 @@ body {
   overscroll-behavior: contain;
 }
 
+/* Mantener siempre los botones finales dentro de una zona segura. */
+.dream-continue-button,
+.foundation-continue-button,
+.unknown-continue-button,
+.invitation-continue-button,
+.classic-continue-button,
+.future-continue-button {
+  right: clamp(18px, 3vw, 46px) !important;
+  bottom: max(28px, env(safe-area-inset-bottom)) !important;
+}
+
 /* Pantallas con poca altura: navegadores en ventana, laptops y 1366x768. */
 @media (max-height: 760px) {
   .dream-sequence { min-height: 0 !important; }
@@ -64,8 +75,8 @@ body {
   .invitation-continue-button,
   .classic-continue-button,
   .future-continue-button {
-    right: 18px !important;
-    bottom: 14px !important;
+    right: 22px !important;
+    bottom: 56px !important;
     padding: 10px 18px !important;
     font-size: .9rem !important;
   }
@@ -75,7 +86,7 @@ body {
     width: min(390px, 68vw) !important;
     min-height: 0 !important;
     height: min(390px, 58vh) !important;
-    bottom: 2vh !important;
+    bottom: 4vh !important;
     padding: 26px 30px !important;
   }
 
@@ -94,7 +105,6 @@ body {
     transform-origin: bottom right !important;
   }
 
-  /* Fundación desconocida e invitación: compactar elementos decorativos. */
   .unknown-story,
   .invitation-story { transform: scale(.92); transform-origin: center; }
 
@@ -110,29 +120,14 @@ body {
     scale: .82;
   }
 
-  /* Selección de club: dos filas compactas sin cortar encabezado. */
   .club-selection-shell {
     padding: 16px clamp(16px, 3vw, 40px) 22px !important;
   }
 
-  .club-selection-heading {
-    margin-bottom: 14px !important;
-  }
-
-  .club-selection-heading .eyebrow {
-    margin-bottom: 4px !important;
-    font-size: .72rem !important;
-  }
-
-  .club-selection-heading h2 {
-    font-size: clamp(1.65rem, 4.2vw, 2.8rem) !important;
-    line-height: 1.05 !important;
-  }
-
-  .club-selection-heading p {
-    margin-top: 7px !important;
-    font-size: .86rem !important;
-  }
+  .club-selection-heading { margin-bottom: 14px !important; }
+  .club-selection-heading .eyebrow { margin-bottom: 4px !important; font-size: .72rem !important; }
+  .club-selection-heading h2 { font-size: clamp(1.65rem, 4.2vw, 2.8rem) !important; line-height: 1.05 !important; }
+  .club-selection-heading p { margin-top: 7px !important; font-size: .86rem !important; }
 
   .club-grid {
     gap: 10px !important;
@@ -155,28 +150,11 @@ body {
   .club-card strong { font-size: .88rem !important; }
   .club-card small { font-size: .72rem !important; }
 
-  .club-modal-card {
-    max-height: 88vh !important;
-    padding: 22px !important;
-  }
+  .club-modal-card { max-height: 88vh !important; padding: 22px !important; }
+  .club-modal-emblem { width: 92px !important; height: 92px !important; margin-bottom: 10px !important; }
+  .club-confirmed-content .club-placeholder { width: 118px !important; height: 118px !important; }
+  .club-confirmed-content h3 { margin-top: 10px !important; font-size: clamp(1.9rem, 6vw, 3.4rem) !important; }
 
-  .club-modal-emblem {
-    width: 92px !important;
-    height: 92px !important;
-    margin-bottom: 10px !important;
-  }
-
-  .club-confirmed-content .club-placeholder {
-    width: 118px !important;
-    height: 118px !important;
-  }
-
-  .club-confirmed-content h3 {
-    margin-top: 10px !important;
-    font-size: clamp(1.9rem, 6vw, 3.4rem) !important;
-  }
-
-  /* Primer clásico. */
   .classic-versus {
     width: min(920px, 88vw) !important;
     grid-template-columns: 1fr minmax(58px, 86px) 1fr !important;
@@ -189,28 +167,15 @@ body {
     margin-bottom: 9px !important;
   }
 
-  .classic-club h3 {
-    font-size: clamp(1.05rem, 2.6vw, 1.65rem) !important;
-  }
+  .classic-club h3 { font-size: clamp(1.05rem, 2.6vw, 1.65rem) !important; }
+  .classic-story { bottom: 14vh !important; }
 
-  .classic-story { bottom: 11vh !important; }
-
-  /* Escena final: mantener las 12 tarjetas dentro del alto disponible. */
-  .future-heading {
-    top: 14px !important;
-  }
-
-  .future-heading .eyebrow {
-    margin-bottom: 3px !important;
-    font-size: .7rem !important;
-  }
-
-  .future-heading h2 {
-    font-size: clamp(1.55rem, 4vw, 2.5rem) !important;
-  }
+  .future-heading { top: 14px !important; }
+  .future-heading .eyebrow { margin-bottom: 3px !important; font-size: .7rem !important; }
+  .future-heading h2 { font-size: clamp(1.55rem, 4vw, 2.5rem) !important; }
 
   .future-club-grid {
-    top: 51% !important;
+    top: 49% !important;
     gap: 8px !important;
     width: min(1080px, 90vw) !important;
   }
@@ -222,19 +187,10 @@ body {
     border-radius: 14px !important;
   }
 
-  .future-logo-wrap {
-    width: 48px !important;
-    height: 48px !important;
-  }
-
-  .future-hidden-badge {
-    width: 48px !important;
-    height: 54px !important;
-    font-size: 1.65rem !important;
-  }
-
+  .future-logo-wrap { width: 48px !important; height: 48px !important; }
+  .future-hidden-badge { width: 48px !important; height: 54px !important; font-size: 1.65rem !important; }
   .future-club-name { font-size: .66rem !important; }
-  .future-story { bottom: 10vh !important; }
+  .future-story { bottom: 14vh !important; }
 }
 
 /* Alturas muy reducidas: ventana pequeña. */
@@ -248,10 +204,20 @@ body {
     font-size: clamp(.82rem, 1.9vw, 1.15rem) !important;
   }
 
+  .dream-continue-button,
+  .foundation-continue-button,
+  .unknown-continue-button,
+  .invitation-continue-button,
+  .classic-continue-button,
+  .future-continue-button {
+    bottom: 50px !important;
+  }
+
   .main-document {
     width: min(330px, 62vw) !important;
-    height: 50vh !important;
+    height: 48vh !important;
     padding: 18px 22px !important;
+    bottom: 7vh !important;
   }
 
   .club-selection-heading p { display: none !important; }
@@ -261,35 +227,21 @@ body {
   .club-placeholder { width: 56px !important; height: 56px !important; }
   .club-card small { margin-top: 2px !important; }
 
-  .classic-crest-wrap {
-    width: 92px !important;
-    height: 92px !important;
-  }
-
+  .classic-crest-wrap { width: 92px !important; height: 92px !important; }
   .classic-story,
-  .future-story { bottom: 12vh !important; }
+  .future-story { bottom: 16vh !important; }
 
   .future-heading .eyebrow { display: none !important; }
-  .future-club-grid { top: 50% !important; }
+  .future-club-grid { top: 47% !important; }
   .future-club-card { min-height: 82px !important; }
   .future-logo-wrap { width: 38px !important; height: 38px !important; }
   .future-hidden-badge { width: 38px !important; height: 42px !important; font-size: 1.35rem !important; }
 }
 
-/* Pantallas estrechas: conservar legibilidad y permitir desplazamiento solo
-   en la selección, donde existe contenido interactivo real. */
 @media (max-width: 760px) {
-  .club-selection-shell {
-    overflow-y: auto !important;
-  }
-
-  .club-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-
-  .club-card {
-    min-height: 175px !important;
-  }
+  .club-selection-shell { overflow-y: auto !important; }
+  .club-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .club-card { min-height: 175px !important; }
 
   .classic-versus {
     width: 94vw !important;
@@ -301,7 +253,5 @@ body {
     height: clamp(82px, 26vw, 125px) !important;
   }
 
-  .future-club-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  }
+  .future-club-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
 }
