@@ -12,7 +12,7 @@
       loadScript('js/hub.js?v=3.1.1', () => {
         loadScript('js/clubs.js?v=3.1.0', () => {
           loadScript('js/club-system.js?v=3.1.2', () => {
-            loadScript('js/match-game.js?v=3.1.6');
+            loadScript('js/match-game.js?v=3.1.7');
           });
         });
         loadScript('js/countries.js?v=3.1.2');
