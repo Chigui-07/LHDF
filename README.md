@@ -2,10 +2,6 @@
 
 Repositorio oficial del juego web **La Historia del Fútbol (LHDF)**.
 
-## 🌐 Jugar LHDF
-
-**Sitio oficial:** https://lhdf.denischigui16.workers.dev/
-
 ## 📌 Descripción
 
 LHDF será un juego web relacionado con la historia y evolución del fútbol. El proyecto se desarrollará progresivamente desde cero, agregando sistemas, equipos, jugadores, torneos, partidos y demás funciones conforme avance el desarrollo.
@@ -14,8 +10,7 @@ LHDF será un juego web relacionado con la historia y evolución del fútbol. El
 
 - Tipo de proyecto: Juego web
 - Repositorio: GitHub
-- Despliegue: Cloudflare / GitHub Pages para pruebas
-- URL oficial: https://lhdf.denischigui16.workers.dev/
+- Publicación de pruebas: GitHub Pages
 - Estado: En desarrollo
 - Estudio: **Chigui Studios**
 
@@ -38,7 +33,6 @@ Este README funcionará como **bitácora oficial del proyecto**. Cada actualizac
 
 - Se creó el repositorio oficial `LHDF`.
 - Se decidió desarrollar **La Historia del Fútbol** como un juego web.
-- Se estableció Cloudflare como plataforma para publicar y probar el juego en línea.
 - Se comenzó a utilizar este README como registro oficial de actualizaciones.
 
 ### 28 de agosto de 2026 — Primer prototipo web
@@ -46,7 +40,7 @@ Este README funcionará como **bitácora oficial del proyecto**. Cada actualizac
 - Se creó `index.html` como página inicial del juego.
 - Se agregó `css/style.css` para los primeros estilos visuales.
 - Se agregó `js/main.js` para la primera interacción básica.
-- Se comprobó correctamente el despliegue del proyecto mediante Cloudflare.
+- Se comprobó correctamente la publicación web del proyecto.
 
 ### 28 de agosto de 2026 — Menú principal Alpha 0.1
 
@@ -60,11 +54,6 @@ Este README funcionará como **bitácora oficial del proyecto**. Cada actualizac
 - Se implementó un sistema reutilizable de transición `fade out → cambio de pantalla → fade in`.
 - Se añadieron pantallas provisionales para probar la navegación de las cuatro opciones principales.
 - Se añadió diseño adaptable para escritorio y teléfono.
-
-### 28 de agosto de 2026 — URL oficial
-
-- Se añadió al README el enlace oficial desplegado en Cloudflare Workers.
-- URL: https://lhdf.denischigui16.workers.dev/
 
 ### 28 de agosto de 2026 — Alpha 1.1: Nueva Historia
 
@@ -85,6 +74,15 @@ Este README funcionará como **bitácora oficial del proyecto**. Cada actualizac
 - Se añadió el estado `introCompleted: false` para preparar la futura introducción animada.
 - Las historias guardadas permanecen disponibles aunque se cierre o recargue el navegador.
 
+## 🧭 Próxima etapa — Alpha 2.1
+
+- La **Alpha 2.1** estará dedicada a la introducción animada de la historia.
+- La secuencia explicará el sueño del fundador de crear un deporte capaz de crecer hasta volverse mundial.
+- Se mostrará el nacimiento de la fundación, que al principio será desconocida.
+- La inauguración comenzará invitando a jóvenes para formar pequeños clubes.
+- Estos clubes podrán desarrollarse y crecer conforme avance el tiempo dentro de la partida.
+- La introducción se dividirá en varias escenas y animaciones para que la historia se entienda de forma progresiva.
+
 ## 🚧 Estado actual
 
-LHDF cuenta con un menú principal funcional, una pantalla real de creación de historia y un sistema de guardado local. La siguiente etapa será conectar las partidas guardadas con **Continuar Partida** y, después, desarrollar la introducción animada que explica el nacimiento de la fundación.
+LHDF cuenta con un menú principal funcional, una pantalla real de creación de historia y un sistema de guardado local. La siguiente tarea dentro de la Alpha 1.1 será conectar las partidas guardadas con **Continuar Partida**. La introducción animada quedará reservada para **Alpha 2.1**.
