@@ -1,0 +1,35 @@
+/* Alpha 2.1 — Alineación exacta de las escenas de introducción */
+
+.dream-scene,
+.foundation-scene,
+.unknown-scene,
+.invitation-scene,
+.club-selection-scene,
+.classic-scene,
+.future-scene {
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  place-items: stretch !important;
+  align-items: stretch !important;
+  justify-items: stretch !important;
+}
+
+.dream-sequence,
+.foundation-sequence,
+.unknown-sequence,
+.invitation-sequence,
+.classic-sequence,
+.future-sequence,
+.club-selection-shell {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  inset: auto !important;
+}
+
+/* Los overlays sí deben cubrir toda la ventana sin heredar separación. */
+.club-modal,
+.club-confirmed {
+  inset: 0 !important;
+}
