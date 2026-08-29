@@ -102,9 +102,15 @@ Este README funciona como registro de los cambios importantes del proyecto.
 - Se creó un menú base propio para el club seleccionado con accesos futuros a Plantilla, Estadísticas, Historia y Gestión.
 - Se añadió el módulo **Países** al Hub y Guatemala quedó como primer país disponible.
 - Se creó una base común de datos en `js/game-data.js` para relacionar países, clubes y jugadores.
-- Cada jugador se relacionará mediante `countryId` y `clubId`.
-- Se activó la pantalla base de **Jugadores**, con filtros por país y club preparados para cargar las plantillas reales.
-- La lista de jugadores permanece vacía hasta incorporar los datos reales de Guatemala.
+- Se activó la pantalla de **Jugadores** y Guatemala abre directamente su registro de futbolistas.
+- Se creó `js/players-guatemala.js` como archivo separado para mantener actualizado el pool nacional sin modificar el resto del mundo.
+- El pool inicial de Guatemala contiene jugadores guatemaltecos identificados en plantillas de **primer equipo** de clubes de la Liga Nacional 2026/27.
+- No se importan plantillas Sub-20, Sub-22, academias o juveniles como fuentes independientes.
+- Un jugador joven sí puede formar parte del pool si ya aparece en la plantilla del primer equipo de su club.
+- Los futbolistas extranjeros o nacionalizados guatemaltecos cuyo origen futbolístico corresponde a otro país no se incorporan al pool de Guatemala.
+- Todos los jugadores comienzan con `clubId: null`: ningún club real queda fijado dentro de una historia nueva.
+- `referenceClubId` conserva únicamente el club real usado para verificar que el jugador estaba activo en Guatemala al crear la base.
+- La pantalla de jugadores permite filtrar por país y posición y muestra a todos inicialmente como **Sin club en esta historia**.
 
 ## 🚧 Alpha 3.1 — En desarrollo
 
@@ -114,7 +120,7 @@ Objetivos principales:
 - Completar y ampliar **Configuraciones** conforme aparezcan nuevos sistemas como audio.
 - Preparar la arquitectura sobre la que se añadirán clubes, partidos, torneos y herramientas de gestión.
 - Convertir progresivamente los módulos provisionales del Hub en sistemas jugables.
-- Incorporar los jugadores reales de Guatemala y conectarlos con sus clubes y país.
+- Revisar y mantener actualizado el pool de jugadores de Guatemala conforme cambien las plantillas reales.
 
 ## 🌿 Ramas de desarrollo
 
