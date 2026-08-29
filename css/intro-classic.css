@@ -2,7 +2,7 @@
 .classic-scene {
   place-items: center;
   overflow: hidden;
-  background: #020605;
+  background: #020605 !important;
 }
 
 .classic-sequence {
@@ -11,9 +11,11 @@
   height: 100vh;
   overflow: hidden;
   isolation: isolate;
-  background:
-    radial-gradient(circle at 50% 46%, rgba(255,255,255,.06), transparent 22%),
-    linear-gradient(180deg, #020706 0%, #07110d 58%, #020605 100%);
+  background-color: #020706;
+  background-image:
+    radial-gradient(circle at 50% 42%, rgba(35, 255, 166, .08), transparent 28%),
+    linear-gradient(180deg, #010403 0%, #08150f 54%, #010403 100%);
+  box-shadow: inset 0 -16vh 26vh rgba(0,0,0,.7);
 }
 
 .classic-sequence::before,
@@ -125,9 +127,9 @@
   display: grid;
   place-items: center;
   border-radius: 34px;
-  background: rgba(255,255,255,.055);
+  background: rgba(4, 12, 9, .92);
   border: 1px solid rgba(255,255,255,.16);
-  box-shadow: 0 24px 60px rgba(0,0,0,.45);
+  box-shadow: 0 24px 60px rgba(0,0,0,.55);
 }
 
 .classic-crest {
@@ -220,7 +222,7 @@
   padding: 13px 24px;
   border: 1px solid rgba(255,255,255,.22);
   border-radius: 999px;
-  background: rgba(10,28,20,.84);
+  background: rgba(10,28,20,.94);
   color: white;
   font: inherit;
   font-weight: 850;
