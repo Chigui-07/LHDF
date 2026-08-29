@@ -64,6 +64,11 @@
   box-shadow: 0 0 0 1px rgba(70,246,223,0.14), 0 0 26px rgba(70,246,223,0.08);
 }
 
+.saved-history-card.is-deleting {
+  border-color: rgba(255,103,103,0.58);
+  box-shadow: 0 0 0 1px rgba(255,103,103,0.08), 0 0 26px rgba(255,70,70,0.06);
+}
+
 .save-card-top {
   display: flex;
   align-items: flex-start;
@@ -107,15 +112,27 @@
   text-align: right;
 }
 
-.continue-save-button {
+.save-card-actions {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+.continue-save-button,
+.delete-save-button,
+.confirm-delete-button,
+.cancel-delete-button {
   min-height: 46px;
-  border: 1px solid rgba(70,246,223,0.48);
   border-radius: 12px;
-  background: linear-gradient(135deg, #0f8a4b, #08745f);
-  color: var(--white);
   font-weight: 800;
   cursor: pointer;
-  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+  transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease, color .2s ease;
+}
+
+.continue-save-button {
+  border: 1px solid rgba(70,246,223,0.48);
+  background: linear-gradient(135deg, #0f8a4b, #08745f);
+  color: var(--white);
 }
 
 .continue-save-button:hover,
@@ -124,6 +141,81 @@
   background: linear-gradient(135deg, #2ed8ba, #18a995);
   color: #03251f;
   box-shadow: 0 10px 24px rgba(16,215,182,0.2);
+  outline: none;
+}
+
+.delete-save-button {
+  min-width: 92px;
+  padding: 0 14px;
+  border: 1px solid rgba(255,113,113,0.34);
+  background: rgba(81,18,18,0.48);
+  color: #ffb2b2;
+}
+
+.delete-save-button:hover,
+.delete-save-button:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(255,113,113,0.72);
+  background: rgba(132,30,30,0.78);
+  color: #fff;
+  outline: none;
+}
+
+.delete-confirmation {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid rgba(255,113,113,0.2);
+  border-radius: 14px;
+  background: rgba(76,16,16,0.24);
+}
+
+.delete-confirmation p {
+  margin: 0;
+  color: rgba(255,255,255,0.76);
+  font-size: .88rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.delete-confirmation p strong {
+  color: #ffd2d2;
+}
+
+.delete-confirmation-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.confirm-delete-button {
+  padding: 0 14px;
+  border: 1px solid rgba(255,113,113,0.62);
+  background: linear-gradient(135deg, #8f2828, #671818);
+  color: #fff;
+}
+
+.confirm-delete-button:hover,
+.confirm-delete-button:focus-visible {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #c34040, #902626);
+  box-shadow: 0 10px 24px rgba(180,35,35,0.18);
+  outline: none;
+}
+
+.cancel-delete-button {
+  padding: 0 14px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.82);
+}
+
+.cancel-delete-button:hover,
+.cancel-delete-button:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(70,246,223,0.42);
+  background: rgba(70,246,223,0.1);
+  color: var(--aqua);
   outline: none;
 }
 
@@ -169,5 +261,14 @@
 
   .saved-histories {
     grid-template-columns: 1fr;
+  }
+
+  .save-card-actions,
+  .delete-confirmation-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .delete-save-button {
+    width: 100%;
   }
 }
