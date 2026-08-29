@@ -1,0 +1,190 @@
+/* Alpha 2.1 — Ajustes responsive de la introducción
+   Mantiene escenas, textos, botones y tarjetas dentro del viewport
+   tanto en ventana como en pantalla completa. */
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
+.dream-scene,
+.foundation-scene,
+.unknown-scene,
+.invitation-scene,
+.club-selection-scene,
+.classic-scene,
+.future-scene {
+  width: 100vw !important;
+  height: 100vh !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+.dream-sequence,
+.foundation-sequence,
+.unknown-sequence,
+.invitation-sequence,
+.classic-sequence,
+.future-sequence {
+  width: 100vw !important;
+  height: 100vh !important;
+  min-height: 0 !important;
+  max-height: 100vh !important;
+  overflow: hidden !important;
+}
+
+.club-selection-shell {
+  box-sizing: border-box !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  min-height: 0 !important;
+  max-height: 100vh !important;
+  overscroll-behavior: contain;
+}
+
+@media (max-height: 760px) {
+  .dream-sequence { min-height: 0 !important; }
+
+  .dream-line,
+  .foundation-line,
+  .unknown-line,
+  .invitation-line,
+  .classic-line,
+  .future-line {
+    width: min(780px, 82vw) !important;
+    font-size: clamp(.95rem, 2.1vw, 1.45rem) !important;
+    line-height: 1.22 !important;
+  }
+
+  .dream-continue-button,
+  .foundation-continue-button,
+  .unknown-continue-button,
+  .invitation-continue-button,
+  .classic-continue-button,
+  .future-continue-button {
+    right: 18px !important;
+    bottom: 14px !important;
+    padding: 10px 18px !important;
+    font-size: .9rem !important;
+  }
+
+  .main-document {
+    width: min(390px, 68vw) !important;
+    min-height: 0 !important;
+    height: min(390px, 58vh) !important;
+    bottom: 2vh !important;
+    padding: 26px 30px !important;
+  }
+
+  .document-header { font-size: .72rem !important; }
+  .document-name { font-size: clamp(1.35rem, 3vw, 2rem) !important; }
+  .document-signature-line { margin-top: 28px !important; }
+  .foundation-stamp {
+    width: 76px !important;
+    height: 76px !important;
+    right: 24px !important;
+    bottom: 26px !important;
+  }
+
+  .desk-lamp {
+    transform: scale(.78) !important;
+    transform-origin: bottom right !important;
+  }
+
+  .unknown-story,
+  .invitation-story { transform: scale(.92); transform-origin: center; }
+
+  .invitation-board {
+    max-width: 330px !important;
+    min-width: 210px !important;
+    padding: 14px 16px !important;
+    bottom: 18vh !important;
+  }
+
+  .invitation-flyer {
+    transform-origin: center !important;
+    scale: .82;
+  }
+
+  .club-selection-shell {
+    padding: 16px clamp(16px, 3vw, 40px) 22px !important;
+  }
+
+  .club-selection-heading { margin-bottom: 14px !important; }
+  .club-selection-heading .eyebrow { margin-bottom: 4px !important; font-size: .72rem !important; }
+  .club-selection-heading h2 { font-size: clamp(1.65rem, 4.2vw, 2.8rem) !important; line-height: 1.05 !important; }
+  .club-selection-heading p { margin-top: 7px !important; font-size: .86rem !important; }
+
+  .club-grid {
+    gap: 10px !important;
+    grid-template-columns: repeat(6, minmax(120px, 1fr)) !important;
+  }
+
+  .club-card { min-height: 170px !important; padding: 12px 9px 11px !important; border-radius: 16px !important; }
+  .club-placeholder { width: 72px !important; height: 72px !important; margin-bottom: 8px !important; border-radius: 18px !important; }
+  .club-card strong { font-size: .88rem !important; }
+  .club-card small { font-size: .72rem !important; }
+
+  .club-modal-card { max-height: 88vh !important; padding: 22px !important; }
+  .club-modal-emblem { width: 92px !important; height: 92px !important; margin-bottom: 10px !important; }
+  .club-confirmed-content .club-placeholder { width: 118px !important; height: 118px !important; }
+  .club-confirmed-content h3 { margin-top: 10px !important; font-size: clamp(1.9rem, 6vw, 3.4rem) !important; }
+
+  .classic-versus {
+    width: min(920px, 88vw) !important;
+    grid-template-columns: 1fr minmax(58px, 86px) 1fr !important;
+    top: -3vh !important;
+  }
+
+  .classic-crest-wrap { width: clamp(105px, 15vw, 150px) !important; height: clamp(105px, 15vw, 150px) !important; margin-bottom: 9px !important; }
+  .classic-club h3 { font-size: clamp(1.05rem, 2.6vw, 1.65rem) !important; }
+  .classic-story { bottom: 11vh !important; }
+
+  .future-heading { top: 14px !important; }
+  .future-heading .eyebrow { margin-bottom: 3px !important; font-size: .7rem !important; }
+  .future-heading h2 { font-size: clamp(1.55rem, 4vw, 2.5rem) !important; }
+
+  .future-club-grid { top: 51% !important; gap: 8px !important; width: min(1080px, 90vw) !important; }
+  .future-club-card { min-height: 105px !important; padding: 8px 6px !important; gap: 4px !important; border-radius: 14px !important; }
+  .future-logo-wrap { width: 48px !important; height: 48px !important; }
+  .future-hidden-badge { width: 48px !important; height: 54px !important; font-size: 1.65rem !important; }
+  .future-club-name { font-size: .66rem !important; }
+  .future-story { bottom: 10vh !important; }
+}
+
+@media (max-height: 620px) {
+  .dream-line,
+  .foundation-line,
+  .unknown-line,
+  .invitation-line,
+  .classic-line,
+  .future-line {
+    font-size: clamp(.82rem, 1.9vw, 1.15rem) !important;
+  }
+
+  .main-document { width: min(330px, 62vw) !important; height: 50vh !important; padding: 18px 22px !important; }
+  .club-selection-heading p { display: none !important; }
+  .club-selection-heading { margin-bottom: 8px !important; }
+  .club-grid { gap: 7px !important; }
+  .club-card { min-height: 138px !important; padding: 8px !important; }
+  .club-placeholder { width: 56px !important; height: 56px !important; }
+  .club-card small { margin-top: 2px !important; }
+  .classic-crest-wrap { width: 92px !important; height: 92px !important; }
+  .classic-story,
+  .future-story { bottom: 12vh !important; }
+  .future-heading .eyebrow { display: none !important; }
+  .future-club-grid { top: 50% !important; }
+  .future-club-card { min-height: 82px !important; }
+  .future-logo-wrap { width: 38px !important; height: 38px !important; }
+  .future-hidden-badge { width: 38px !important; height: 42px !important; font-size: 1.35rem !important; }
+}
+
+@media (max-width: 760px) {
+  .club-selection-shell { overflow-y: auto !important; }
+  .club-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .club-card { min-height: 175px !important; }
+  .classic-versus { width: 94vw !important; grid-template-columns: 1fr 48px 1fr !important; }
+  .classic-crest-wrap { width: clamp(82px, 26vw, 125px) !important; height: clamp(82px, 26vw, 125px) !important; }
+  .future-club-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+}
