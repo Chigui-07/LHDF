@@ -7,13 +7,15 @@
     document.body.appendChild(script);
   }
 
-  loadScript('js/game-data.js?v=3.1.0', () => {
+  loadScript('js/game-data.js?v=3.1.1', () => {
     loadScript('js/players-guatemala.js?v=3.1.0', () => {
       loadScript('js/hub.js?v=3.1.1', () => {
         loadScript('js/clubs.js?v=3.1.0');
-        loadScript('js/countries.js?v=3.1.1');
-        loadScript('js/players.js?v=3.1.1', () => {
-          loadScript('js/hub-modules.js?v=3.1.0');
+        loadScript('js/countries.js?v=3.1.2');
+        loadScript('js/players.js?v=3.1.2', () => {
+          loadScript('js/player-detail.js?v=3.1.0', () => {
+            loadScript('js/hub-modules.js?v=3.1.0');
+          });
         });
 
         // En Alpha 3.1, una historia que ya terminó la introducción entra al Hub.
