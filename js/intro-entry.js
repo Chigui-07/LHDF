@@ -1,5 +1,31 @@
 // Control temporal de entrada a la introducción durante Alpha 2.1.
-// Mientras la introducción no esté completada, siempre comienza desde la primera escena.
+// Durante las pruebas actuales, las historias incompletas saltan directamente
+// a la selección de club para evitar repetir todas las animaciones anteriores.
+
+function showClubSelectionForTesting() {
+  const selectionStage = document.getElementById('clubSelectionStage');
+
+  // club-selection.js se inyecta al cargar este archivo. Si todavía no terminó,
+  // esperamos un instante y volvemos a intentar sin mandar al jugador a otra escena.
+  if (!selectionStage) {
+    window.setTimeout(showClubSelectionForTesting, 60);
+    return;
+  }
+
+  fade.classList.add('is-visible');
+
+  window.setTimeout(() => {
+    document.querySelectorAll('.screen.active').forEach((screen) => screen.classList.remove('active'));
+    selectionStage.classList.add('active');
+
+    if (typeof stopDreamScene === 'function') stopDreamScene();
+    if (typeof stopFoundationScene === 'function') stopFoundationScene();
+    if (typeof stopUnknownScene === 'function') stopUnknownScene();
+    if (typeof stopInvitationScene === 'function') stopInvitationScene();
+
+    requestAnimationFrame(() => fade.classList.remove('is-visible'));
+  }, TRANSITION_TIME);
+}
 
 openHistory = function (history) {
   const histories = loadHistories();
@@ -20,9 +46,9 @@ openHistory = function (history) {
     return;
   }
 
-  // Durante el desarrollo de Alpha 2.1, una introducción sin completar
-  // siempre vuelve a comenzar desde El Sueño para facilitar las pruebas.
-  showScreen('introStage');
+  // ATAJO TEMPORAL DE DESARROLLO:
+  // saltamos las escenas 1–4 y entramos directamente a elegir club.
+  showClubSelectionForTesting();
 };
 
 // Escena 4: invitación a los primeros jóvenes.
