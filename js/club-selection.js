@@ -1,7 +1,7 @@
 (() => {
   const stylesheet = document.createElement('link');
   stylesheet.rel = 'stylesheet';
-  stylesheet.href = 'css/club-selection.css?v=2.1.2';
+  stylesheet.href = 'css/club-selection.css?v=2.1.3';
   document.head.appendChild(stylesheet);
 
   const LOGO_BASE = 'assets/clubs/guatemala/';
