@@ -2,6 +2,10 @@
 
 Repositorio oficial del juego web **La Historia del Fútbol (LHDF)**.
 
+## 🌐 Jugar LHDF
+
+**Sitio oficial:** https://lhdf.denischigui16.workers.dev/
+
 ## 📌 Descripción
 
 LHDF será un juego web relacionado con la historia y evolución del fútbol. El proyecto se desarrollará progresivamente desde cero, agregando sistemas, equipos, jugadores, torneos, partidos y demás funciones conforme avance el desarrollo.
@@ -11,6 +15,7 @@ LHDF será un juego web relacionado con la historia y evolución del fútbol. El
 - Tipo de proyecto: Juego web
 - Repositorio: GitHub
 - Despliegue: Cloudflare
+- URL oficial: https://lhdf.denischigui16.workers.dev/
 - Estado: En desarrollo
 - Estudio: **Chigui Studios**
 
@@ -55,6 +60,11 @@ Este README funcionará como **bitácora oficial del proyecto**. Cada actualizac
 - Se implementó un sistema reutilizable de transición `fade out → cambio de pantalla → fade in`.
 - Se añadieron pantallas provisionales para probar la navegación de las cuatro opciones principales.
 - Se añadió diseño adaptable para escritorio y teléfono.
+
+### 28 de agosto de 2026 — URL oficial
+
+- Se añadió al README el enlace oficial desplegado en Cloudflare Workers.
+- URL: https://lhdf.denischigui16.workers.dev/
 
 ## 🚧 Estado actual
 
