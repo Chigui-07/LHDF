@@ -1,7 +1,7 @@
 // Alpha 3.1 — Datos base compartidos del mundo de LHDF.
 window.LHDF_DATA = window.LHDF_DATA || {
   countries: [
-    { id: 'guatemala', name: 'Guatemala', code: 'GT', discovered: true }
+    { id: 'guatemala', name: 'Guatemala', code: 'GT', flag: 'assets/flags/guatemala.png', discovered: true }
   ],
   clubs: [
     { id: 'municipal', countryId: 'guatemala', name: 'Municipal', logo: 'CSD Municipal.png' },
@@ -17,6 +17,6 @@ window.LHDF_DATA = window.LHDF_DATA || {
     { id: 'malacateco', countryId: 'guatemala', name: 'Malacateco', logo: 'Malacateco FC.png' },
     { id: 'coban-imperial', countryId: 'guatemala', name: 'Cobán Imperial', logo: 'Coban Imperial FC.png' }
   ],
-  // Se llenará con jugadores reales. Cada jugador usará countryId y clubId.
+  // Los jugadores se relacionan con su país; clubId es el club dentro de la historia.
   players: []
 };
