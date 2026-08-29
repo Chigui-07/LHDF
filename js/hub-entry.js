@@ -6,6 +6,17 @@
   hubScript.addEventListener('load', () => {
     const clubsScript = document.createElement('script');
     clubsScript.src = 'js/clubs.js?v=3.1.0';
+    clubsScript.addEventListener('load', () => {
+      document.querySelectorAll('.hub-module').forEach((module) => {
+        const title = module.querySelector('strong');
+        if (!title || title.textContent.trim() !== 'Clubes') return;
+        const status = module.querySelector('em');
+        const description = module.querySelector('span');
+        if (status) status.textContent = 'Disponible';
+        if (description) description.textContent = 'Tu club y los clubes que descubras.';
+        module.style.cursor = 'pointer';
+      });
+    });
     document.body.appendChild(clubsScript);
 
     // En Alpha 3.1, una historia que ya terminó la introducción entra al Hub.
