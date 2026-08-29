@@ -77,7 +77,7 @@
 
   function emblemMarkup(club) {
     const src = `${LOGO_BASE}${encodeURIComponent(club.logo).replaceAll('%2F', '/')}`;
-    return `<span class="club-initials-fallback">${club.initials}</span><img class="club-logo" src="${src}" alt="Escudo de ${club.name}" onerror="this.style.display='none'">`;
+    return `<span class="club-initials-fallback" style="display:none">${club.initials}</span><img class="club-logo" src="${src}" alt="Escudo de ${club.name}" onerror="this.previousElementSibling.style.display='grid';this.style.display='none'">`;
   }
 
   function setEmblem(container, club) {
