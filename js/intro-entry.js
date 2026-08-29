@@ -1,39 +1,12 @@
-// Control temporal de entrada a la introducción durante Alpha 2.1.
-// Durante las pruebas actuales, las historias incompletas saltan directamente
-// a la selección de club para evitar repetir todas las animaciones anteriores.
-
-function showClubSelectionForTesting() {
-  const selectionStage = document.getElementById('clubSelectionStage');
-
-  // club-selection.js se inyecta al cargar este archivo. Si todavía no terminó,
-  // esperamos un instante y volvemos a intentar sin mandar al jugador a otra escena.
-  if (!selectionStage) {
-    window.setTimeout(showClubSelectionForTesting, 60);
-    return;
-  }
-
-  fade.classList.add('is-visible');
-
-  window.setTimeout(() => {
-    document.querySelectorAll('.screen.active').forEach((screen) => screen.classList.remove('active'));
-    selectionStage.classList.add('active');
-
-    if (typeof stopDreamScene === 'function') stopDreamScene();
-    if (typeof stopFoundationScene === 'function') stopFoundationScene();
-    if (typeof stopUnknownScene === 'function') stopUnknownScene();
-    if (typeof stopInvitationScene === 'function') stopInvitationScene();
-
-    requestAnimationFrame(() => fade.classList.remove('is-visible'));
-  }, TRANSITION_TIME);
-}
+// Entrada oficial a la introducción de Alpha 2.1.
+// Las historias sin completar comienzan desde El Sueño; una introducción terminada
+// queda lista para que la siguiente versión la envíe al hub real.
 
 openHistory = function (history) {
   const histories = loadHistories();
   const storedHistory = histories.find((item) => item.id === history.id);
 
-  if (!storedHistory) {
-    return;
-  }
+  if (!storedHistory) return;
 
   storedHistory.updatedAt = new Date().toISOString();
   writeHistories(histories);
@@ -41,14 +14,12 @@ openHistory = function (history) {
   renderSavedHistories();
 
   if (storedHistory.introCompleted === true) {
-    // Destino provisional hasta que exista el hub real.
-    showScreen('introStage');
+    // Alpha 2.1 todavía no contiene el hub; Alpha 3.1 reemplazará este destino.
+    showScreen('mainMenu');
     return;
   }
 
-  // ATAJO TEMPORAL DE DESARROLLO:
-  // saltamos las escenas 1–4 y entramos directamente a elegir club.
-  showClubSelectionForTesting();
+  showScreen('introStage');
 };
 
 // Escena 4: invitación a los primeros jóvenes.
@@ -187,13 +158,13 @@ if (invitationContinueButton) {
 
 // Pantalla interactiva de elección del primer club.
 const clubSelectionScript = document.createElement('script');
-clubSelectionScript.src = 'js/club-selection.js?v=2.1.3';
+clubSelectionScript.src = 'js/club-selection.js?v=2.1.4';
 clubSelectionScript.addEventListener('load', () => {
   // El clásico y la escena final se cargan después de la selección para
   // asegurar que el flujo completo esté disponible antes de elegir un club.
   if (!document.querySelector('script[data-lhdf-classic]')) {
     const classicScript = document.createElement('script');
-    classicScript.src = 'js/intro-classic.js?v=2.1.1';
+    classicScript.src = 'js/intro-classic.js?v=2.1.2';
     classicScript.dataset.lhdfClassic = 'true';
     document.body.appendChild(classicScript);
   }
