@@ -11,16 +11,14 @@
   <link rel="stylesheet" href="css/continue-game.css?v=1.1.0">
   <link rel="stylesheet" href="css/intro-dream.css?v=2.1.2">
   <link rel="stylesheet" href="css/intro-foundation.css?v=2.1.1">
+  <link rel="stylesheet" href="css/intro-unknown.css?v=2.1.0">
 </head>
 <body>
   <div class="stadium" aria-hidden="true">
     <div class="stadium-lights lights-left"></div>
     <div class="stadium-lights lights-right"></div>
     <div class="stands"></div>
-    <div class="pitch">
-      <div class="pitch-line center-line"></div>
-      <div class="center-circle"></div>
-    </div>
+    <div class="pitch"><div class="pitch-line center-line"></div><div class="center-circle"></div></div>
   </div>
 
   <div id="screenFade" class="screen-fade is-visible" aria-hidden="true"></div>
@@ -33,66 +31,34 @@
         <div class="title-line"></div>
         <p class="subtitle">Escribe tu propia historia dentro del fútbol.</p>
       </div>
-
       <div class="ball-stage" aria-hidden="true">
         <div class="ball-shadow"></div>
-        <div class="football">
-          <span class="patch p1"></span>
-          <span class="patch p2"></span>
-          <span class="patch p3"></span>
-          <span class="patch p4"></span>
-          <span class="patch p5"></span>
-        </div>
+        <div class="football"><span class="patch p1"></span><span class="patch p2"></span><span class="patch p3"></span><span class="patch p4"></span><span class="patch p5"></span></div>
       </div>
-
       <nav class="menu-panel" aria-label="Menú principal">
-        <button class="menu-button" data-screen="newGame">
-          <span class="button-copy"><strong>Nueva Historia</strong><small>Comienza una nueva carrera</small></span>
-          <span class="button-arrow">›</span>
-        </button>
-        <button class="menu-button" data-screen="continueGame">
-          <span class="button-copy"><strong>Continuar Partida</strong><small>Regresa a tu última historia</small></span>
-          <span class="button-arrow">›</span>
-        </button>
-        <button class="menu-button" data-screen="settings">
-          <span class="button-copy"><strong>Configuraciones</strong><small>Personaliza tu experiencia</small></span>
-          <span class="button-arrow">›</span>
-        </button>
-        <button class="menu-button" data-screen="credits">
-          <span class="button-copy"><strong>Créditos</strong><small>Conoce el proyecto</small></span>
-          <span class="button-arrow">›</span>
-        </button>
+        <button class="menu-button" data-screen="newGame"><span class="button-copy"><strong>Nueva Historia</strong><small>Comienza una nueva carrera</small></span><span class="button-arrow">›</span></button>
+        <button class="menu-button" data-screen="continueGame"><span class="button-copy"><strong>Continuar Partida</strong><small>Regresa a tu última historia</small></span><span class="button-arrow">›</span></button>
+        <button class="menu-button" data-screen="settings"><span class="button-copy"><strong>Configuraciones</strong><small>Personaliza tu experiencia</small></span><span class="button-arrow">›</span></button>
+        <button class="menu-button" data-screen="credits"><span class="button-copy"><strong>Créditos</strong><small>Conoce el proyecto</small></span><span class="button-arrow">›</span></button>
       </nav>
-
       <footer class="menu-footer"><span class="footer-version">Alpha 2.1</span></footer>
     </section>
 
     <section id="newGame" class="screen secondary-screen new-history-screen" aria-labelledby="newGameTitle">
       <div class="history-layout">
-        <div class="history-heading">
-          <p class="eyebrow">NUEVA HISTORIA</p>
-          <h2 id="newGameTitle">Crea tu fundación</h2>
-          <p>Tu historia comenzará en Guatemala. Define el nombre de tu fundación y quién estará al frente de ella.</p>
-        </div>
+        <div class="history-heading"><p class="eyebrow">NUEVA HISTORIA</p><h2 id="newGameTitle">Crea tu fundación</h2><p>Tu historia comenzará en Guatemala. Define el nombre de tu fundación y quién estará al frente de ella.</p></div>
         <form id="newHistoryForm" class="history-form" autocomplete="off">
           <label class="history-field"><span>Fundación</span><input id="foundationName" name="foundationName" type="text" maxlength="32" placeholder="Escribe tu fundación" required></label>
           <label class="history-field"><span>Nombre del fundador</span><input id="founderName" name="founderName" type="text" maxlength="32" placeholder="Tu nombre de fundador" required></label>
           <div id="historyMessage" class="history-message" aria-live="polite"></div>
-          <div class="history-actions">
-            <button type="button" class="back-button" data-screen="mainMenu">← Volver al menú</button>
-            <button type="submit" class="create-history-button">Crear Historia</button>
-          </div>
+          <div class="history-actions"><button type="button" class="back-button" data-screen="mainMenu">← Volver al menú</button><button type="submit" class="create-history-button">Crear Historia</button></div>
         </form>
       </div>
     </section>
 
     <section id="continueGame" class="screen secondary-screen continue-screen" aria-labelledby="continueTitle">
       <div class="continue-layout">
-        <header class="continue-heading">
-          <p class="eyebrow">CONTINUAR PARTIDA</p>
-          <h2 id="continueTitle">Tus historias</h2>
-          <p>Selecciona una fundación guardada para continuar su historia.</p>
-        </header>
+        <header class="continue-heading"><p class="eyebrow">CONTINUAR PARTIDA</p><h2 id="continueTitle">Tus historias</h2><p>Selecciona una fundación guardada para continuar su historia.</p></header>
         <div id="savedHistories" class="saved-histories" aria-live="polite"></div>
         <div id="continueMessage" class="continue-message" aria-live="polite"></div>
         <div class="continue-footer"><button class="back-button" data-screen="mainMenu">← Volver al menú</button></div>
@@ -101,28 +67,14 @@
 
     <section id="introStage" class="screen secondary-screen dream-scene" aria-labelledby="dreamSceneTitle">
       <div id="dreamSequence" class="dream-sequence">
-        <div class="dream-sky" aria-hidden="true">
-          <span class="dream-star star-1"></span><span class="dream-star star-2"></span><span class="dream-star star-3"></span><span class="dream-star star-4"></span><span class="dream-star star-5"></span><span class="dream-star star-6"></span>
-        </div>
-        <div class="dream-floodlight dream-floodlight-left" aria-hidden="true"><span></span></div>
-        <div class="dream-floodlight dream-floodlight-right" aria-hidden="true"><span></span></div>
-        <div class="dream-light-beam dream-light-beam-left" aria-hidden="true"></div>
-        <div class="dream-light-beam dream-light-beam-right" aria-hidden="true"></div>
+        <div class="dream-sky" aria-hidden="true"><span class="dream-star star-1"></span><span class="dream-star star-2"></span><span class="dream-star star-3"></span><span class="dream-star star-4"></span><span class="dream-star star-5"></span><span class="dream-star star-6"></span></div>
+        <div class="dream-floodlight dream-floodlight-left" aria-hidden="true"><span></span></div><div class="dream-floodlight dream-floodlight-right" aria-hidden="true"><span></span></div>
+        <div class="dream-light-beam dream-light-beam-left" aria-hidden="true"></div><div class="dream-light-beam dream-light-beam-right" aria-hidden="true"></div>
         <div class="dream-stands" aria-hidden="true"><div class="dream-crowd"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
-        <div class="dream-field" aria-hidden="true">
-          <div class="dream-touchline"></div><div class="dream-halfway-line"></div><div class="dream-center-circle"></div><div class="dream-center-spot"></div>
-          <div class="dream-ball"><span class="dream-ball-patch patch-a"></span><span class="dream-ball-patch patch-b"></span><span class="dream-ball-patch patch-c"></span></div>
-          <div class="dream-ball-shadow"></div>
-        </div>
+        <div class="dream-field" aria-hidden="true"><div class="dream-touchline"></div><div class="dream-halfway-line"></div><div class="dream-center-circle"></div><div class="dream-center-spot"></div><div class="dream-ball"><span class="dream-ball-patch patch-a"></span><span class="dream-ball-patch patch-b"></span><span class="dream-ball-patch patch-c"></span></div><div class="dream-ball-shadow"></div></div>
         <div class="dream-people" aria-hidden="true"><span class="dream-person person-1"></span><span class="dream-person person-2"></span><span class="dream-person person-3"></span><span class="dream-person person-4"></span><span class="dream-person person-5"></span></div>
         <div class="dream-vignette" aria-hidden="true"></div>
-        <div class="dream-story" id="dreamSceneTitle">
-          <p class="dream-line dream-line-1">Toda gran historia comienza con un sueño.</p>
-          <p class="dream-line dream-line-2">Imaginabas algo diferente.</p>
-          <p class="dream-line dream-line-3">Un deporte capaz de unir personas, crear rivalidades y algún día llegar a todo el mundo.</p>
-          <p class="dream-line dream-line-4">Todavía no existían grandes clubes, torneos ni multitudes.</p>
-          <p class="dream-line dream-line-5">Por ahora... solo era una idea.</p>
-        </div>
+        <div class="dream-story" id="dreamSceneTitle"><p class="dream-line dream-line-1">Toda gran historia comienza con un sueño.</p><p class="dream-line dream-line-2">Imaginabas algo diferente.</p><p class="dream-line dream-line-3">Un deporte capaz de unir personas, crear rivalidades y algún día llegar a todo el mundo.</p><p class="dream-line dream-line-4">Todavía no existían grandes clubes, torneos ni multitudes.</p><p class="dream-line dream-line-5">Por ahora... solo era una idea.</p></div>
         <button id="dreamContinueButton" class="dream-continue-button" type="button">Continuar ›</button>
       </div>
     </section>
@@ -130,46 +82,49 @@
     <section id="foundationStage" class="screen secondary-screen foundation-scene" aria-labelledby="foundationSceneTitle">
       <div id="foundationSequence" class="foundation-sequence">
         <div class="foundation-room" aria-hidden="true">
-          <div class="room-wall"></div>
-          <div class="window-frame"><div class="window-night"></div><span class="window-bar bar-v"></span><span class="window-bar bar-h"></span></div>
-          <div class="desk-lamp"><div class="lamp-shade"></div><div class="lamp-neck"></div><div class="lamp-base"></div></div>
-          <div class="lamp-glow"></div>
-          <div class="wood-desk"></div>
-          <div class="idea-paper paper-left"><span></span><span></span><span></span></div>
-          <div class="idea-paper paper-right"><span></span><span></span></div>
-          <div class="pencil"></div>
-          <div class="main-document">
-            <div class="document-header">ACTA DE FUNDACIÓN</div>
-            <div class="document-rule rule-1"></div><div class="document-rule rule-2"></div><div class="document-rule rule-3"></div>
-            <div id="foundationDocumentName" class="document-name">Tu Fundación</div>
-            <div class="document-signature-line"></div>
-            <div id="foundationDocumentFounder" class="document-signature">Fundador</div>
-            <div class="foundation-stamp"><span>FUNDADA</span></div>
-          </div>
+          <div class="room-wall"></div><div class="window-frame"><div class="window-night"></div><span class="window-bar bar-v"></span><span class="window-bar bar-h"></span></div>
+          <div class="desk-lamp"><div class="lamp-shade"></div><div class="lamp-neck"></div><div class="lamp-base"></div></div><div class="lamp-glow"></div><div class="wood-desk"></div>
+          <div class="idea-paper paper-left"><span></span><span></span><span></span></div><div class="idea-paper paper-right"><span></span><span></span></div><div class="pencil"></div>
+          <div class="main-document"><div class="document-header">ACTA DE FUNDACIÓN</div><div class="document-rule rule-1"></div><div class="document-rule rule-2"></div><div class="document-rule rule-3"></div><div id="foundationDocumentName" class="document-name">Tu Fundación</div><div class="document-signature-line"></div><div id="foundationDocumentFounder" class="document-signature">Fundador</div><div class="foundation-stamp"><span>FUNDADA</span></div></div>
           <div class="hand-shadow"></div>
         </div>
-
-        <div class="foundation-story" id="foundationSceneTitle">
-          <p class="foundation-line foundation-line-1">Pero un sueño no podía quedarse solo en tu imaginación.</p>
-          <p class="foundation-line foundation-line-2">Necesitabas dar el primer paso.</p>
-          <p class="foundation-line foundation-line-3">Una organización capaz de convertir aquella idea en algo real.</p>
-          <p class="foundation-line foundation-line-4">Y así nació <strong id="foundationStoryName">tu fundación</strong>.</p>
-          <p class="foundation-line foundation-line-5">Pequeña. Desconocida. Pero con un propósito enorme.</p>
-        </div>
-
+        <div class="foundation-story" id="foundationSceneTitle"><p class="foundation-line foundation-line-1">Pero un sueño no podía quedarse solo en tu imaginación.</p><p class="foundation-line foundation-line-2">Necesitabas dar el primer paso.</p><p class="foundation-line foundation-line-3">Una organización capaz de convertir aquella idea en algo real.</p><p class="foundation-line foundation-line-4">Y así nació <strong id="foundationStoryName">tu fundación</strong>.</p><p class="foundation-line foundation-line-5">Pequeña. Desconocida. Pero con un propósito enorme.</p></div>
         <button id="foundationContinueButton" class="foundation-continue-button" type="button">Continuar ›</button>
       </div>
     </section>
 
-    <section id="settings" class="screen secondary-screen" aria-labelledby="settingsTitle">
-      <div class="screen-card"><p class="eyebrow">CONFIGURACIONES</p><h2 id="settingsTitle">Configuraciones</h2><p>Audio, interfaz y opciones del juego se añadirán en esta sección.</p><button class="back-button" data-screen="mainMenu">← Volver al menú</button></div>
+    <section id="unknownStage" class="screen secondary-screen unknown-scene" aria-labelledby="unknownSceneTitle">
+      <div id="unknownSequence" class="unknown-sequence">
+        <div class="unknown-sky" aria-hidden="true"></div>
+        <div class="unknown-city" aria-hidden="true">
+          <div class="unknown-building building-a"><span></span><span></span><span></span></div>
+          <div class="unknown-building building-b"><span></span><span></span><span></span><span></span></div>
+          <div class="unknown-building building-c"><span></span><span></span></div>
+          <div class="unknown-office">
+            <div class="office-window"></div>
+            <div id="unknownFoundationSign" class="office-sign">TU FUNDACIÓN</div>
+            <div class="office-door"></div>
+          </div>
+          <div class="street-lamp lamp-one"></div><div class="street-lamp lamp-two"></div>
+          <div class="street-ground"></div>
+          <div class="passers"><span class="passer passer-1"></span><span class="passer passer-2"></span><span class="passer passer-3"></span><span class="passer passer-4"></span></div>
+          <div class="notice-board"><div class="notice-paper"></div></div>
+        </div>
+        <div class="unknown-story" id="unknownSceneTitle">
+          <p class="unknown-line unknown-line-1">La fundación ya existía.</p>
+          <p class="unknown-line unknown-line-2">Pero fuera de esas paredes... nadie sabía quiénes eran.</p>
+          <p class="unknown-line unknown-line-3">No había clubes. No había torneos. No había seguidores.</p>
+          <p class="unknown-line unknown-line-4">Solo una pequeña organización intentando hacerse escuchar.</p>
+          <p class="unknown-line unknown-line-5">Si querías que todo comenzara, necesitabas encontrar a las primeras personas dispuestas a creer.</p>
+        </div>
+        <button id="unknownContinueButton" class="unknown-continue-button" type="button">Continuar ›</button>
+      </div>
     </section>
 
-    <section id="credits" class="screen secondary-screen" aria-labelledby="creditsTitle">
-      <div class="screen-card"><p class="eyebrow">CRÉDITOS</p><h2 id="creditsTitle">La Historia del Fútbol</h2><p>Un proyecto de <strong>Chigui Studios</strong>.</p><button class="back-button" data-screen="mainMenu">← Volver al menú</button></div>
-    </section>
+    <section id="settings" class="screen secondary-screen" aria-labelledby="settingsTitle"><div class="screen-card"><p class="eyebrow">CONFIGURACIONES</p><h2 id="settingsTitle">Configuraciones</h2><p>Audio, interfaz y opciones del juego se añadirán en esta sección.</p><button class="back-button" data-screen="mainMenu">← Volver al menú</button></div></section>
+    <section id="credits" class="screen secondary-screen" aria-labelledby="creditsTitle"><div class="screen-card"><p class="eyebrow">CRÉDITOS</p><h2 id="creditsTitle">La Historia del Fútbol</h2><p>Un proyecto de <strong>Chigui Studios</strong>.</p><button class="back-button" data-screen="mainMenu">← Volver al menú</button></div></section>
   </main>
 
-  <script src="js/main.js?v=2.1.2"></script>
+  <script src="js/main.js?v=2.1.3"></script>
 </body>
 </html>
