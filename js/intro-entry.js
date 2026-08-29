@@ -4,8 +4,13 @@
 
 const introResponsiveStyle = document.createElement('link');
 introResponsiveStyle.rel = 'stylesheet';
-introResponsiveStyle.href = 'css/intro-responsive.css?v=2.1.0';
+introResponsiveStyle.href = 'css/intro-responsive.css?v=2.1.1';
 document.head.appendChild(introResponsiveStyle);
+
+const introAlignmentStyle = document.createElement('link');
+introAlignmentStyle.rel = 'stylesheet';
+introAlignmentStyle.href = 'css/intro-alignment.css?v=2.1.0';
+document.head.appendChild(introAlignmentStyle);
 
 openHistory = function (history) {
   const histories = loadHistories();
