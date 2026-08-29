@@ -95,6 +95,17 @@ Este README funciona como registro de los cambios importantes del proyecto.
 - Se añadió **Guardar y salir**, que actualiza el guardado antes de volver al menú principal.
 - Al guardar desde el Hub, la historia actualiza su fecha de guardado y queda identificada como **Alpha 3.1**.
 
+### 29 de agosto de 2026 — Alpha 3.1: Clubes, países y jugadores
+
+- El módulo **Clubes** quedó disponible desde el Hub.
+- Solo el club elegido por el jugador aparece descubierto; los otros clubes se muestran en negro con `?`.
+- Se creó un menú base propio para el club seleccionado con accesos futuros a Plantilla, Estadísticas, Historia y Gestión.
+- Se añadió el módulo **Países** al Hub y Guatemala quedó como primer país disponible.
+- Se creó una base común de datos en `js/game-data.js` para relacionar países, clubes y jugadores.
+- Cada jugador se relacionará mediante `countryId` y `clubId`.
+- Se activó la pantalla base de **Jugadores**, con filtros por país y club preparados para cargar las plantillas reales.
+- La lista de jugadores permanece vacía hasta incorporar los datos reales de Guatemala.
+
 ## 🚧 Alpha 3.1 — En desarrollo
 
 Objetivos principales:
@@ -103,6 +114,7 @@ Objetivos principales:
 - Completar y ampliar **Configuraciones** conforme aparezcan nuevos sistemas como audio.
 - Preparar la arquitectura sobre la que se añadirán clubes, partidos, torneos y herramientas de gestión.
 - Convertir progresivamente los módulos provisionales del Hub en sistemas jugables.
+- Incorporar los jugadores reales de Guatemala y conectarlos con sus clubes y país.
 
 ## 🌿 Ramas de desarrollo
 
