@@ -76,16 +76,50 @@
       </nav>
 
       <footer class="menu-footer">
-        <span class="footer-version">Alpha 0.1</span>
+        <span class="footer-version">Alpha 1.1</span>
       </footer>
     </section>
 
-    <section id="newGame" class="screen secondary-screen" aria-labelledby="newGameTitle">
-      <div class="screen-card">
-        <p class="eyebrow">NUEVA HISTORIA</p>
-        <h2 id="newGameTitle">El comienzo de una nueva era</h2>
-        <p>Esta será la pantalla donde crearemos una nueva historia. Por ahora sirve para probar la navegación y las transiciones.</p>
-        <button class="back-button" data-screen="mainMenu">← Volver al menú</button>
+    <section id="newGame" class="screen secondary-screen new-history-screen" aria-labelledby="newGameTitle">
+      <div class="history-layout">
+        <div class="history-heading">
+          <p class="eyebrow">NUEVA HISTORIA</p>
+          <h2 id="newGameTitle">Comienza tu historia</h2>
+          <p>Define los datos básicos de tu nueva partida. Esta configuración será la base de tu mundo dentro de LHDF.</p>
+        </div>
+
+        <form id="newHistoryForm" class="history-form" autocomplete="off">
+          <label class="history-field">
+            <span>Nombre de la historia</span>
+            <input id="historyName" name="historyName" type="text" maxlength="32" placeholder="Ej. El sueño chapín" required>
+          </label>
+
+          <label class="history-field">
+            <span>Nombre del entrenador</span>
+            <input id="managerName" name="managerName" type="text" maxlength="32" placeholder="Tu nombre dentro del juego" required>
+          </label>
+
+          <label class="history-field">
+            <span>País inicial</span>
+            <select id="startingCountry" name="startingCountry" required>
+              <option value="Guatemala">Guatemala</option>
+            </select>
+            <small>Guatemala es el primer país disponible en esta etapa del desarrollo.</small>
+          </label>
+
+          <label class="history-field">
+            <span>Equipo inicial</span>
+            <input id="startingTeam" name="startingTeam" type="text" maxlength="40" placeholder="Escribe el equipo por ahora" required>
+            <small>Más adelante este campo mostrará los equipos oficiales disponibles en el juego.</small>
+          </label>
+
+          <div id="historyMessage" class="history-message" aria-live="polite"></div>
+
+          <div class="history-actions">
+            <button type="button" class="back-button" data-screen="mainMenu">← Volver al menú</button>
+            <button type="submit" class="create-history-button">Crear Historia</button>
+          </div>
+        </form>
       </div>
     </section>
 
