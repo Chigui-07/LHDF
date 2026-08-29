@@ -3,14 +3,124 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#04130d">
   <title>La Historia del Fútbol</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <main class="hero">
-    <h1>La Historia del Fútbol</h1>
-    <p>Primer prototipo web de LHDF.</p>
-    <button id="startButton">Comenzar</button>
+  <div class="stadium" aria-hidden="true">
+    <div class="stadium-lights lights-left"></div>
+    <div class="stadium-lights lights-right"></div>
+    <div class="stands"></div>
+    <div class="pitch">
+      <div class="pitch-line center-line"></div>
+      <div class="center-circle"></div>
+    </div>
+  </div>
+
+  <div id="screenFade" class="screen-fade is-visible" aria-hidden="true"></div>
+
+  <main class="game-shell">
+    <section id="mainMenu" class="screen active" aria-labelledby="gameTitle">
+      <div class="brand-block">
+        <p class="eyebrow">CHIGUI STUDIOS PRESENTA</p>
+        <h1 id="gameTitle">LA HISTORIA<br><span>DEL FÚTBOL</span></h1>
+        <div class="title-line"></div>
+        <p class="subtitle">Escribe tu propia historia dentro del fútbol.</p>
+      </div>
+
+      <div class="ball-stage" aria-hidden="true">
+        <div class="ball-shadow"></div>
+        <div class="football">
+          <span class="patch p1"></span>
+          <span class="patch p2"></span>
+          <span class="patch p3"></span>
+          <span class="patch p4"></span>
+          <span class="patch p5"></span>
+        </div>
+      </div>
+
+      <nav class="menu-panel" aria-label="Menú principal">
+        <button class="menu-button" data-screen="newGame">
+          <span class="button-index">01</span>
+          <span class="button-copy">
+            <strong>Nueva Historia</strong>
+            <small>Comienza una nueva carrera</small>
+          </span>
+          <span class="button-arrow">›</span>
+        </button>
+
+        <button class="menu-button" data-screen="continueGame">
+          <span class="button-index">02</span>
+          <span class="button-copy">
+            <strong>Continuar Partida</strong>
+            <small>Regresa a tu última historia</small>
+          </span>
+          <span class="button-arrow">›</span>
+        </button>
+
+        <button class="menu-button" data-screen="settings">
+          <span class="button-index">03</span>
+          <span class="button-copy">
+            <strong>Configuraciones</strong>
+            <small>Personaliza tu experiencia</small>
+          </span>
+          <span class="button-arrow">›</span>
+        </button>
+
+        <button class="menu-button" data-screen="credits">
+          <span class="button-index">04</span>
+          <span class="button-copy">
+            <strong>Créditos</strong>
+            <small>Conoce el proyecto</small>
+          </span>
+          <span class="button-arrow">›</span>
+        </button>
+      </nav>
+
+      <footer class="menu-footer">
+        <span>LHDF</span>
+        <span class="status-dot"></span>
+        <span>En desarrollo</span>
+        <span class="footer-version">Alpha 0.1</span>
+      </footer>
+    </section>
+
+    <section id="newGame" class="screen secondary-screen" aria-labelledby="newGameTitle">
+      <div class="screen-card">
+        <p class="eyebrow">NUEVA HISTORIA</p>
+        <h2 id="newGameTitle">El comienzo de una nueva era</h2>
+        <p>Esta será la pantalla donde crearemos una nueva historia. Por ahora sirve para probar la navegación y las transiciones.</p>
+        <button class="back-button" data-screen="mainMenu">← Volver al menú</button>
+      </div>
+    </section>
+
+    <section id="continueGame" class="screen secondary-screen" aria-labelledby="continueTitle">
+      <div class="screen-card">
+        <p class="eyebrow">CONTINUAR PARTIDA</p>
+        <h2 id="continueTitle">Todavía no hay partidas guardadas</h2>
+        <p>Cuando implementemos el sistema de guardado, aquí aparecerán tus historias disponibles.</p>
+        <button class="back-button" data-screen="mainMenu">← Volver al menú</button>
+      </div>
+    </section>
+
+    <section id="settings" class="screen secondary-screen" aria-labelledby="settingsTitle">
+      <div class="screen-card">
+        <p class="eyebrow">CONFIGURACIONES</p>
+        <h2 id="settingsTitle">Configuraciones</h2>
+        <p>Audio, interfaz y opciones del juego se añadirán en esta sección.</p>
+        <button class="back-button" data-screen="mainMenu">← Volver al menú</button>
+      </div>
+    </section>
+
+    <section id="credits" class="screen secondary-screen" aria-labelledby="creditsTitle">
+      <div class="screen-card">
+        <p class="eyebrow">CRÉDITOS</p>
+        <h2 id="creditsTitle">La Historia del Fútbol</h2>
+        <p>Un proyecto de <strong>Chigui Studios</strong>.</p>
+        <button class="back-button" data-screen="mainMenu">← Volver al menú</button>
+      </div>
+    </section>
   </main>
 
   <script src="js/main.js"></script>
