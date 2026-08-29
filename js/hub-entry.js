@@ -10,10 +10,13 @@
   loadScript('js/game-data.js?v=3.1.1', () => {
     loadScript('js/players-guatemala.js?v=3.1.0', () => {
       loadScript('js/hub.js?v=3.1.1', () => {
-        loadScript('js/clubs.js?v=3.1.0');
+        loadScript('js/clubs.js?v=3.1.0', () => {
+          loadScript('js/club-system.js?v=3.1.0');
+        });
         loadScript('js/countries.js?v=3.1.2');
         loadScript('js/players.js?v=3.1.2', () => {
           loadScript('js/player-detail.js?v=3.1.0', () => {
+            loadScript('js/player-club-logo.js?v=3.1.0');
             loadScript('js/hub-modules.js?v=3.1.0');
           });
         });
