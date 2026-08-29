@@ -14,7 +14,7 @@ LHDF será un juego web relacionado con la historia y evolución del fútbol. El
 
 - Tipo de proyecto: Juego web
 - Repositorio: GitHub
-- Despliegue: Cloudflare
+- Despliegue: Cloudflare / GitHub Pages para pruebas
 - URL oficial: https://lhdf.denischigui16.workers.dev/
 - Estado: En desarrollo
 - Estudio: **Chigui Studios**
@@ -69,14 +69,22 @@ Este README funcionará como **bitácora oficial del proyecto**. Cada actualizac
 ### 28 de agosto de 2026 — Alpha 1.1: Nueva Historia
 
 - Se creó la rama `alpha-1.1` a partir de la versión estable anterior.
-- La pantalla **Nueva Historia** dejó de ser provisional y pasó a tener un formulario real.
-- Se añadieron los campos **Nombre de la historia**, **Nombre del entrenador**, **País inicial** y **Equipo inicial**.
-- Guatemala quedó como primer país disponible durante esta etapa del desarrollo.
-- El campo de equipo se mantiene como texto temporal hasta incorporar la base oficial de equipos del juego.
-- Se añadió validación básica del formulario.
-- Se mantuvo la identidad visual verde/aqua y las transiciones suaves del menú principal.
+- Se rediseñó por completo la pantalla **Nueva Historia** para mantener el estilo visual del menú.
+- La creación de una historia ahora solicita únicamente **Fundación** y **Nombre del fundador**.
+- Guatemala queda establecido internamente como país inicial de todas las nuevas historias.
+- La elección del club se realizará posteriormente dentro de la partida.
+- Se añadió validación básica de los datos introducidos.
 - La versión visible del menú se actualizó a **Alpha 1.1**.
+
+### 28 de agosto de 2026 — Alpha 1.1: Sistema de guardado
+
+- Se implementó guardado local mediante `localStorage`.
+- Cada nueva historia guarda el nombre de la fundación, fundador, país inicial, fecha de creación, última actualización y versión del juego.
+- Se genera un identificador único para cada historia.
+- La historia recién creada queda marcada como la partida actual.
+- Se añadió el estado `introCompleted: false` para preparar la futura introducción animada.
+- Las historias guardadas permanecen disponibles aunque se cierre o recargue el navegador.
 
 ## 🚧 Estado actual
 
-LHDF cuenta con un menú principal funcional y la primera pantalla real de creación de partida. El siguiente sistema pendiente es el guardado de historias para poder conectar **Nueva Historia** con **Continuar Partida**.
+LHDF cuenta con un menú principal funcional, una pantalla real de creación de historia y un sistema de guardado local. La siguiente etapa será conectar las partidas guardadas con **Continuar Partida** y, después, desarrollar la introducción animada que explica el nacimiento de la fundación.
