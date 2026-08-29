@@ -190,3 +190,7 @@
   applySettings();
   syncFullscreen();
 })();
+
+const hubEntryScript = document.createElement('script');
+hubEntryScript.src = 'js/hub-entry.js?v=3.1.0';
+document.body.appendChild(hubEntryScript);
