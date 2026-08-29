@@ -150,6 +150,24 @@
     }, TRANSITION_TIME);
   };
 
+  // Intercepta el botón final de la celebración del club antes de que
+  // club-selection.js lo envíe provisionalmente al menú principal.
+  document.addEventListener('click', (event) => {
+    const button = event.target.closest('#clubNextButton');
+    if (!button || typeof window.showFirstClassicScene !== 'function') return;
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+
+    const confirmed = document.getElementById('clubConfirmed');
+    if (confirmed) {
+      confirmed.classList.remove('is-visible');
+      confirmed.setAttribute('aria-hidden', 'true');
+    }
+
+    window.showFirstClassicScene();
+  }, true);
+
   continueButton.addEventListener('click', () => {
     stop();
     stage.classList.remove('active');
