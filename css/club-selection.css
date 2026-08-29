@@ -86,19 +86,41 @@
 }
 
 .club-placeholder {
+  position: relative;
+  isolation: isolate;
   width: 104px;
   height: 104px;
   margin: 0 auto 15px;
   display: grid;
   place-items: center;
+  overflow: hidden;
   border-radius: 26px;
-  background: linear-gradient(145deg, var(--club-primary), var(--club-secondary));
-  border: 4px solid rgba(255,255,255,.7);
+  background:
+    radial-gradient(circle at 50% 35%, color-mix(in srgb, var(--club-primary) 20%, transparent), transparent 62%),
+    rgba(255,255,255,.075);
+  border: 2px solid color-mix(in srgb, var(--club-primary) 58%, rgba(255,255,255,.42));
   box-shadow: 0 12px 30px rgba(0,0,0,.28);
   font-size: 1.55rem;
   font-weight: 950;
   letter-spacing: .04em;
   text-shadow: 0 2px 8px rgba(0,0,0,.45);
+}
+
+.club-initials-fallback {
+  position: relative;
+  z-index: 1;
+  color: rgba(255,255,255,.8);
+}
+
+.club-logo {
+  position: absolute;
+  z-index: 2;
+  inset: 8px;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+  object-fit: contain;
+  object-position: center;
+  filter: drop-shadow(0 6px 8px rgba(0,0,0,.34));
 }
 
 .club-card strong { display: block; font-size: 1.04rem; }
@@ -219,6 +241,7 @@
   .club-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .club-card { min-height: 205px; padding-inline: 10px; }
   .club-placeholder { width: 82px; height: 82px; font-size: 1.2rem; }
+  .club-logo { inset: 6px; width: calc(100% - 12px); height: calc(100% - 12px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
