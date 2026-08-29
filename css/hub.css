@@ -1,0 +1,208 @@
+/* Alpha 3.1 — Hub principal */
+.hub-scene {
+  padding: 0 !important;
+  background: #03100b;
+  overflow: hidden;
+}
+
+.hub-shell {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  padding: clamp(20px, 3vw, 42px);
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: clamp(16px, 2.2vh, 26px);
+  color: #f4fff9;
+  background:
+    radial-gradient(circle at 80% 12%, rgba(68, 255, 179, .10), transparent 28%),
+    radial-gradient(circle at 12% 85%, rgba(67, 211, 255, .08), transparent 24%),
+    linear-gradient(160deg, #071812 0%, #03100b 58%, #020806 100%);
+  box-shadow: inset 0 0 0 7px rgba(92,165,129,.16), inset 0 0 28px rgba(0,0,0,.3);
+}
+
+.hub-topbar {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.hub-heading .eyebrow { margin-bottom: 7px; }
+.hub-heading h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  line-height: .98;
+}
+.hub-heading p {
+  margin: 9px 0 0;
+  color: rgba(255,255,255,.62);
+}
+
+.hub-version {
+  padding: 9px 14px;
+  border: 1px solid rgba(127,255,192,.22);
+  border-radius: 999px;
+  color: #a9ffd2;
+  background: rgba(7,30,21,.78);
+  font-size: .75rem;
+  font-weight: 850;
+  letter-spacing: .08em;
+}
+
+.hub-identity {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(300px, 1.25fr);
+  gap: 16px;
+}
+
+.hub-foundation-card,
+.hub-rivalry-card {
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 22px;
+  background: rgba(5,24,17,.78);
+  box-shadow: 0 18px 44px rgba(0,0,0,.24);
+}
+
+.hub-foundation-card { padding: 20px 22px; }
+.hub-foundation-card small,
+.hub-rivalry-card > small {
+  color: #78e9ba;
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.hub-foundation-card h3 {
+  margin: 8px 0 12px;
+  font-size: clamp(1.45rem, 2.4vw, 2.2rem);
+}
+.hub-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  color: rgba(255,255,255,.62);
+  font-size: .88rem;
+}
+.hub-meta strong { color: white; }
+
+.hub-rivalry-card {
+  padding: 14px 18px 16px;
+}
+.hub-rivalry-row {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 48px 1fr;
+  align-items: center;
+  gap: 10px;
+}
+.hub-club-mini { text-align: center; min-width: 0; }
+.hub-club-logo-wrap {
+  width: clamp(60px, 7vw, 86px);
+  height: clamp(60px, 7vw, 86px);
+  margin: 0 auto 7px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: rgba(255,255,255,.055);
+  border: 1px solid rgba(255,255,255,.10);
+}
+.hub-club-logo { width: 82%; height: 82%; object-fit: contain; }
+.hub-club-mini strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: .9rem;
+}
+.hub-vs { text-align: center; font-size: 1.3rem; font-weight: 950; color: rgba(255,255,255,.48); }
+
+.hub-modules {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(130px, 1fr));
+  gap: 12px;
+  align-content: stretch;
+}
+
+.hub-module {
+  position: relative;
+  min-height: 150px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 20px;
+  background: linear-gradient(160deg, rgba(20,54,39,.8), rgba(4,20,14,.92));
+  color: white;
+  text-align: left;
+  cursor: default;
+  overflow: hidden;
+}
+.hub-module::before {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  right: -35px;
+  top: -35px;
+  border-radius: 50%;
+  background: rgba(111,255,191,.055);
+}
+.hub-module strong { font-size: 1.08rem; }
+.hub-module span { margin-top: 5px; color: rgba(255,255,255,.52); font-size: .76rem; }
+.hub-module em {
+  position: absolute;
+  top: 13px;
+  left: 13px;
+  font-style: normal;
+  color: #82e9bd;
+  font-size: .67rem;
+  font-weight: 900;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.hub-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.hub-save-status {
+  min-height: 20px;
+  color: rgba(255,255,255,.58);
+  font-size: .8rem;
+}
+.hub-actions { display: flex; gap: 9px; flex-wrap: wrap; justify-content: flex-end; }
+.hub-action {
+  padding: 11px 17px;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 12px;
+  background: rgba(10,45,31,.88);
+  color: white;
+  font: inherit;
+  font-weight: 820;
+  cursor: pointer;
+  transition: .2s ease;
+}
+.hub-action:hover { transform: translateY(-2px); background: rgba(36,135,96,.92); }
+.hub-action.save-exit { border-color: rgba(115,255,198,.32); background: #176c4b; }
+
+@media (max-width: 900px) {
+  .hub-identity { grid-template-columns: 1fr; }
+  .hub-modules { grid-template-columns: repeat(3, 1fr); }
+  .hub-shell { overflow-y: auto; }
+}
+
+@media (max-width: 620px) {
+  .hub-shell { padding: 16px; }
+  .hub-topbar { align-items: center; }
+  .hub-heading p { display: none; }
+  .hub-modules { grid-template-columns: repeat(2, 1fr); }
+  .hub-module { min-height: 125px; }
+  .hub-footer { align-items: stretch; }
+  .hub-actions { width: 100%; }
+  .hub-action { flex: 1; min-width: 130px; }
+}
