@@ -1,6 +1,5 @@
 // Entrada oficial de historias para Alpha 3.1.
-// Las historias sin completar comienzan desde El Sueño; las completadas quedarán
-// listas para entrar al hub cuando se conecte en esta versión.
+// Las historias sin completar comienzan desde El Sueño; las completadas entran al Hub.
 
 const introResponsiveStyle = document.createElement('link');
 introResponsiveStyle.rel = 'stylesheet';
@@ -24,8 +23,8 @@ openHistory = function (history) {
   renderSavedHistories();
 
   if (storedHistory.introCompleted === true) {
-    // Destino temporal mientras se construye el Hub de Alpha 3.1.
-    showScreen('mainMenu');
+    if (typeof window.showHub === 'function') window.showHub();
+    else showScreen('mainMenu');
     return;
   }
 
@@ -183,3 +182,11 @@ document.body.appendChild(clubSelectionScript);
 const settingsScript = document.createElement('script');
 settingsScript.src = 'js/settings.js?v=3.1.0';
 document.body.appendChild(settingsScript);
+
+// Cargador oficial del Hub de Alpha 3.1.
+if (!document.querySelector('script[data-lhdf-hub-entry]')) {
+  const hubEntryScript = document.createElement('script');
+  hubEntryScript.src = 'js/hub-entry.js?v=3.1.5';
+  hubEntryScript.dataset.lhdfHubEntry = 'true';
+  document.body.appendChild(hubEntryScript);
+}
