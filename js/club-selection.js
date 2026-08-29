@@ -1,22 +1,25 @@
 (() => {
   const stylesheet = document.createElement('link');
   stylesheet.rel = 'stylesheet';
-  stylesheet.href = 'css/club-selection.css?v=2.1.1';
+  stylesheet.href = 'css/club-selection.css?v=2.1.2';
   document.head.appendChild(stylesheet);
 
+  const LOGO_BASE = 'assets/clubs/guatemala/';
+  const CELEBRATION_COLORS = ['#ffd166', '#55e6d9', '#ffffff', '#ff7b72', '#a78bfa'];
+
   const clubs = [
-    { id: 'municipal', name: 'Municipal', place: 'Ciudad de Guatemala', initials: 'MUN', primary: '#d71920', secondary: '#ffffff', rival: 'comunicaciones' },
-    { id: 'comunicaciones', name: 'Comunicaciones', place: 'Ciudad de Guatemala', initials: 'COM', primary: '#f2f0e7', secondary: '#c9c4ad', rival: 'municipal' },
-    { id: 'antigua-gfc', name: 'Antigua GFC', place: 'Antigua Guatemala', initials: 'ANT', primary: '#198754', secondary: '#ffffff', rival: 'xelaju-mc' },
-    { id: 'xelaju-mc', name: 'Xelajú MC', place: 'Quetzaltenango', initials: 'XEL', primary: '#233a8b', secondary: '#c91e2b', rival: 'antigua-gfc' },
-    { id: 'mixco', name: 'Deportivo Mixco', place: 'Mixco', initials: 'MIX', primary: '#244a9b', secondary: '#f1d23b', rival: 'comunicaciones' },
-    { id: 'guastatoya', name: 'Guastatoya', place: 'El Progreso', initials: 'GUA', primary: '#f0d323', secondary: '#2c8b42', rival: 'coban-imperial' },
-    { id: 'san-pedro', name: 'San Pedro', place: 'San Marcos', initials: 'SPD', primary: '#1e57a6', secondary: '#ffffff', rival: 'marquense' },
-    { id: 'suchitepequez', name: 'Suchitepéquez', place: 'Mazatenango', initials: 'SUC', primary: '#b51f32', secondary: '#244a8f', rival: 'xelaju-mc' },
-    { id: 'marquense', name: 'Marquense', place: 'San Marcos', initials: 'MAR', primary: '#f0d027', secondary: '#111111', rival: 'san-pedro' },
-    { id: 'aurora', name: 'Aurora FC', place: 'Ciudad de Guatemala', initials: 'AUR', primary: '#f2d21e', secondary: '#111111', rival: 'municipal' },
-    { id: 'malacateco', name: 'Malacateco', place: 'Malacatán', initials: 'MAL', primary: '#d4272e', secondary: '#ffffff', rival: 'marquense' },
-    { id: 'coban-imperial', name: 'Cobán Imperial', place: 'Alta Verapaz', initials: 'COB', primary: '#1f4aa5', secondary: '#ffffff', rival: 'guastatoya' }
+    { id: 'municipal', name: 'Municipal', place: 'Ciudad de Guatemala', initials: 'MUN', logo: 'CSD Municipal.png', primary: '#d71920', secondary: '#ffffff', rival: 'comunicaciones' },
+    { id: 'comunicaciones', name: 'Comunicaciones', place: 'Ciudad de Guatemala', initials: 'COM', logo: 'Comunicaciones FC.png', primary: '#f2f0e7', secondary: '#c9c4ad', rival: 'municipal' },
+    { id: 'antigua-gfc', name: 'Antigua GFC', place: 'Antigua Guatemala', initials: 'ANT', logo: 'Antigua GFC.png', primary: '#198754', secondary: '#ffffff', rival: 'xelaju-mc' },
+    { id: 'xelaju-mc', name: 'Xelajú MC', place: 'Quetzaltenango', initials: 'XEL', logo: 'Xelaju FC.png', primary: '#233a8b', secondary: '#c91e2b', rival: 'antigua-gfc' },
+    { id: 'mixco', name: 'Deportivo Mixco', place: 'Mixco', initials: 'MIX', logo: 'Mixco FC.png', primary: '#244a9b', secondary: '#f1d23b', rival: 'comunicaciones' },
+    { id: 'guastatoya', name: 'Guastatoya', place: 'El Progreso', initials: 'GUA', logo: 'Guastatoya FC.png', primary: '#f0d323', secondary: '#2c8b42', rival: 'coban-imperial' },
+    { id: 'san-pedro', name: 'San Pedro', place: 'San Marcos', initials: 'SPD', logo: 'San Pedro FC.png', primary: '#1e57a6', secondary: '#ffffff', rival: 'marquense' },
+    { id: 'suchitepequez', name: 'Suchitepéquez', place: 'Mazatenango', initials: 'SUC', logo: 'Suchitepequez FC.png', primary: '#b51f32', secondary: '#244a8f', rival: 'xelaju-mc' },
+    { id: 'marquense', name: 'Marquense', place: 'San Marcos', initials: 'MAR', logo: 'Marquense FC.png', primary: '#f0d027', secondary: '#111111', rival: 'san-pedro' },
+    { id: 'aurora', name: 'Aurora FC', place: 'Ciudad de Guatemala', initials: 'AUR', logo: 'Aurora FC.png', primary: '#f2d21e', secondary: '#111111', rival: 'municipal' },
+    { id: 'malacateco', name: 'Malacateco', place: 'Malacatán', initials: 'MAL', logo: 'Malacateco FC.png', primary: '#d4272e', secondary: '#ffffff', rival: 'marquense' },
+    { id: 'coban-imperial', name: 'Cobán Imperial', place: 'Alta Verapaz', initials: 'COB', logo: 'Coban Imperial FC.png', primary: '#1f4aa5', secondary: '#ffffff', rival: 'guastatoya' }
   ];
 
   const gameShell = document.querySelector('.game-shell');
@@ -72,21 +75,30 @@
   const confettiLayer = document.getElementById('confettiLayer');
   let pendingClub = null;
 
+  function emblemMarkup(club) {
+    const src = `${LOGO_BASE}${encodeURIComponent(club.logo).replaceAll('%2F', '/')}`;
+    return `<span class="club-initials-fallback">${club.initials}</span><img class="club-logo" src="${src}" alt="Escudo de ${club.name}" onerror="this.style.display='none'">`;
+  }
+
+  function setEmblem(container, club) {
+    container.innerHTML = emblemMarkup(club);
+    applyClubTheme(container, club);
+  }
+
   clubGrid.innerHTML = clubs.map((club, index) => `
     <button class="club-card" type="button" data-club-id="${club.id}" style="--club-primary:${club.primary};--club-secondary:${club.secondary};animation-delay:${index * 55}ms">
-      <div class="club-placeholder">${club.initials}</div>
+      <div class="club-placeholder">${emblemMarkup(club)}</div>
       <strong>${club.name}</strong>
       <small>${club.place}</small>
     </button>`).join('');
 
-  // Reemplaza el destino temporal de la cuarta escena por la elección de club.
   const oldInvitationButton = document.getElementById('invitationContinueButton');
   if (oldInvitationButton) {
     const invitationButton = oldInvitationButton.cloneNode(true);
     oldInvitationButton.replaceWith(invitationButton);
     invitationButton.textContent = 'Elegir club ›';
     invitationButton.addEventListener('click', () => {
-      stopInvitationScene?.();
+      if (typeof stopInvitationScene === 'function') stopInvitationScene();
       updateIntroProgress(5);
       showSelectionScreen();
     });
@@ -111,7 +123,6 @@
   clubNextButton.addEventListener('click', () => {
     clubConfirmed.classList.remove('is-visible');
     clubConfirmed.setAttribute('aria-hidden', 'true');
-    // Destino provisional hasta construir la animación personalizada del primer clásico.
     showScreen('mainMenu');
   });
 
@@ -143,8 +154,7 @@
     if (!pendingClub) return;
     applyClubTheme(clubModalCard, pendingClub);
     applyClubTheme(clubConfirmButton, pendingClub);
-    clubModalEmblem.textContent = pendingClub.initials;
-    applyClubTheme(clubModalEmblem, pendingClub);
+    setEmblem(clubModalEmblem, pendingClub);
     clubModalName.textContent = pendingClub.name;
     clubModal.classList.add('is-open');
     clubModal.setAttribute('aria-hidden', 'false');
@@ -174,18 +184,16 @@
 
   function celebrateClub(club) {
     applyClubTheme(clubConfirmed, club);
-    applyClubTheme(confirmedEmblem, club);
     applyClubTheme(clubNextButton, club);
-    confirmedEmblem.textContent = club.initials;
+    setEmblem(confirmedEmblem, club);
     confirmedClubName.textContent = club.name;
     confettiLayer.innerHTML = '';
 
-    const colors = [club.primary, club.secondary];
-    for (let index = 0; index < 90; index += 1) {
+    for (let index = 0; index < 100; index += 1) {
       const piece = document.createElement('span');
       piece.className = 'confetti-piece';
       piece.style.left = `${Math.random() * 100}vw`;
-      piece.style.setProperty('--confetti-color', colors[index % colors.length]);
+      piece.style.setProperty('--confetti-color', CELEBRATION_COLORS[index % CELEBRATION_COLORS.length]);
       piece.style.setProperty('--fall-duration', `${2.6 + Math.random() * 2.4}s`);
       piece.style.setProperty('--drift', `${-120 + Math.random() * 240}px`);
       piece.style.animationDelay = `${Math.random() * .7}s`;
