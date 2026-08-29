@@ -1,7 +1,7 @@
 (() => {
   const stylesheet = document.createElement('link');
   stylesheet.rel = 'stylesheet';
-  stylesheet.href = 'css/club-selection.css?v=2.1.0';
+  stylesheet.href = 'css/club-selection.css?v=2.1.1';
   document.head.appendChild(stylesheet);
 
   const clubs = [
@@ -19,37 +19,8 @@
     { id: 'coban-imperial', name: 'Cobán Imperial', place: 'Alta Verapaz', initials: 'COB', primary: '#1f4aa5', secondary: '#ffffff', rival: 'guastatoya' }
   ];
 
-  const insertionPoint = document.getElementById('settings') || document.querySelector('main');
-  if (!insertionPoint || document.getElementById('invitationStage')) return;
-
-  const invitationSection = document.createElement('section');
-  invitationSection.id = 'invitationStage';
-  invitationSection.className = 'screen secondary-screen invitation-scene';
-  invitationSection.setAttribute('aria-labelledby', 'invitationSceneTitle');
-  invitationSection.innerHTML = `
-    <div class="invitation-sequence">
-      <div class="community-sun" aria-hidden="true"></div>
-      <div class="community-hills" aria-hidden="true"></div>
-      <div class="community-field" aria-hidden="true"></div>
-      <div class="community-goal" aria-hidden="true"></div>
-      <div class="community-ball" aria-hidden="true"></div>
-      <div class="community-player player-a" aria-hidden="true"></div>
-      <div class="community-player player-b" aria-hidden="true"></div>
-      <div class="community-player player-c" aria-hidden="true"></div>
-      <div class="community-player player-d" aria-hidden="true"></div>
-      <div class="invitation-flyer flyer-a" aria-hidden="true">BUSCAMOS JÓVENES<br><br>UNA NUEVA HISTORIA ESTÁ POR COMENZAR</div>
-      <div class="invitation-flyer flyer-b" aria-hidden="true">PRIMERA CONVOCATORIA<br><br>FORMA PARTE DEL COMIENZO</div>
-      <div class="invitation-flyer flyer-c" aria-hidden="true">FÚTBOL<br><br>UNA IDEA NECESITA JUGADORES</div>
-      <div class="invitation-board" aria-hidden="true"><small>CONVOCATORIA</small><strong id="invitationFoundationName">TU FUNDACIÓN</strong><span>Buscamos jóvenes dispuestos a formar los primeros clubes.</span></div>
-      <div class="invitation-story" id="invitationSceneTitle">
-        <p class="invitation-line invitation-line-1">La idea necesitaba salir a las calles.</p>
-        <p class="invitation-line invitation-line-2">Publicaste la primera convocatoria.</p>
-        <p class="invitation-line invitation-line-3">Poco a poco, jóvenes de distintos lugares comenzaron a acercarse.</p>
-        <p class="invitation-line invitation-line-4">Querían jugar. Querían competir. Querían formar algo propio.</p>
-        <p class="invitation-line invitation-line-5">Todavía no eran clubes... pero ya no estabas solo.</p>
-      </div>
-      <button id="invitationContinueButton" class="invitation-continue-button" type="button">Elegir club ›</button>
-    </div>`;
+  const gameShell = document.querySelector('.game-shell');
+  if (!gameShell || document.getElementById('clubSelectionStage')) return;
 
   const selectionSection = document.createElement('section');
   selectionSection.id = 'clubSelectionStage';
@@ -68,7 +39,7 @@
       <div id="clubModalCard" class="club-modal-card">
         <div id="clubModalEmblem" class="club-placeholder club-modal-emblem">---</div>
         <h3 id="clubModalName">Club</h3>
-        <p id="clubModalText">¿Quieres comenzar tu historia con este club?</p>
+        <p>¿Quieres comenzar tu historia con este club?</p>
         <div class="club-modal-actions">
           <button id="clubCancelButton" class="club-cancel-button" type="button">Volver</button>
           <button id="clubConfirmButton" class="club-confirm-button" type="button">Elegir club</button>
@@ -85,20 +56,7 @@
       </div>
     </div>`;
 
-  insertionPoint.parentNode.insertBefore(invitationSection, insertionPoint);
-  insertionPoint.parentNode.insertBefore(selectionSection, insertionPoint);
-
-  // main.js ya registró un destino provisional en este botón. Lo clonamos para retirar ese listener.
-  const oldUnknownButton = document.getElementById('unknownContinueButton');
-  if (oldUnknownButton) {
-    const newUnknownButton = oldUnknownButton.cloneNode(true);
-    oldUnknownButton.replaceWith(newUnknownButton);
-    newUnknownButton.addEventListener('click', () => {
-      updateIntroProgress(4);
-      prepareInvitation();
-      showScreen('invitationStage');
-    });
-  }
+  gameShell.appendChild(selectionSection);
 
   const clubGrid = document.getElementById('clubGrid');
   const clubModal = document.getElementById('clubModal');
@@ -121,10 +79,18 @@
       <small>${club.place}</small>
     </button>`).join('');
 
-  document.getElementById('invitationContinueButton').addEventListener('click', () => {
-    updateIntroProgress(5);
-    showScreen('clubSelectionStage');
-  });
+  // Reemplaza el destino temporal de la cuarta escena por la elección de club.
+  const oldInvitationButton = document.getElementById('invitationContinueButton');
+  if (oldInvitationButton) {
+    const invitationButton = oldInvitationButton.cloneNode(true);
+    oldInvitationButton.replaceWith(invitationButton);
+    invitationButton.textContent = 'Elegir club ›';
+    invitationButton.addEventListener('click', () => {
+      stopInvitationScene?.();
+      updateIntroProgress(5);
+      showSelectionScreen();
+    });
+  }
 
   clubGrid.querySelectorAll('[data-club-id]').forEach((button) => {
     button.addEventListener('click', () => openClubModal(button.dataset.clubId));
@@ -143,25 +109,19 @@
   });
 
   clubNextButton.addEventListener('click', () => {
-    // Destino temporal hasta construir la siguiente animación personalizada del clásico.
     clubConfirmed.classList.remove('is-visible');
+    clubConfirmed.setAttribute('aria-hidden', 'true');
+    // Destino provisional hasta construir la animación personalizada del primer clásico.
     showScreen('mainMenu');
   });
 
-  function prepareInvitation() {
-    const history = currentHistory();
-    const name = document.getElementById('invitationFoundationName');
-    if (name) name.textContent = history?.foundationName || 'TU FUNDACIÓN';
-  }
-
-  function currentHistory() {
-    try {
-      const histories = JSON.parse(localStorage.getItem('lhdf.histories') || '[]');
-      const id = localStorage.getItem('lhdf.currentHistoryId');
-      return Array.isArray(histories) ? histories.find((history) => history.id === id) || null : null;
-    } catch {
-      return null;
-    }
+  function showSelectionScreen() {
+    fade.classList.add('is-visible');
+    window.setTimeout(() => {
+      document.querySelectorAll('.screen.active').forEach((screen) => screen.classList.remove('active'));
+      selectionSection.classList.add('active');
+      requestAnimationFrame(() => fade.classList.remove('is-visible'));
+    }, TRANSITION_TIME);
   }
 
   function updateIntroProgress(scene) {
@@ -219,7 +179,8 @@
     confirmedEmblem.textContent = club.initials;
     confirmedClubName.textContent = club.name;
     confettiLayer.innerHTML = '';
-    const colors = [club.primary, club.secondary, club.primary, club.secondary];
+
+    const colors = [club.primary, club.secondary];
     for (let index = 0; index < 90; index += 1) {
       const piece = document.createElement('span');
       piece.className = 'confetti-piece';
@@ -230,6 +191,7 @@
       piece.style.animationDelay = `${Math.random() * .7}s`;
       confettiLayer.appendChild(piece);
     }
+
     clubConfirmed.classList.add('is-visible');
     clubConfirmed.setAttribute('aria-hidden', 'false');
   }
