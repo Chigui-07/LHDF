@@ -26,6 +26,14 @@ Este README funcionará como **bitácora oficial del proyecto**. Cada actualizac
 - Se estableció Cloudflare como plataforma para publicar y probar el juego en línea.
 - Se comenzó a utilizar este README como registro oficial de actualizaciones.
 
+### 28 de agosto de 2026 — Primer prototipo web
+
+- Se creó `index.html` como página inicial del juego.
+- Se agregó `css/style.css` para los primeros estilos visuales.
+- Se agregó `js/main.js` para la primera interacción básica.
+- La portada muestra el título **La Historia del Fútbol** y un botón `Comenzar`.
+- El objetivo de esta versión es comprobar que el despliegue web en Cloudflare funciona correctamente.
+
 ## 🚧 Estado actual
 
-El proyecto se encuentra en su etapa inicial. La estructura, mecánicas y sistemas del juego se irán definiendo y construyendo durante el desarrollo.
+LHDF ya cuenta con una estructura web mínima funcional. El siguiente paso será comprobar el despliegue en Cloudflare y, después, comenzar a construir las primeras pantallas y sistemas reales del juego.
