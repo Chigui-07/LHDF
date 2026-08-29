@@ -20,7 +20,7 @@
 
   const style = document.createElement('link');
   style.rel = 'stylesheet';
-  style.href = 'css/hub.css?v=3.1.0';
+  style.href = 'css/hub.css?v=3.1.1';
   document.head.appendChild(style);
 
   const stage = document.createElement('section');
@@ -47,8 +47,11 @@
           </div>
         </article>
 
-        <article class="hub-rivalry-card">
-          <small>Primer clásico de esta historia</small>
+        <article class="hub-rivalry-card hub-upcoming-card">
+          <div class="hub-match-heading">
+            <small>Próximo partido</small>
+            <span id="hubMatchDate" class="hub-match-date">Fecha por definir</span>
+          </div>
           <div class="hub-rivalry-row">
             <div class="hub-club-mini">
               <div class="hub-club-logo-wrap"><img id="hubClubLogo" class="hub-club-logo" alt="Escudo del club elegido"></div>
@@ -60,13 +63,14 @@
               <strong id="hubRivalName">Rival</strong>
             </div>
           </div>
+          <div id="hubMatchType" class="hub-match-type">Clásico inaugural</div>
         </article>
       </section>
 
       <section class="hub-modules" aria-label="Secciones del juego">
         <button class="hub-module" type="button"><em>Próximamente</em><strong>Clubes</strong><span>Gestiona y descubre clubes.</span></button>
         <button class="hub-module" type="button"><em>Próximamente</em><strong>Jugadores</strong><span>Plantillas y desarrollo.</span></button>
-        <button class="hub-module" type="button"><em>Próximamente</em><strong>Partidos</strong><span>Organiza y disputa encuentros.</span></button>
+        <button class="hub-module" type="button"><em>En preparación</em><strong>Partidos</strong><span>Calendario, próximos encuentros y resultados.</span></button>
         <button class="hub-module" type="button"><em>Próximamente</em><strong>Torneos</strong><span>Crea competiciones y campeones.</span></button>
         <button class="hub-module" type="button"><em>Próximamente</em><strong>Fundación</strong><span>Expande tu organización.</span></button>
       </section>
@@ -92,6 +96,8 @@
     clubLogo: document.getElementById('hubClubLogo'),
     rivalName: document.getElementById('hubRivalName'),
     rivalLogo: document.getElementById('hubRivalLogo'),
+    matchDate: document.getElementById('hubMatchDate'),
+    matchType: document.getElementById('hubMatchType'),
     status: document.getElementById('hubSaveStatus')
   };
 
@@ -99,21 +105,44 @@
     return `${LOGO_BASE}${encodeURIComponent(file).replaceAll('%2F', '/')}`;
   }
 
-  function getHistory() {
+  function loadHistoryState() {
     try {
       const histories = JSON.parse(localStorage.getItem('lhdf.histories') || '[]');
       const id = localStorage.getItem('lhdf.currentHistoryId');
-      return histories.find((item) => item.id === id) || null;
+      const history = histories.find((item) => item.id === id) || null;
+      return { histories, history };
     } catch (error) {
-      return null;
+      return { histories: [], history: null };
     }
+  }
+
+  function ensureInitialMatch() {
+    const { histories, history } = loadHistoryState();
+    if (!history) return null;
+
+    if (!Array.isArray(history.matches)) history.matches = [];
+
+    if (history.matches.length === 0 && history.selectedClub && history.rivalClub) {
+      const createdAt = new Date().toISOString();
+      history.matches.push({
+        id: `lhdf-match-${Date.now()}`,
+        homeClub: history.selectedClub,
+        awayClub: history.rivalClub,
+        competition: 'Clásico inaugural',
+        status: 'scheduled',
+        scheduledAt: null,
+        createdAt
+      });
+      history.updatedAt = createdAt;
+      localStorage.setItem('lhdf.histories', JSON.stringify(histories));
+    }
+
+    return history.matches.find((match) => match.status === 'scheduled') || null;
   }
 
   function saveCurrentHistory(message = 'Partida guardada.') {
     try {
-      const histories = JSON.parse(localStorage.getItem('lhdf.histories') || '[]');
-      const id = localStorage.getItem('lhdf.currentHistoryId');
-      const history = histories.find((item) => item.id === id);
+      const { histories, history } = loadHistoryState();
       if (!history) return false;
 
       history.updatedAt = new Date().toISOString();
@@ -132,12 +161,22 @@
     }
   }
 
+  function formatMatchDate(value) {
+    if (!value) return 'Fecha por definir';
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return 'Fecha por definir';
+    return new Intl.DateTimeFormat('es-GT', { day: '2-digit', month: 'short', year: 'numeric' }).format(date);
+  }
+
   function renderHub() {
-    const history = getHistory();
+    const { history } = loadHistoryState();
     if (!history) return false;
 
-    const club = CLUBS[history.selectedClub] || { name: 'Club elegido', logo: '' };
-    const rival = CLUBS[history.rivalClub] || { name: 'Rival', logo: '' };
+    const nextMatch = ensureInitialMatch();
+    const homeId = nextMatch?.homeClub || history.selectedClub;
+    const awayId = nextMatch?.awayClub || history.rivalClub;
+    const club = CLUBS[homeId] || { name: 'Club elegido', logo: '' };
+    const rival = CLUBS[awayId] || { name: 'Rival', logo: '' };
 
     els.title.textContent = history.foundationName || 'Tu Fundación';
     els.foundation.textContent = history.foundationName || 'Tu Fundación';
@@ -145,6 +184,8 @@
     els.country.textContent = history.country || 'Guatemala';
     els.clubName.textContent = club.name;
     els.rivalName.textContent = rival.name;
+    els.matchDate.textContent = formatMatchDate(nextMatch?.scheduledAt);
+    els.matchType.textContent = nextMatch?.competition || 'Sin partidos programados';
 
     if (club.logo) els.clubLogo.src = imgPath(club.logo);
     if (rival.logo) els.rivalLogo.src = imgPath(rival.logo);
@@ -167,6 +208,7 @@
   });
 
   document.getElementById('hubSettingsButton').addEventListener('click', () => {
+    sessionStorage.setItem('lhdf.settingsReturn', 'hub');
     stage.classList.remove('active');
     showScreen('settings');
   });
@@ -174,6 +216,7 @@
   document.getElementById('hubExitButton').addEventListener('click', () => {
     if (!saveCurrentHistory('Guardado antes de salir a las')) return;
     window.setTimeout(() => {
+      sessionStorage.removeItem('lhdf.settingsReturn');
       stage.classList.remove('active');
       showScreen('mainMenu');
     }, 250);
